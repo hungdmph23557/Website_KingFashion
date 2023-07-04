@@ -19,6 +19,11 @@
   font-weight: 400;
   line-height: normal;
 }
+.flex{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -8201,7 +8206,8 @@ h1, h2, h3, h4, h5,
 .img {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center; }
+  background-position: center center;
+}
 
 .navbar {
   padding: 15px 10px;
@@ -8234,14 +8240,16 @@ h1, h2, h3, h4, h5,
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
-  transition: all 0.3s; }
+  transition: all 0.3s;
+}
   #sidebar.active {
     margin-left: -300px; }
   #sidebar .logo {
     display: block;
     width: 120px;
     height: 120px;
-    margin: 0 auto; }
+    margin: 0 auto;
+  }
     #sidebar .logo span {
       display: block; }
   #sidebar ul.components {
