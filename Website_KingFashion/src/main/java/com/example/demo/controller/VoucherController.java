@@ -10,7 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class VoucherController {
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model){
+    public String hienThi(Model model) {
         return "voucher/home";
+    }
+
+    @GetMapping("/view-add")
+    public String viewAdd(Model model) {
+        return "voucher/add";
     }
 }

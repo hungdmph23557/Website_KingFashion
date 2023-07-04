@@ -17,15 +17,17 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-        .add{
+        .add {
             color: green;
             border: none;
         }
-        .flex{
+
+        .flex {
             display: flex;
             justify-content: center;
             justify-items: center;
         }
+
         :root {
             --blue: #007bff;
             --indigo: #6610f2;
@@ -11673,7 +11675,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#" >Admin</a>
+                            <a class="nav-link active" href="#">Admin</a>
                         </li>
                     </ul>
                 </div>
@@ -11683,113 +11685,56 @@
             <div class="row">
                 <div class="col-12">
                     <h1 style="padding-left: 40px">Voucher</h1>
-                    <br>
                 </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Mã: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Mã</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Tên</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Mức giảm</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Số tiền tối thiểu</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Thời gian bắt đầu</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Thời gian kết thúc</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Mô tả</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Trạng thái</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Hoạt động
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Không hoạt động
+                            </label>
                         </div>
                     </div>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Tên: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Add</button>
                     </div>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Mức giảm: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Số tiền tối thiểu: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Trạng thái: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Ngày bắt đầu: </label>
-                        <div class="col-sm-6">
-                            <input type="date" name="" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Ngày kết thúc: </label>
-                        <div class="col-sm-6">
-                            <input type="date" name="" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <button type="button" class="btn btn-primary">Lọc</button>
-                </div> <div class="col-3">
-                    <a type="button" class="btn btn-primary add" href="/voucher/view-add">Add</a>
-                </div>
+                </form>
             </div>
-        </section>
-        <section class="navbar-expand-lg navbar-light bg-light">
-            <table class="table table-striped">
-                <tr>
-                    <td>#</td>
-                    <td>Mã</td>
-                    <td>Tên</td>
-                    <td>Mức giảm</td>
-                    <td>Số tiền tối thiểu</td>
-                    <td>Ngày bắt đầu</td>
-                    <td>Trạng thái</td>
-                    <td>Action</td>
-                </tr>
-            </table>
-            <nav aria-label="Page navigation example" class="flex">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
         </section>
     </div>
 </div>
