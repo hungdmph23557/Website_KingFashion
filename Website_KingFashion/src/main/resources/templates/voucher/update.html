@@ -71,7 +71,8 @@
                 <div class="col-12">
                     <h1 style="padding-left: 40px">Voucher</h1>
                 </div>
-                <form class="row g-3" method="post" th:action="@{/voucher/add}" th:object="${voucher}">
+                <form class="row g-3" method="post" th:action="@{/voucher/update(id=${voucher.id})}" th:object="${voucher}">
+                    <span th:hidden="*{id}"></span>
                     <div class="col-md-6">
                         <label class="form-label">Mã</label>
                         <input type="text" class="form-control" th:field="*{ma}">
@@ -116,7 +117,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
