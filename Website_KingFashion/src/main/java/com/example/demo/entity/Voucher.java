@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,29 +24,37 @@ public class Voucher {
     private UUID id;
 
     @Column(name = "ma")
+    @NotBlank(message = "Không được để trống")
     private String ma;
 
     @Column(name = "ten")
+    @NotBlank(message = "Không được để trống")
     private String ten;
 
     @Column(name = "muc_giam")
+    @NotBlank(message = "Không được để trống")
     private String mucGiam;
 
     @Column(name = "so_tien_toi_thieu_giam_gia")
+    @NotNull(message = "Không được để trống")
     private Double tien;
 
     @Column(name = "thoi_gian_bat_dau")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Không được để trống")
     private Date thoiGianBatDau;
 
     @Column(name = "thoi_gian_ket_thuc")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Không được để trống")
     private Date thoiGianKetThuc;
 
     @Column(name = "mo_ta")
+    @NotBlank(message = "Không được để trống")
     private String moTa;
 
     @Column(name = "trang_thai")
+    @NotNull(message = "Không được để trống")
     private Integer trangThai;
 
     @Column(name = "ngay_tao")

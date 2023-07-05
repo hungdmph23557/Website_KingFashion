@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:thnum="http://www.thymeleaf.org/extras/numbers">
 <head>
     <title>Sidebar 01</title>
     <meta charset="utf-8">
@@ -178,10 +178,10 @@
                     <td th:text="${index.count}"></td>
                     <td th:text="${l.ma}"></td>
                     <td th:text="${l.ten}"></td>
-                    <td th:text="${l.mucGiam}"></td>
-                    <td th:text="${l.tien}"></td>
-                    <td th:text="${l.thoiGianBatDau}"></td>
-                    <td th:text="${l.thoiGianKetThuc}"></td>
+                    <td th:text="${#numbers.formatDecimal(l.mucGiam, 0 , 'COMMA',3,'POINT').substring(0, #numbers.formatDecimal(l.mucGiam, 0 , 'COMMA',3,'POINT').length()-4)} + ' đ'"></td>
+                    <td th:text="${#numbers.formatDecimal(l.tien, 0, 'COMMA', 3, 'POINT').substring(0, #numbers.formatDecimal(l.tien, 0, 'COMMA', 3, 'POINT').length() - 4)} + ' đ'"></td>
+                    <td th:text="${#dates.format(l.thoiGianBatDau, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#dates.format(l.thoiGianKetThuc, 'dd/MM/yyyy')}"></td>
                     <td th:text="${l.moTa}"></td>
                     <td th:text="${l.trangThai == 1 ? 'Hoạt động' : 'Không hoạt động'}"></td>
                     <td>
@@ -193,9 +193,9 @@
             </table>
             <nav aria-label="Page navigation example" class="flex">
                 <ul class="pagination">
-<!--                    <li class="page-item" th:classappend="${list.number == 0} ? disabled">-->
-<!--                        <a class="page-link" th:href="@{/vouchers(page=0, size=${list.size})}">First</a>-->
-<!--                    </li>-->
+                    <!--                    <li class="page-item" th:classappend="${list.number == 0} ? disabled">-->
+                    <!--                        <a class="page-link" th:href="@{/vouchers(page=0, size=${list.size})}">First</a>-->
+                    <!--                    </li>-->
                     <li class="page-item" th:classappend="${list.number == 0} ? disabled">
                         <a class="page-link" th:href="@{/voucher/hien-thi(page=${list.number - 1})}">
                             Previous
@@ -211,9 +211,9 @@
                             Next
                         </a>
                     </li>
-<!--                    <li class="page-item" th:classappend="${list.number == list.totalPages - 1} ? disabled"><a-->
-<!--                            class="page-link" th:href="@{/vouchers(page=${list.totalPages - 1}, size=${list.size})}">Last</a>-->
-<!--                    </li>-->
+                    <!--                    <li class="page-item" th:classappend="${list.number == list.totalPages - 1} ? disabled"><a-->
+                    <!--                            class="page-link" th:href="@{/vouchers(page=${list.totalPages - 1}, size=${list.size})}">Last</a>-->
+                    <!--                    </li>-->
                 </ul>
             </nav>
         </section>

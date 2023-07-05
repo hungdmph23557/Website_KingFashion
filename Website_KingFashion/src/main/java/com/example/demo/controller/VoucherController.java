@@ -2,10 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Voucher;
 import com.example.demo.service.impl.VoucherServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -44,13 +46,19 @@ public class VoucherController {
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute("voucher") Voucher voucher) {
+    public String add(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            return "voucher/add";
+        }
         voucherService.add(voucher);
         return "redirect:/voucher/hien-thi";
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute("voucher") Voucher voucher) {
+    public String update(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            return "voucher/update";
+        }
         voucherService.add(voucher);
         return "redirect:/voucher/hien-thi";
     }
