@@ -184,6 +184,12 @@ pre {
 figure {
   margin: 0 0 1rem; }
 
+.update{
+  color: #d39e00;
+}
+.remove{
+  color: red;
+}
 img {
   vertical-align: middle;
   border-style: none; }
