@@ -30,7 +30,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h1 style="padding-left: 40px"><b>Loại sản phẩm</b></h1>
+                        <h1 style="padding-left: 40px"><b>Cổ áo</b></h1>
                     </div>
                     <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
@@ -42,9 +42,9 @@
                     <div id="addEmployeeModal" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form th:action="@{/loai-san-pham/add}" th:object="${lsp1}" method="post">
+                                <form th:action="@{/co-ao/add}" th:object="${att}" method="post">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Thêm Loại sản phẩm</h4>
+                                        <h4 class="modal-title">Thêm Chất liệu</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                             &times;
                                         </button>
@@ -124,17 +124,17 @@
             <nav aria-label="Page navigation example" class="flex">
                 <ul class="pagination">
                     <li class="page-item" th:classappend="${list.number == 0} ? disabled">
-                        <a class="page-link" th:href="@{/loai-san-pham/hien-thi(page=${list.number - 1})}">
+                        <a class="page-link" th:href="@{/co-ao/hien-thi(page=${list.number - 1})}">
                             Previous
                         </a>
                     </li>
                     <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
-                        <a class="page-link" th:href="@{/loai-san-pham/hien-thi(page=${pageNumber})}"
+                        <a class="page-link" th:href="@{/co-ao/hien-thi(page=${pageNumber})}"
                            th:text="${pageNumber + 1}" th:classappend="${pageNumber == list.number} ? active">
                         </a>
                     </li>
                     <li class="page-item" th:classappend="${list.number == list.totalPages - 1} ? disabled">
-                        <a class="page-link" th:href="@{/loai-san-pham/hien-thi(page=${list.number + 1})}">
+                        <a class="page-link" th:href="@{/co-ao/hien-thi(page=${list.number + 1})}">
                             Next
                         </a>
                     </li>

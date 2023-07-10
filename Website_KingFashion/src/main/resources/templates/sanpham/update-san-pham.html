@@ -29,7 +29,7 @@
         <section class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="row">
                 <div class="col-12">
-                    <h1 style="padding-left: 40px">Update loại sản phẩm</h1>
+                    <h1 style="padding-left: 40px">Update Sản Phẩm</h1>
                     <br>
                 </div>
                 <div class="col-2">
@@ -88,7 +88,7 @@
                     <button type="button" class="btn btn-primary">Lọc</button>
                 </div>
                 <div class="col-12">
-                    <form th:action="@{/loai-san-pham/update(id=${lsp1.id})}" th:object="${lsp1}" method="post">
+                    <form th:action="@{/san-pham/update(id=${att.id})}" th:object="${att}" method="post">
                         <div class="mb-3">
                             <label class="form-label" for="ma" >Mã</label>
                             <input type="text" class="form-control" id="ma" th:field="*{ma}" />
@@ -97,7 +97,11 @@
                             <label class="form-label">Tên</label>
                             <input type="text" class="form-control" th:field="*{ten}" />
                         </div>
-                        <input  type="hidden" th:field="*{ngayTao}" th:value="${lsp1.ngayTao}" />
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả</label>
+                            <input type="text" class="form-control" th:field="*{moTa}" />
+                        </div>
+                        <input  type="hidden" th:field="*{ngayTao}" th:value="${att.ngayTao}" />
                         <div class="form-check">
                             <input class="form-check-input" type="radio" th:field="*{trangThai}" th:value="1" checked/>
                             <label class="form-check-label" >Hoạt động</label>

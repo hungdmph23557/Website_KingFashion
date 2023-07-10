@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.SanPham;
-import com.example.demo.service.SanPhamService;
+import com.example.demo.entity.Anh;
+import com.example.demo.service.AnhService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,49 +21,49 @@ import java.util.Date;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/san-pham/")
-public class SanPhamController {
+@RequestMapping("/anh/")
+public class AnhController {
     @Autowired
-    private SanPhamService sanPhamService;
+    private AnhService anhService;
 
     @GetMapping("hien-thi")
     public String hienThi(@RequestParam(defaultValue = "0", name = "page") Integer pageNum, Model model) {
-        Page<SanPham> page = sanPhamService.phanTrang(pageNum, 5);
+        Page<Anh> page = anhService.phanTrang(pageNum, 5);
         model.addAttribute("list", page);
-        model.addAttribute("att", new SanPham());
-        return "sanpham/san-pham";
+        model.addAttribute("att", new Anh());
+        return "anh/anh";
     }
 
     @PostMapping("add")
-    public String add(@Valid @ModelAttribute("att") SanPham sanPham, BindingResult result, Model model) {
+    public String add(@Valid @ModelAttribute("att") Anh anh, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            return "sanpham/san-pham";
+            return "coao/co-ao";
         }
-        sanPham.setNgayTao(new Date());
-        sanPham.setNgaySua(new Date());
-        model.addAttribute("att", sanPham);
-        sanPhamService.add(sanPham);
-        return "redirect:/san-pham/hien-thi";
+        anh.setNgayTao(new Date());
+        anh.setNgaySua(new Date());
+        model.addAttribute("att", anh);
+        anhService.add(anh);
+        return "redirect:/anh/hien-thi";
     }
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable UUID id, Model model) {
-        sanPhamService.delete(id);
-        return "redirect:/san-pham/hien-thi";
+        anhService.delete(id);
+        return "redirect:/anh/hien-thi";
     }
 
     @GetMapping("view-update/{id}")
-    public String updateMauSac(@PathVariable UUID id, Model model) {
-        SanPham sanPham = sanPhamService.detail(id);
-        model.addAttribute("att", sanPham);
-        return "sanpham/update-san-pham";
+    public String viewUpdate(@PathVariable UUID id, Model model) {
+        Anh anh = anhService.detail(id);
+        model.addAttribute("att", anh);
+        return "anh/update-anh";
     }
 
     @PostMapping("update")
-    public String updateMauSac(@Valid @ModelAttribute("lsp1") SanPham sanPham, BindingResult result, Model model, @RequestParam("ngayTao") String ngayTao) {
+    public String update(@Valid @ModelAttribute("att") Anh anh, BindingResult result, Model model, @RequestParam("ngayTao") String ngayTao) {
         if (result.hasErrors()) {
-            return "sanpham/update-san-pham";
+            return "anh/update-anh";
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -75,10 +75,10 @@ public class SanPhamController {
             return "redirect:/error";
         }
 
-        sanPham.setNgayTao(ngayTaoDate);
-        sanPham.setNgaySua(new Date());
-        model.addAttribute("att", sanPham);
-        sanPhamService.add(sanPham);
-        return "redirect:/san-pham/hien-thi";
+        anh.setNgayTao(ngayTaoDate);
+        anh.setNgaySua(new Date());
+        model.addAttribute("att", anh);
+        anhService.add(anh);
+        return "redirect:/anh/hien-thi";
     }
 }
