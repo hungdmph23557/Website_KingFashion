@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <h1 style="padding-left: 40px">Khách Hàng</h1>
                 </div>
-                <form class="row g-3" method="post" th:action="@{/voucher/update(id=${khachhang.id})}"
+                <form class="row g-3" method="post" th:action="@{/khach-hang/update(id=${khachhang.id})}"
                       th:object="${khachhang}">
                     <span th:hidden="*{id}"></span>
                     <div class="col-md-6">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label">Địa chỉ</label>
-                        <input type="date" class="form-control" th:field="*{diaChi}">
+                        <input type="text" class="form-control" th:field="*{diaChi}">
                         <span th:errors="*{diaChi}"></span>
                     </div>
                     <div class="col-12">
