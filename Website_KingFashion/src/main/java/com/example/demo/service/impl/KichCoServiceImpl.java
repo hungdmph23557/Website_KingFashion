@@ -8,7 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import org.springframework.stereotype.Service;
+
 import java.util.UUID;
+
+@Service
 
 public class KichCoServiceImpl implements KichCoService {
 
@@ -23,12 +27,12 @@ public class KichCoServiceImpl implements KichCoService {
 
     @Override
     public void add(KichCo kichCo) {
-        kichCoRepository.save(kichCo);
+            kichCoRepository.save(kichCo);
     }
 
     @Override
     public KichCo detail(UUID id) {
-        return kichCoRepository.getKickCoById(id);
+        return kichCoRepository.getKichCoById(id);
     }
 
     @Override
