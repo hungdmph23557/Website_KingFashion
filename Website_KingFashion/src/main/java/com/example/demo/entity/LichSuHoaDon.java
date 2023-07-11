@@ -10,14 +10,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.UUID;
 
-
-@Table(name = "KichCo")
+@Table(name = "LichSuHoaDon")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class KickCo {
+public class LichSuHoaDon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,28 +24,19 @@ public class KickCo {
     private UUID id;
 
     @Column(name = "ma")
-    private String maKichCo;
-
+    private String maLichSuHoaDon;
 
     @Column(name = "ten")
-    private String tenKichCo;
+    private String tenLichSuHoaDon;
 
 
-    @Column(name = "trang_thai")
-    private String trangThai;
+    @Column(name = "nguoi_tao")
+    private String nguoiTaoLichSuHoaDon;
 
 
     @Column(name = "ngay_tao")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayTao;
-
-
-    @Column(name = "ngay_sua")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ngaySua;
-
-    @Column(name = "gia_tien")
-    private String giaTien;
 
 
 }
