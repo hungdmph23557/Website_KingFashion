@@ -39,7 +39,7 @@ public class HoaDonController {
         List<LichSuHoaDon> lichSuHoaDons = lichSuHoaDonService.getAll();
         model.addAttribute("listLSHD", lichSuHoaDons);
         List<TaiKhoan> taiKhoans = taiKhoanService.getAll();
-        model.addAttribute("listTk", taiKhoans);
+        model.addAttribute("listTK", taiKhoans);
         return "hoadon/hoadon";
     }
 }
