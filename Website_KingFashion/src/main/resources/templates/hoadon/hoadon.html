@@ -47,7 +47,7 @@
                     <td>Ngày tạo</td>
                     <td>Ngày Thanh Toán</td>
                     <td>Tổng tiền</td>
-                    <td>Tổng tiền</td>
+                    <td>Sau Tổng tiền</td>
                     <td>Trạng Thái</td>
                     <td>Người nhận</td>
                     <td>Địa chỉ</td>
@@ -64,7 +64,21 @@
                 <tbody>
                 <tr th:each="hd,index : ${listHD.content}">
                     <td th:text="${index.count}"></td>
-
+                    <td th:text="${hd.ma}"></td>
+                    <td th:text="${hd.ngayTao}"></td>
+                    <td th:text="${hd.ngayThanhToan}"></td>
+                    <td th:text="${hd.tongTien}"></td>
+                    <td th:text="${hd.tongTienSauKhiGiam}"></td>
+                    <td th:text="${hd.trangThai}"></td>
+                    <td th:text="${hd.nguoiNhan}"></td>
+                    <td th:text="${hd.diaChi}"></td>
+                    <td th:text="${hd.soDienThoai}"></td>
+                    <td th:text="${hd.ngayDuKienNhan}"></td>
+                    <td th:text="${hd.tienShip}"></td>
+                    <td th:text="${hd.ngaySua}"></td>
+                    <td th:text="${hd.nguoiTao}"></td>
+                    <td th:text="${hd.ngayNhan}"></td>
+                    <td th:text="${hd.ghiChu}"></td>
                 </tr>
                 </tbody>
             </table>
