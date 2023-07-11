@@ -60,7 +60,7 @@ public class ChiTietSanPham {
 
     @ManyToOne
     @JoinColumn(name = "id_kichco", referencedColumnName = "id")
-    private KickCo kickCo;
+    private KichCo kickCo;
 
 
     @ManyToOne
