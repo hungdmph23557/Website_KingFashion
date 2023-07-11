@@ -25,9 +25,9 @@
         <section class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="row">
                 <div class="col-12">
-                    <h1 style="padding-left: 40px">Voucher</h1>
+                    <h1 style="padding-left: 40px">Khách Hàng</h1>
                 </div>
-                <form class="row g-3" method="post" th:action="@{/voucher/add}" th:object="${voucher}">
+                <form class="row g-3" method="post" th:action="@{/khach-hang/add}" th:object="${khachhang}">
                     <div class="col-md-6">
                         <label class="form-label">Mã</label>
                         <input type="text" class="form-control" th:field="*{ma}">
@@ -39,29 +39,29 @@
                         <span th:errors="*{ten}"></span>
                     </div>
                     <div class="col-6">
-                        <label class="form-label">Mức giảm</label>
-                        <input type="text" class="form-control" th:field="*{mucGiam}">
-                        <span th:errors="*{mucGiam}"></span>
+                        <label class="form-label">SĐT</label>
+                        <input type="text" class="form-control" th:field="*{sdt}">
+                        <span th:errors="*{sdt}"></span>
                     </div>
                     <div class="col-6">
-                        <label class="form-label">Số tiền tối thiểu</label>
-                        <input type="text" class="form-control" th:field="*{tien}">
-                        <span th:errors="*{tien}"></span>
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" th:field="*{email}">
+                        <span th:errors="*{email}"></span>
                     </div>
                     <div class="col-12">
-                        <label class="form-label">Thời gian bắt đầu</label>
-                        <input type="date" class="form-control" th:field="*{thoiGianBatDau}">
-                        <span th:errors="*{thoiGianBatDau}"></span>
+                        <label class="form-label">Địa chỉ</label>
+                        <input type="date" class="form-control" th:field="*{diaChi}">
+                        <span th:errors="*{diaChi}"></span>
                     </div>
                     <div class="col-12">
-                        <label class="form-label">Thời gian kết thúc</label>
-                        <input type="date" class="form-control" th:field="*{thoiGianKetThuc}">
-                        <span th:errors="*{thoiGianKetThuc}"></span>
+                        <label class="form-label">Ngày sinh</label>
+                        <input type="date" class="form-control" th:field="*{ngaySinh}">
+                        <span th:errors="*{ngaySinh}"></span>
                     </div>
                     <div class="col-12">
-                        <label class="form-label">Mô tả</label>
-                        <input type="text" class="form-control" th:field="*{moTa}">
-                        <span th:errors="*{moTa}"></span>
+                        <label class="form-label">Mật khẩu</label>
+                        <input type="text" class="form-control" th:field="*{matKhau}">
+                        <span th:errors="*{matKhau}"></span>
                     </div>
                     <div class="col-12">
                         <label class="form-label">Trạng thái</label>
