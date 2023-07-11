@@ -8,7 +8,7 @@ import java.util.UUID;
 @Service
 public interface SanPhamService {
     Page<SanPham> phanTrang(Integer pageNum, Integer pageNo);
-
+//hhhhhh
     void add(SanPham sanPham);
 
     SanPham detail(UUID id);

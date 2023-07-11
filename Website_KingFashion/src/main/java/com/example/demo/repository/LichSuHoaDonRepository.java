@@ -1,13 +1,11 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.KichCo;
+import com.example.demo.entity.LichSuHoaDon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface KichCoRepository extends JpaRepository<KichCo, UUID> {
-        KichCo getKichCoById(UUID id);
-
+public interface LichSuHoaDonRepository extends JpaRepository<LichSuHoaDon, UUID> {
 }

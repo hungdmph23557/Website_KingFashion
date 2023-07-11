@@ -21,7 +21,10 @@ import java.util.Date;
 import java.util.UUID;
 
 @Controller
+
 @RequestMapping("/kich-co/")
+
+
 public class KichCoController {
     @Autowired
     private KichCoService kichCoService;
@@ -35,6 +38,7 @@ public class KichCoController {
     }
 
     @PostMapping("add")
+
     public String add(@Valid @ModelAttribute("att") KichCo kichCo, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
@@ -55,10 +59,13 @@ public class KichCoController {
 
     @GetMapping("view-update/{id}")
     public String viewUpdate(@PathVariable UUID id, Model model) {
+
         KichCo kichCo = kichCoService.detail(id);
         model.addAttribute("att", kichCo);
         return "kichco/update-kich-co";
     }
+
+
 
     @PostMapping("update")
     public String update(@Valid @ModelAttribute("att") KichCo kichCo, BindingResult result, Model model, @RequestParam("ngayTao") String ngayTao) {
@@ -80,5 +87,6 @@ public class KichCoController {
         model.addAttribute("att", kichCo);
         kichCoService.add(kichCo);
         return "redirect:/kich-co/hien-thi";
+
     }
 }
