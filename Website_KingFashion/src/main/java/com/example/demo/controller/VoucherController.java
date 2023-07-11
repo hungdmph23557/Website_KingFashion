@@ -23,6 +23,15 @@ public class VoucherController {
     public String hienThi(Model model, @RequestParam(name = "page", defaultValue = "0") Integer p) {
         Page<Voucher> page = voucherService.page(p, 5);
         model.addAttribute("list", page);
+        model.addAttribute("search", new Voucher());
+        return "voucher/home";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("search") Voucher voucher, @RequestParam(name = "page", defaultValue = "0") Integer p) {
+        Page<Voucher> list = voucherService.search(voucher.getMa(), voucher.getTen(), voucher.getMucGiam(), voucher.getTien(),
+                voucher.getThoiGianBatDau(), voucher.getThoiGianKetThuc(), voucher.getTrangThai(), 5, p);
+        model.addAttribute("list", list);
         return "voucher/home";
     }
 
@@ -47,7 +56,7 @@ public class VoucherController {
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "voucher/add";
         }
         voucherService.add(voucher);
@@ -56,7 +65,7 @@ public class VoucherController {
 
     @PostMapping("/update")
     public String update(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "voucher/update";
         }
         voucherService.add(voucher);
