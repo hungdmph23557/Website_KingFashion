@@ -22,7 +22,76 @@
 <body>
 
 
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" th:insert="layout/slidebar.html :: header">
+    </nav>
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" th:insert="layout/nav.html :: header">
+        </nav>
+        <section class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 style="padding-left: 40px"><b>Hóa đơn </b></h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="navbar-expand-lg navbar-light bg-light">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Mã</td>
+                    <td>Ngày tạo</td>
+                    <td>Ngày Thanh Toán</td>
+                    <td>Tổng tiền</td>
+                    <td>Tổng tiền</td>
+                    <td>Trạng Thái</td>
+                    <td>Người nhận</td>
+                    <td>Địa chỉ</td>
+                    <td>SDT</td>
+                    <td>Ngày Nhận DK</td>
+                    <td>Ngày ship</td>
+                    <td>Tiền ship</td>
+                    <td>Ngày sửa</td>
+                    <td>Người tạo</td>
+                    <td>Ngày nhận</td>
+                    <td>Ghi chú</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="hd,index : ${listHD.content}">
+                    <td th:text="${index.count}"></td>
 
+                </tr>
+                </tbody>
+            </table>
+
+
+            <nav aria-label="Page navigation example" class="flex">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${listHD.number == 0} ? disabled">
+                        <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${listHD.number - 1})}">
+                            Previous
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, listHD.totalPages - 1)}">
+                        <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${pageNumber})}"
+                           th:text="${pageNumber + 1}" th:classappend="${pageNumber == listHD.number} ? active">
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${listHD.number == listHD.totalPages - 1} ? disabled">
+                        <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${listHD.number + 1})}">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+    </div>
+</div>
 
 
 <!--<img src="../../static/images/logo.jpg" alt="">-->

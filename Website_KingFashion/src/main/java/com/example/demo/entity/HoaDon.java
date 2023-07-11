@@ -69,9 +69,9 @@ public class HoaDon {
     @Column(name = "sdt")
     private String soDienThoai;
 
-    @Column(name = "ngay_nhan_du_kien")
+    @Column(name = "ngay_du_kien_nhan")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ngayNhanDuKien;
+    private Date ngayDuKienNhan;
 
 
     @Column(name = "ngay_ship")
