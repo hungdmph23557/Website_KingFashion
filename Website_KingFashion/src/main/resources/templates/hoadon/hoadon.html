@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <th:block id="home-static-resources">
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{../../static/css/style.css}"/>
+    </th:block>
+    <style media="screen">
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" th:insert="layout/slidebar.html :: header">
+    </nav>
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" th:insert="layout/nav.html :: header">
+        </nav>
+        <section class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 style="padding-left: 40px"><b>Hóa đơn </b></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addEmployeeModal" class="btn btn-secondary" data-toggle="modal"><i
+                                class="material-icons">&#xE147;</i>
+                            <span>Xuất Hóa Đơn </span></a>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <input type="text" placeholder="Tìm kiếm đơn hàng">
+        <button class="btn btn-primary">Tìm kiếm</button>
+        <button class="btn btn-success">Làm mới</button>
+
+        <div class="col-4">
+            <div class="row mb-6">
+                <label class="col-sm-2 col-form-label">Trạng Thái </label>
+                <div class="col-sm-6">
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="1">Tồn Tại</option>
+                        <option value="2">0</option>
+                        <option value="3">1</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row mb-6">
+                <label class="col-sm-2 col-form-label">Ngay Nhan </label>
+                <div class="col-sm-6">
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+        <section class="navbar-expand-lg navbar-light bg-light">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Mã</td>
+                    <td>Ngày tạo</td>
+                    <td>Ngày Thanh Toán</td>
+                    <td>Tổng tiền</td>
+                    <td>Sau Tổng tiền</td>
+                    <td>Trạng Thái</td>
+                    <td>Người nhận</td>
+                    <td>Địa chỉ</td>
+                    <td>SDT</td>
+                    <td>Ngày Nhận DK</td>
+                    <td>Ngày ship</td>
+                    <td>Tiền ship</td>
+                    <td>Ngày sửa</td>
+                    <td>Người tạo</td>
+                    <td>Ngày nhận</td>
+                    <td>Ghi chú</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="hd,index : ${listHD.content}">
+                    <td th:text="${index.count}"></td>
+                    <td th:text="${hd.ma}"></td>
+                    <td th:text="${hd.ngayTao}"></td>
+                    <td th:text="${hd.ngayThanhToan}"></td>
+                    <td th:text="${hd.tongTien}"></td>
+                    <td th:text="${hd.tongTienSauKhiGiam}"></td>
+                    <td th:text="${hd.trangThai}"></td>
+                    <td th:text="${hd.nguoiNhan}"></td>
+                    <td th:text="${hd.diaChi}"></td>
+                    <td th:text="${hd.soDienThoai}"></td>
+                    <td th:text="${hd.ngayDuKienNhan}"></td>
+                    <td th:text="${hd.tienShip}"></td>
+                    <td th:text="${hd.ngaySua}"></td>
+                    <td th:text="${hd.nguoiTao}"></td>
+                    <td th:text="${hd.ngayNhan}"></td>
+                    <td th:text="${hd.ghiChu}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <nav aria-label="Page navigation example" class="flex">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${listHD.number == 0} ? disabled">
+                        <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${listHD.number - 1})}">
+                            Previous
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, listHD.totalPages - 1)}">
+                        <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${pageNumber})}"
+                           th:text="${pageNumber + 1}" th:classappend="${pageNumber == listHD.number} ? active">
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${listHD.number == listHD.totalPages - 1} ? disabled">
+                        <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${listHD.number + 1})}">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+    </div>
+</div>
+
+
+<!--<img src="../../static/images/logo.jpg" alt="">-->
+<script src="../../static/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../../static/js/popper.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</body>
+</html>
