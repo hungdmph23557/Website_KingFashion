@@ -41,7 +41,6 @@ public class AnhController {
             return "coao/co-ao";
         }
         anh.setNgayTao(new Date());
-        anh.setNgaySua(new Date());
         model.addAttribute("att", anh);
         anhService.add(anh);
         return "redirect:/anh/hien-thi";

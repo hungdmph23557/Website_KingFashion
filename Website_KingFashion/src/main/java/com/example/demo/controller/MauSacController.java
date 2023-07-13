@@ -51,7 +51,6 @@ public class MauSacController {
             return "mausac/mausac";
         }
         mauSac.setNgayTao(new Date());
-        mauSac.setNgaySua(new Date());
         model.addAttribute("ms1", mauSac);
         redirectAttributes.addFlashAttribute("message","Save Success");
         mauSacService.add(mauSac);
