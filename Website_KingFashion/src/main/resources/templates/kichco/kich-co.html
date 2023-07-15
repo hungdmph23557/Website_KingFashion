@@ -30,45 +30,21 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h1 style="padding-left: 40px"><b>Sản phẩm</b></h1>
-                    </div>
-                    <div class="col-3" style="margin-top: 20px">
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" style="color: black">Tên: </label>
-                            <div class="col-sm-10">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3" style="margin-top: 20px">
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" style="color: black">Trạng thái: </label>
-                            <div class="col-sm-10">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div>
+                        <h1 style="padding-left: 40px"><b>Kích cỡ</b></h1>
                     </div>
                     <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
                                 class="material-icons">&#xE147;</i>
-                            <span>Add Sản Phẩm</span></a>
+                            <span>Add New Employee</span></a>
                         <!--                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i>-->
                         <!--                            <span>Delete</span></a>-->
                     </div>
                     <div id="addEmployeeModal" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form th:action="@{/san-pham/add}" th:object="${att}" method="post">
+                                <form th:action="@{/kich-co/add}" th:object="${att}" method="post">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Thêm Sản phẩm</h4>
+                                        <h4 class="modal-title">Thêm Kích cỡ</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                             &times;
                                         </button>
@@ -81,10 +57,6 @@
                                         <div class="mb-3">
                                             <label class="form-label" style="color: black">Tên</label>
                                             <input type="text" class="form-control" th:field="*{ten}"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" style="color: black">Mô tả</label>
-                                            <input type="text" class="form-control" th:field="*{moTa}"/>
                                         </div>
                                         <div class="md-3">
                                             <label for="validationCustom04" class="form-label" style="color: black">Trạng
@@ -119,7 +91,6 @@
                     <td>Tên</td>
                     <td>Ngày tạo</td>
                     <td>Ngày sửa</td>
-                    <td>Mô tả</td>
                     <td>Trạng thái</td>
                     <td>Action</td>
                 </tr>
@@ -131,7 +102,6 @@
                     <td th:text="${l.ten}"></td>
                     <td th:text="${l.ngayTao}"></td>
                     <td th:text="${l.ngaySua}"></td>
-                    <td th:text="${l.moTa}"></td>
                     <!--                    <td th:text="${mauSac.trangThai}"></td>-->
                     <td th:if="${l.trangThai == 1}">Hoạt động</td>
                     <td th:if="${l.trangThai == 0}">Không hoạt động</td>
@@ -154,17 +124,17 @@
             <nav aria-label="Page navigation example" class="flex">
                 <ul class="pagination">
                     <li class="page-item" th:classappend="${list.number == 0} ? disabled">
-                        <a class="page-link" th:href="@{/san-pham/hien-thi(page=${list.number - 1})}">
+                        <a class="page-link" th:href="@{/kich-co/hien-thi(page=${list.number - 1})}">
                             Previous
                         </a>
                     </li>
                     <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
-                        <a class="page-link" th:href="@{/san-pham/hien-thi(page=${pageNumber})}"
+                        <a class="page-link" th:href="@{/kich-co/hien-thi(page=${pageNumber})}"
                            th:text="${pageNumber + 1}" th:classappend="${pageNumber == list.number} ? active">
                         </a>
                     </li>
                     <li class="page-item" th:classappend="${list.number == list.totalPages - 1} ? disabled">
-                        <a class="page-link" th:href="@{/san-pham/hien-thi(page=${list.number + 1})}">
+                        <a class="page-link" th:href="@{/kich-co/hien-thi(page=${list.number + 1})}">
                             Next
                         </a>
                     </li>
@@ -173,6 +143,7 @@
         </section>
     </div>
 </div>
+
 <!--<img src="../../static/images/logo.jpg" alt="">-->
 
 <script src="../../static/js/jquery.min.js"></script>
