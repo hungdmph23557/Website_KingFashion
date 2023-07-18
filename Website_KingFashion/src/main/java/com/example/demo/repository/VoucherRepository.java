@@ -21,4 +21,6 @@ public interface VoucherRepository extends JpaRepository<Voucher, UUID> {
             "  AND (:ngayKetThuc is null OR v.thoiGianKetThuc >= :ngayKetThuc)\n" +
             "  AND (:trangThai is null OR v.trangThai = :trangThai)")
     Page<Voucher> search(String ma, String ten, String mucGiam, Double tien, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, Pageable pageable);
+
+    Voucher existsVoucherByMa(String ma);
 }

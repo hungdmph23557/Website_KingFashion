@@ -16,6 +16,8 @@ import java.util.UUID;
 @RequestMapping("/voucher")
 public class VoucherController {
 
+    private int entity;
+
     @Autowired
     private VoucherServiceImpl voucherService;
 
@@ -59,6 +61,11 @@ public class VoucherController {
         if (result.hasErrors()) {
             return "voucher/add";
         }
+        if (voucher.getThoiGianBatDau().after(voucher.getThoiGianKetThuc())) {
+            result.rejectValue("thoiGianKetThuc", null, "Ngày bắt đầu không được lớn hơn ngày kết thúc");
+        }
+        String ma = "VOC" + entity++;
+        voucher.setMa(ma);
         voucherService.add(voucher);
         return "redirect:/voucher/hien-thi";
     }

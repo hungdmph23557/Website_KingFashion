@@ -6,8 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +36,7 @@ public class Voucher {
     private UUID id;
 
     @Column(name = "ma")
-    @NotBlank(message = "Không được để trống")
+//    @NotBlank(message = "Không được để trống")
     private String ma;
 
     @Column(name = "ten")
@@ -43,20 +45,24 @@ public class Voucher {
 
     @Column(name = "muc_giam")
     @NotBlank(message = "Không được để trống")
+    @Min(value = 0)
     private String mucGiam;
 
     @Column(name = "so_tien_toi_thieu_giam_gia")
     @NotNull(message = "Không được để trống")
+    @Min(value = 0)
     private Double tien;
 
     @Column(name = "thoi_gian_bat_dau")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Không được để trống")
+    @Past(message = "Không được đi đến tương lai")
     private Date thoiGianBatDau;
 
     @Column(name = "thoi_gian_ket_thuc")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Không được để trống")
+    @Past(message = "Không được đi đến tương lai")
     private Date thoiGianKetThuc;
 
     @Column(name = "mo_ta")
