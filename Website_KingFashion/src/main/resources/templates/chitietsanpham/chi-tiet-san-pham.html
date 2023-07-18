@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <th:block id="home-static-resources">
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{../../static/css/style.css}"/>
+    </th:block>
+    <style media="screen">
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" th:insert="layout/slidebar.html :: header">
+    </nav>
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" th:insert="layout/nav.html :: header">
+        </nav>
+        <section class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 style="padding-left: 40px"><b>Sản phẩm</b></h1>
+                    </div>
+                    <div class="col-3" style="margin-top: 20px">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" style="color: black">Tên: </label>
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3" style="margin-top: 20px">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" style="color: black">Trạng thái: </label>
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                                class="material-icons">&#xE147;</i>
+                            <span>Add Sản Phẩm</span></a>
+                        <!--                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i>-->
+                        <!--                            <span>Delete</span></a>-->
+                    </div>
+                    <div id="addEmployeeModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form th:action="@{/chi-tiet-san-pham/add}" th:object="${att}" method="post" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Thêm Sản phẩm</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="form-label" style="color: black">Tên Sản Hhẩm</label>
+                                            <input type="text" class="form-control" th:field="*{sanPham.ten}"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" style="color: black">Mô tả</label>
+                                            <input type="text" class="form-control" th:field="*{sanPham.moTa}"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" style="color: black">Số lượng</label>
+                                            <input type="text" class="form-control" th:field="*{soLuong}"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" style="color: black">Giá</label>
+                                            <input type="text" class="form-control" th:field="*{giaBan}"/>
+                                        </div>
+                                        <div class="md-3 d-flex justify-content-around" style="margin-bottom: 10px">
+                                                <div class="md-4">
+                                                    <label  class="form-label" style="color: black">Chất
+                                                        liệu
+                                                    </label>
+                                                    <select class="form-select" th:field="*{chatLieu}">
+                                                        <option th:each="chatLieu : ${listChatLieu}" th:value="${chatLieu.ma}" th:text="${chatLieu.ten}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="md-4">
+                                                    <label  class="form-label" style="color: black">Loại
+                                                        Sản Phẩm
+                                                    </label>
+                                                    <select class="form-select" th:field="*{loaiSanPham}">
+                                                        <option th:each="loaiSanPham : ${listLoaiSanPham}" th:value="${loaiSanPham.ma}" th:text="${loaiSanPham.ten}"></option>
+                                                    </select>
+                                                </div>
+                                        </div>
+                                        <div class="md-3 d-flex justify-content-around" style="margin-bottom: 10px">
+                                            <div class="md-4">
+                                                <label  class="form-label" style="color: black">Màu
+                                                    Sắc
+                                                </label>
+                                                <select class="form-select" th:field="*{mauSac}">
+                                                    <option th:each="mauSac : ${listMauSac}" th:value="${mauSac.maMauSac}" th:text="${mauSac.tenMauSac}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="md-4">
+                                                <label  class="form-label" style="color: black">Nhà
+                                                    Sản Xuất
+                                                </label>
+                                                <select class="form-select" th:field="*{nhaSanXuat}">
+                                                    <option th:each="nhaSanXuat : ${listNhaSanXuat}" th:value="${nhaSanXuat.maNhaSanXuat}" th:text="${nhaSanXuat.tenNhaSanXuat}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="md-3 d-flex justify-content-around">
+                                            <div class="md-4">
+                                                <label  class="form-label" style="color: black">Cổ
+                                                    Áo
+                                                </label>
+                                                <select class="form-select" th:field="*{coAo}">
+                                                    <option th:each="coAo : ${listCoAo}" th:value="${coAo.ma}" th:text="${coAo.ten}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="md-4">
+                                                <label  class="form-label" style="color: black">Kích
+                                                    Cỡ
+                                                </label>
+                                                <select class="form-select" th:field="*{kichCo}">
+                                                    <option th:each="kichCo : ${listKichCo}" th:value="${kichCo.ma}" th:text="${kichCo.ten}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="file" name="img" class="form-control">
+                                        <button class="btn btn-primary">Upload</button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal"
+                                               value="Cancel">
+                                        <input type="submit" class="btn btn-success" value="Add">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="navbar-expand-lg navbar-light bg-light">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>STT</td>
+                    <td>Ảnh</td>
+                    <td>Tên Sản Phẩm</td>
+                    <td>Giá</td>
+                    <td>Ngày tạo</td>
+                    <td>Trạng thái</td>
+                    <td>Action</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="l, row : ${list.content}">
+                    <th scope="row" th:text="${row.index + 1}"></th>
+                    <td><img th:src="${'img/'+${l.ten}}" alt=""></td>
+                    <td th:text="${l.sanPham.ten}"></td>
+                    <td th:text="${l.giaBan}"></td>
+                    <td th:text="${l.ngayTao}"></td>
+                    <td th:if="${l.trangThai == 1}">Hoạt động</td>
+                    <td th:if="${l.trangThai == 0}">Không hoạt động</td>
+                    <td>
+                        <a class="edit"
+                           th:href="@{view-update/{id}(id=${l.id})}"
+                        ><i
+                                class="material-icons"
+                                data-toggle="tooltip"
+                                title="Edit">&#xE254;</i></a>
+                        <a th:href="@{delete/{id}(id=${l.id})}" class="delete"><i
+                                class="material-icons"
+                                data-toggle="tooltip"
+                                title="Delete">&#xE872;</i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation example" class="flex">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${list.number == 0} ? disabled">
+                        <a class="page-link" th:href="@{/san-pham/hien-thi(page=${list.number - 1})}">
+                            Previous
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
+                        <a class="page-link" th:href="@{/san-pham/hien-thi(page=${pageNumber})}"
+                           th:text="${pageNumber + 1}" th:classappend="${pageNumber == list.number} ? active">
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${list.number == list.totalPages - 1} ? disabled">
+                        <a class="page-link" th:href="@{/san-pham/hien-thi(page=${list.number + 1})}">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+    </div>
+</div>
+<script>
+    function handleFileSelect(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            // hiển thị ảnh được chọn
+            var preview = document.getElementById('preview');
+            preview.src = e.target.result;
+        }
+
+        reader.readAsDataURL(file);
+    }
+</script>
+
+<script src="../../static/js/jquery.min.js"></script>
+<script src="../../static/js/popper.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</body>
+</html>

@@ -8448,3 +8448,6 @@ table.table .avatar {
   vertical-align: middle;
   margin-right: 10px;
 }
+#fileInput {
+  display: none;
+}

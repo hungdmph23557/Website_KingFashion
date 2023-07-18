@@ -33,7 +33,7 @@ public class ChiTietSanPham {
     private ChatLieu chatLieu;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sp", referencedColumnName = "id")
     private SanPham sanPham;
 
@@ -60,7 +60,7 @@ public class ChiTietSanPham {
 
     @ManyToOne
     @JoinColumn(name = "id_kichco", referencedColumnName = "id")
-    private KichCo kickCo;
+    private KichCo kichCo;
 
 
     @ManyToOne

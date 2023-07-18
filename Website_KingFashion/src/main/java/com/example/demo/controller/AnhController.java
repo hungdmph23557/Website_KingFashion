@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Anh;
+import com.example.demo.repository.AnhRepository;
 import com.example.demo.service.AnhService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,8 +31,14 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/anh/")
 public class AnhController {
+
+    private static int currentNumber = 1;
+
     @Autowired
     private AnhService anhService;
+
+    @Autowired
+    private AnhRepository anhRepository;
 
     @GetMapping("hien-thi")
     public String hienThi(@RequestParam(defaultValue = "0", name = "page") Integer pageNum, Model model) {
@@ -35,14 +49,28 @@ public class AnhController {
     }
 
     @PostMapping("add")
-    public String add(@Valid @ModelAttribute("att") Anh anh, BindingResult result, Model model) {
+    public String add(@Valid @ModelAttribute("att") Anh anh, BindingResult result, @RequestParam MultipartFile image, Model model) {
 
         if (result.hasErrors()) {
             return "coao/co-ao";
         }
+        String maAnh = "Anh" + currentNumber;
+        currentNumber++;
+        anh.setMa(maAnh);
+        anh.setTen(image.getOriginalFilename());
         anh.setNgayTao(new Date());
+        anh.setTrangThai(1);
         model.addAttribute("att", anh);
-        anhService.add(anh);
+        Anh uploadAnh = anhRepository.save(anh);
+        if (uploadAnh != null) {
+            try {
+                File saveFile = new ClassPathResource("static/image").getFile();
+                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + image.getOriginalFilename());
+                Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return "redirect:/anh/hien-thi";
     }
 
