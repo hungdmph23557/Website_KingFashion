@@ -62,7 +62,6 @@ public class Voucher {
     @Column(name = "thoi_gian_ket_thuc")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Không được để trống")
-    @Past(message = "Không được đi đến tương lai")
     private Date thoiGianKetThuc;
 
     @Column(name = "mo_ta")

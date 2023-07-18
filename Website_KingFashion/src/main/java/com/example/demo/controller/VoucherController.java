@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Voucher;
 import com.example.demo.service.impl.VoucherServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,13 +17,18 @@ import java.util.UUID;
 @RequestMapping("/voucher")
 public class VoucherController {
 
-    private int entity;
+    public static int entity = 1;
 
     @Autowired
     private VoucherServiceImpl voucherService;
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model, @RequestParam(name = "page", defaultValue = "0") Integer p) {
+    public String hienThi(Model model, @RequestParam(name = "page", defaultValue = "0") Integer p, HttpSession session) {
+        if (session.getAttribute("successMessage") != null) {
+            String successMessage = (String) session.getAttribute("successMessage");
+            model.addAttribute("successMessage", successMessage);
+            session.removeAttribute("successMessage");
+        }
         Page<Voucher> page = voucherService.page(p, 5);
         model.addAttribute("list", page);
         model.addAttribute("search", new Voucher());
@@ -44,8 +50,9 @@ public class VoucherController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable UUID id, Model model) {
+    public String delete(@PathVariable UUID id, Model model, HttpSession session) {
         voucherService.delete(id);
+        session.setAttribute("successMessage", "Xoá thành công");
         return "redirect:/voucher/hien-thi";
     }
 
@@ -53,11 +60,12 @@ public class VoucherController {
     public String viewUpdate(@PathVariable UUID id, Model model) {
         Voucher voucher = voucherService.detail(id);
         model.addAttribute("voucher", voucher);
+
         return "voucher/update";
     }
 
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
+    public String add(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model, HttpSession session) {
         if (result.hasErrors()) {
             return "voucher/add";
         }
@@ -67,15 +75,17 @@ public class VoucherController {
         String ma = "VOC" + entity++;
         voucher.setMa(ma);
         voucherService.add(voucher);
+        session.setAttribute("successMessage", "Thêm thành công");
         return "redirect:/voucher/hien-thi";
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
+    public String update(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model, HttpSession session) {
         if (result.hasErrors()) {
             return "voucher/update";
         }
         voucherService.add(voucher);
+        session.setAttribute("successMessage", "Update thành công");
         return "redirect:/voucher/hien-thi";
     }
 }

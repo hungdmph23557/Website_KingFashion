@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -22,5 +23,5 @@ public interface VoucherRepository extends JpaRepository<Voucher, UUID> {
             "  AND (:trangThai is null OR v.trangThai = :trangThai)")
     Page<Voucher> search(String ma, String ten, String mucGiam, Double tien, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, Pageable pageable);
 
-    Voucher existsVoucherByMa(String ma);
+    List<Voucher> findByThoiGianKetThucBeforeAndTrangThaiEquals(Date endDate, Integer status);
 }

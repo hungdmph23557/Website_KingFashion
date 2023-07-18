@@ -165,7 +165,22 @@
 </div>
 
 <!--<img src="../../static/images/logo.jpg" alt="">-->
-
+<script th:if="${successMessage}" th:inline="javascript">
+    /*<![CDATA[*/
+    window.addEventListener('DOMContentLoaded', function() {
+        var successMessage = /*[[${successMessage}]]*/ '';
+        if (successMessage) {
+            swal({
+                title: "Good job!",
+                text: successMessage,
+                icon: "success",
+                button: "OK",
+            });
+        }
+    });
+    /*]]>*/
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../../static/js/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../../static/js/popper.js"></script>
