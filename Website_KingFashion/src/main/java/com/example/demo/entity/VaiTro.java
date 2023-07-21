@@ -21,8 +21,6 @@ public class VaiTro {
     @Column(name = "id")
     private UUID id;
 
-
-
     @Column(name = "ma")
     private String maVaiTro;
 

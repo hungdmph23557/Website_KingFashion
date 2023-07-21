@@ -71,6 +71,10 @@
                             <label class="form-check-label">Đang diễn ra</label>
                         </div>
                         <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" value="1" th:field="*{trangThai}" checked>
+                            <label class="form-check-label">Sắp diễn ra</label>
+                        </div>
+                        <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" value="0" th:field="*{trangThai}">
                             <label class="form-check-label">Kết thúc</label>
                         </div>
@@ -90,7 +94,7 @@
                     </div>
                 </form>
                 <a type="button" class="btn btn-primary add" href="/voucher/view-add"><i
-                        class="material-icons">&#xE147;</i></a>
+                        class="material-icons" >&#xE147;</i></a>
             </div>
         </section>
         <section class="navbar-expand-lg navbar-light bg-light">
@@ -128,7 +132,8 @@
                         <a th:href="@{delete/{id}(id=${l.id})}"><i
                                 class="material-icons remove"
                                 data-toggle="tooltip"
-                                title="Delete">&#xE872;</i></a>
+                                title="Delete"
+                                onclick="return confirm('Bạn có muốn xoá không?')">&#xE872;</i></a>
                     </td>
                 </tr>
                 </tbody>
