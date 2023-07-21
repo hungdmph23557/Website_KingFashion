@@ -52,6 +52,7 @@
                         <label class="form-label">Thời gian kết thúc</label>
                         <input type="date" class="form-control" th:field="*{thoiGianKetThuc}">
                         <span class="error" th:errors="*{thoiGianKetThuc}"></span>
+                        <span th:text="${mess}"></span>
                     </div>
                     <div class="col-12">
                         <label class="form-label">Mô tả</label>

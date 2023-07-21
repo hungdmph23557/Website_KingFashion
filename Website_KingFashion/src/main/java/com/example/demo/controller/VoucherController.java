@@ -66,11 +66,9 @@ public class VoucherController {
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model, HttpSession session) {
-        if (result.hasErrors()) {
-            return "voucher/add";
-        }
-        if (voucher.getThoiGianBatDau().after(voucher.getThoiGianKetThuc())) {
+        if (result.hasErrors() || voucher.getThoiGianBatDau().after(voucher.getThoiGianKetThuc())) {
             result.rejectValue("thoiGianKetThuc", null, "Ngày bắt đầu không được lớn hơn ngày kết thúc");
+            return "voucher/add";
         }
         String ma = "VOC" + entity++;
         voucher.setMa(ma);
