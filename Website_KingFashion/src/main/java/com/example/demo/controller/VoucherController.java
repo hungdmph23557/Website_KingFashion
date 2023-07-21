@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequestMapping("/voucher")
 public class VoucherController {
 
-    public static int entity = 1;
+    public static int entity = 0;
 
     @Autowired
     private VoucherServiceImpl voucherService;
@@ -70,7 +70,7 @@ public class VoucherController {
             result.rejectValue("thoiGianKetThuc", null, "Ngày bắt đầu không được lớn hơn ngày kết thúc");
             return "voucher/add";
         }
-        String ma = "VOC" + entity++;
+        String ma = "VOC" + String.format("%05d", ++entity);
         voucher.setMa(ma);
         voucherService.add(voucher);
         session.setAttribute("successMessage", "Thêm thành công");
