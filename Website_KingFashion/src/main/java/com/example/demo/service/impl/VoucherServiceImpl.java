@@ -26,9 +26,9 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public Page<Voucher> search(String ma, String ten, String mucGiam, Double tien, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, Integer size, Integer page) {
+    public Page<Voucher> search(String ma, String ten, Integer mucGiam, Double tien, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, Integer size, Integer page) {
         Pageable pageable = PageRequest.of(page, size);
-        return repository.search(ma, ten, mucGiam, tien, ngayBatDau, ngayKetThuc, trangThai, pageable);
+        return repository.search(ma, ten, tien, ngayBatDau, ngayKetThuc, trangThai, pageable);
     }
 
     @Override

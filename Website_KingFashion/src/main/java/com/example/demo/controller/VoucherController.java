@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -36,8 +37,8 @@ public class VoucherController {
     }
 
     @GetMapping("/search")
-    public String search(Model model, @ModelAttribute("search") Voucher voucher, @RequestParam(name = "page", defaultValue = "0") Integer p) {
-        Page<Voucher> list = voucherService.search(voucher.getMa(), voucher.getTen(), voucher.getMucGiam(), voucher.getTien(),
+    public String search(Model model, @ModelAttribute("search") Voucher voucher, @RequestParam(name = "page", defaultValue = "0") Integer p, @RequestParam("ma") String ma) {
+        Page<Voucher> list = voucherService.search(voucher.getMa(), voucher.getTen(), Integer.valueOf(voucher.getMucGiam()), voucher.getTien(),
                 voucher.getThoiGianBatDau(), voucher.getThoiGianKetThuc(), voucher.getTrangThai(), 5, p);
         model.addAttribute("list", list);
         return "voucher/home";
@@ -72,8 +73,7 @@ public class VoucherController {
         }
         String ma = "VOC" + new Random().nextInt(100000);
         voucher.setMa(ma);
-        Timestamp timestamp = new Timestamp(voucher.getThoiGianBatDau().getTime());
-        voucher.setThoiGianBatDau(timestamp);
+        voucher.setNgayTao(new Date());
         voucherService.add(voucher);
         session.setAttribute("successMessage", "Thêm thành công");
         return "redirect:/voucher/hien-thi";
@@ -84,6 +84,7 @@ public class VoucherController {
         if (result.hasErrors()) {
             return "voucher/update";
         }
+        voucher.setNgaySua(new Date());
         voucherService.add(voucher);
         session.setAttribute("successMessage", "Update thành công");
         return "redirect:/voucher/hien-thi";

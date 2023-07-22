@@ -11,7 +11,7 @@ public interface VoucherService {
 
     Page<Voucher> page(Integer page, Integer size);
 
-    Page<Voucher> search(String ma, String ten, String mucGiam, Double tien, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, Integer size, Integer page);
+    Page<Voucher> search(String ma, String ten, Integer mucGiam, Double tien, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, Integer size, Integer page);
 
     Voucher detail(UUID id);
 

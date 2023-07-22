@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">Mã:</label>
-                        <input type="text" class="form-control" th:field="*{ma}">
+                        <input type="text" class="form-control" th:field="*{ma}" name="ma">
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">Tên:</label>
@@ -123,7 +123,7 @@
                     <td th:text="${#dates.format(l.thoiGianBatDau, 'dd/MM/yyyy HH:mm')}"></td>
                     <td th:text="${#dates.format(l.thoiGianKetThuc, 'dd/MM/yyyy HH:mm')}"></td>
                     <td th:text="${l.moTa}"></td>
-                    <td th:text="${l.trangThai == 1 ? 'Đang diễn ra' : 'Kết thúc'}"></td>
+                    <td th:text="${l.trangThai == 1 ? 'Đang diễn ra' : ( l.trangThai==2 ? 'Sắp diễn ra' : 'Kết thúc')}"></td>
                     <td>
                         <a th:href="@{view-update/{id}(id=${l.id})}"><i
                                 class="material-icons update"
