@@ -45,12 +45,12 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label">Thời gian bắt đầu</label>
-                        <input type="date" class="form-control" th:field="*{thoiGianBatDau}">
+                        <input type="datetime-local" class="form-control" th:field="*{thoiGianBatDau}">
                         <span class="error" th:errors="*{thoiGianBatDau}"></span>
                     </div>
                     <div class="col-12">
                         <label class="form-label">Thời gian kết thúc</label>
-                        <input type="date" class="form-control" th:field="*{thoiGianKetThuc}">
+                        <input type="datetime-local" class="form-control" th:field="*{thoiGianKetThuc}">
                         <span class="error" th:errors="*{thoiGianKetThuc}"></span>
                         <span th:text="${mess}"></span>
                     </div>

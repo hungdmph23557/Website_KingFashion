@@ -15,7 +15,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -54,13 +53,13 @@ public class Voucher {
     private Double tien;
 
     @Column(name = "thoi_gian_bat_dau")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     @NotNull(message = "Không được để trống")
     @Past(message = "Không được đi đến tương lai")
     private Date thoiGianBatDau;
 
     @Column(name = "thoi_gian_ket_thuc")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     @NotNull(message = "Không được để trống")
     private Date thoiGianKetThuc;
 

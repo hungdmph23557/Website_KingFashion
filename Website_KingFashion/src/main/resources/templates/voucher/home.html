@@ -82,11 +82,11 @@
                     <div class="col-md-12 d-flex justify-content-left">
                         <div class="col-md-2">
                             <label class="form-label">Ngày bắt đầu:</label>
-                            <input type="date" class="form-control" th:field="*{thoiGianBatDau}">
+                            <input type="datetime-local" class="form-control" th:field="*{thoiGianBatDau}">
                         </div>
                         <div class="col-md-2">
                             <label class="form-label">Ngày kết thúc:</label>
-                            <input type="date" class="form-control" th:field="*{thoiGianKetThuc}">
+                            <input type="datetime-local" class="form-control" th:field="*{thoiGianKetThuc}">
                         </div>
                         <div class="col-md-2" style="padding-top: 30px">
                             <button type="submit" class="btn btn-primary">Lọc</button>
@@ -120,8 +120,8 @@
                     <td th:text="${l.ten}"></td>
                     <td th:text="${#numbers.formatDecimal(l.mucGiam, 0 , 'COMMA',3,'POINT').substring(0, #numbers.formatDecimal(l.mucGiam, 0 , 'COMMA',3,'POINT').length()-4)} + ' đ'"></td>
                     <td th:text="${#numbers.formatDecimal(l.tien, 0, 'COMMA', 3, 'POINT').substring(0, #numbers.formatDecimal(l.tien, 0, 'COMMA', 3, 'POINT').length() - 4)} + ' đ'"></td>
-                    <td th:text="${#dates.format(l.thoiGianBatDau, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${#dates.format(l.thoiGianKetThuc, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#dates.format(l.thoiGianBatDau, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#dates.format(l.thoiGianKetThuc, 'dd/MM/yyyy HH:mm')}"></td>
                     <td th:text="${l.moTa}"></td>
                     <td th:text="${l.trangThai == 1 ? 'Đang diễn ra' : 'Kết thúc'}"></td>
                     <td>
