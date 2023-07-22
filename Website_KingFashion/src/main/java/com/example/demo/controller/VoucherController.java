@@ -11,13 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/voucher")
 public class VoucherController {
-
-    public static int entity = 0;
 
     @Autowired
     private VoucherServiceImpl voucherService;
@@ -70,8 +70,10 @@ public class VoucherController {
             result.rejectValue("thoiGianKetThuc", null, "Ngày bắt đầu không được lớn hơn ngày kết thúc");
             return "voucher/add";
         }
-        String ma = "VOC" + String.format("%05d", ++entity);
+        String ma = "VOC" + new Random().nextInt(100000);
         voucher.setMa(ma);
+        Timestamp timestamp = new Timestamp(voucher.getThoiGianBatDau().getTime());
+        voucher.setThoiGianBatDau(timestamp);
         voucherService.add(voucher);
         session.setAttribute("successMessage", "Thêm thành công");
         return "redirect:/voucher/hien-thi";
