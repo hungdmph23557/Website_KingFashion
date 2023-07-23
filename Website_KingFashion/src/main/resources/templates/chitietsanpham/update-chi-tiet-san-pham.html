@@ -88,27 +88,40 @@
                     <button type="button" class="btn btn-primary">Lọc</button>
                 </div>
                 <div class="col-12">
-                    <form th:action="@{/san-pham/update(id=${att.id})}" th:object="${att}" method="post">
+                    <form th:action="@{/chi-tiet-san-pham/update(id=${att.id})}" th:object="${att}" method="post">
                         <div class="mb-3">
-                            <label class="form-label" for="ma" >Mã</label>
-                            <input type="text" class="form-control" id="ma" th:field="*{ma}" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Tên</label>
-                            <input type="text" class="form-control" th:field="*{ten}" />
+                            <label class="form-label"  >Tên</label>
+                            <input type="text" class="form-control" th:field="*{sanPham.ten}" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Mô tả</label>
-                            <input type="text" class="form-control" th:field="*{moTa}" />
+                            <label class="form-label"  >Mô tả</label>
+                            <input type="text" class="form-control" th:field="*{sanPham.moTa}" />
                         </div>
-                        <input  type="hidden" th:field="*{ngayTao}" th:value="${att.ngayTao}" />
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" th:field="*{trangThai}" th:value="1" checked/>
-                            <label class="form-check-label" >Hoạt động</label>
+                        <div class="mb-3">
+                            <label class="form-label"  >Giá</label>
+                            <input type="text" class="form-control" th:field="*{giaBan}" />
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio"  th:field="*{trangThai}" th:value="0" />
-                            <label class="form-check-label" >Không hoạt động</label>
+                        <div class="mb-3">
+                            <label class="form-label"  >Số lượng</label>
+                            <input type="text" class="form-control" th:field="*{soLuong}" />
+                        </div>
+                        <div class="md-3 d-flex justify-content-around" style="margin-bottom: 10px">
+                            <div class="md-4">
+                                <label  class="form-label" style="color: black">Chất
+                                    liệu
+                                </label>
+                                <select class="form-select" th:field="*{chatLieu}">
+                                    <option th:each="chatLieu : ${listChatLieu}" th:value="${chatLieu.id}" th:text="${chatLieu.ten}"></option>
+                                </select>
+                            </div>
+                            <div class="md-4">
+                                <label  class="form-label" style="color: black">Loại
+                                    Sản Phẩm
+                                </label>
+                                <select class="form-select" th:field="*{loaiSanPham}">
+                                    <option th:each="loaiSanPham : ${listLoaiSanPham}" th:value="${loaiSanPham.id}" th:text="${loaiSanPham.ten}"></option>
+                                </select>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>

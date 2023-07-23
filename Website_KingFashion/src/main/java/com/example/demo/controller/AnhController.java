@@ -64,9 +64,13 @@ public class AnhController {
         Anh uploadAnh = anhRepository.save(anh);
         if (uploadAnh != null) {
             try {
+
                 File saveFile = new ClassPathResource("static/image").getFile();
+
                 Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + image.getOriginalFilename());
+                System.out.println(path);
                 Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

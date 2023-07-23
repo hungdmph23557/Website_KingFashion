@@ -83,7 +83,7 @@
                 <tr th:each="l, row : ${list.content}">
                     <th scope="row" th:text="${row.index + 1}"></th>
                     <td th:text="${l.ma}"></td>
-                 <td><img th:src="@{'../static/image/'+${l.ten}}" style="width: 200px; height: 100px"></td>
+                 <td><img th:src="@{'../static/image/'+${l.ten}}" style="width: 200px; height: 150px"></td>
                     <td th:text="${l.ngayTao}"></td>
                     <td th:text="${l.ngaySua}"></td>
                     <!--                    <td th:text="${mauSac.trangThai}"></td>-->

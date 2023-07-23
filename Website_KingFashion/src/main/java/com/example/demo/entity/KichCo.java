@@ -33,6 +33,9 @@ public class KichCo {
     @Column(name = "ten")
     private String ten;
 
+    @Column(name = "so_luong")
+    private Integer soLuong;
+
     @Column(name = "trang_thai")
     private Integer trangThai;
 

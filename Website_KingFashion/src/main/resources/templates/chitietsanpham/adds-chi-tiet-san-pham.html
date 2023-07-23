@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard | Uplon - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../../static/assets\images\favicon.ico">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{../../static/css/style.css}"/>
+    <!-- App css -->
+    <link href="../../static/assets\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
+    <link href="../../static/assets\css\icons.min.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets\css\app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+    <!-- Topbar Start -->
+    <div class="navbar-custom" th:insert="layout/nav.html :: header">
+
+    </div>
+    <!-- end Topbar -->
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu" th:insert="layout/slidebar.html :: header">
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-center">
+                                <h1 class="page-title" style="text-align: center; font-size: 200%">Sản Phẩm</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="card-box" style="display: flex;justify-content:center ">
+                                    <div class="col-xl-12">
+                                        <div class="form-inline mt-3" style="display: flex;justify-content:center ">
+                                            <div class="form-floating mb-3 mt-3">
+                                                <input type="hidden" th:field="*{att.ngayTao}"
+                                                       th:value="${att.ngayTao}"/>
+                                                <input type="text" class="form-control"
+                                                       placeholder="Tên Sản Phẩm" name="" style="width: 600px"
+                                                       th:value="*{att.sanPham.ten}">
+                                                <label>Tên Sản Phẩm</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-inline mt-3"
+                                             style=" display: flex;justify-content:center ">
+                                            <div class="form-floating mb-3 mt-3">
+                                                <input type="text" class="form-control"
+                                                       placeholder="Tên Sản Phẩm" name="" style="width: 600px"
+                                                       th:value="${att.sanPham.moTa}">
+                                                <label>Mô tả</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-inline mt-3" style="display: flex;justify-content:center ">
+                                            <div class="form-floating mb-3 mt-3" style="margin-right: 30px;">
+                                                <input type="text" class="form-control" placeholder="Tên Sản Phẩm"
+                                                       name="" style="width: 200px" th:value="${att.giaBan}">
+                                                <label>Giá</label>
+                                            </div>
+                                            <div class="d-flex">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        style="height: 58px;width: 200px" th:value="${att.trangThai}">
+                                                    <option value="">Trạng thái..</option>
+                                                    <option value="1" th:selected="${att.trangThai == 1}">Hoạt Động
+                                                    </option>
+                                                    <option value="0" th:selected="${att.trangThai == 0}">Không hoạt
+                                                        động
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-inline mt-3" style="display: flex;justify-content:center ">
+                                            <div class="d-flex" style="margin-right: 30px;">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        style="height: 58px; width: 200px" th:value="${chatLieu}">
+                                                    <option th:each="chatLieu : ${listChatLieu}"
+                                                            th:value="${chatLieu.id}"
+                                                            th:text="${chatLieu.ten}"></option>
+                                                </select>
+                                                <button type="button"
+                                                        class="btn btn-success waves-effect waves-light"
+                                                        style="float: right;">
+                                                    <i class="mdi mdi-plus"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="d-flex" style="margin-right: 30px;">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        style="height: 58px; width: 200px"
+                                                        th:value="${att.loaiSanPham}">>
+                                                    <option th:each="loaiSanPham : ${listLoaiSanPham}"
+                                                            th:value="${loaiSanPham.id}"
+                                                            th:text="${loaiSanPham.ten}"></option>
+                                                </select>
+                                                <button type="button"
+                                                        class="btn btn-success waves-effect waves-light"
+                                                        style="float: right;">
+                                                    <i class="mdi mdi-plus"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="d-flex" style="margin-right: 30px;">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        style="height: 58px; width: 200px" th:value="*{att.mauSac}">
+                                                    <option th:each="mauSac : ${listMauSac}" th:value="${mauSac.id}"
+                                                            th:text="${mauSac.tenMauSac}"></option>
+                                                </select>
+
+                                                <button type="button"
+                                                        class="btn btn-success waves-effect waves-light"
+                                                        style="float: right;">
+                                                    <i class="mdi mdi-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-inline mt-3" style="display: flex;justify-content:center ">
+                                            <div class="d-flex" style="margin-right: 30px;">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        style="height: 58px; width: 200px" th:value="${att.nhaSanXuat}">>
+                                                    <option th:each="nhaSanXuat : ${listNhaSanXuat}"
+                                                            th:value="${nhaSanXuat.id}"
+                                                            th:text="${nhaSanXuat.tenNhaSanXuat}"></option>
+                                                </select>
+                                                <button type="button"
+                                                        class="btn btn-success waves-effect waves-light"
+                                                        style="float: right;">
+                                                    <i class="mdi mdi-plus"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="d-flex" style="margin-right: 30px;">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        style="height: 58px; width: 200px" th:value="*{att.coAo}">
+                                                    <option th:each="coAo : ${listCoAo}" th:value="${coAo.id}"
+                                                            th:text="${coAo.ten}"></option>
+                                                </select>
+                                                <button type="button"
+                                                        class="btn btn-success waves-effect waves-light"
+                                                        style="float: right;">
+                                                    <i class="mdi mdi-plus"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-box" id="newPanel" style="display: flex">
+                                    <div class="col-xl-12">
+                                        <div id="addEmployeeModal" class="modal fade">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content" style="height: 200px">
+                                                    <form th:action="@{/chi-tiet-san-pham/update(id=${att.id})}"
+                                                          th:object="${att}" method="post">
+                                                        <div class="row" style="height: 100px;">
+                                                            <div class="col-3 text-centers">
+                                                                <label>Kích cỡ</label>
+                                                            </div>
+                                                            <div class="col-9 text-centerss">
+                                                                <input type="hidden" th:field="*{ngayTao}"/>
+                                                                <div th:each="size: ${listKichCo}" class="col-2">
+                                                                    <label>
+                                                                        <input type="radio" class="size-radio"
+                                                                               th:value="${size.id}" name="size"
+                                                                               >
+                                                                        <span th:text="${size.ten}"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="height: 100px;">
+                                                            <div class="quantity-input">
+                                                                <button type="button" class="quantity-btn"
+                                                                        onclick="decreaseQuantity(this)">-
+                                                                </button>
+                                                                <input type="number" class="quantity"
+                                                                       th:field="*{kichCo.soLuong}" min="1" max="100">
+                                                                <button type="button" class="quantity-btn"
+                                                                        onclick="increaseQuantity(this)">+
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-inline mt-3"
+                                                             style="display: flex;justify-content:right ">
+                                                            <button type="submit" class="btn btn-info">Xác nhận</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-inline mt-3"
+                                             style="display: flex;justify-content:center ">
+                                            <a href="#addEmployeeModal" class="btn btn-success"
+                                               data-toggle="modal"><i
+                                                    class="material-icons">&#xE147;</i>
+                                                <span>Thêm</span></a>
+                                        </div>
+                                        <table id="datatable-buttons"
+                                               class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                                               style="border-collapse: collapse; border-spacing: 0px; width: 100%;"
+                                               role="grid" aria-describedby="datatable-buttons_info">
+                                            <thead class="text-center">
+                                            <tr>
+                                                <th>Tên</th>
+                                                <th>Số lượng</th>
+                                                <th>Trạng thái</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="l, row : ${list}" class="text-center">
+                                                <td class="align-middle" th:text="${l.kichCo.ten}">
+                                                </td>
+                                                <td class="align-middle" th:text="${l.kichCo.soLuong}">
+
+                                                </td>
+                                                <td class="align-middle"
+                                                    th:if="${l.kichCo.trangThai == 1}">Hoạt động
+                                                </td>
+                                                <td class="align-middle"
+                                                    th:if="${l.kichCo.trangThai == 0}">Không hoạt
+                                                    động
+                                                </td>
+                                                <td class="align-middle">
+                                                    <input type="checkbox" checked=""
+                                                           data-plugin="switchery" data-color="#3db9dc">
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end row -->
+        </div> <!-- end container-fluid -->
+
+    </div> <!-- end content -->
+
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+</div>
+<!-- END wrapper -->
+
+<!--&lt;!&ndash; Right Sidebar &ndash;&gt;-->
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+
+<!--<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">-->
+<!--    <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos-->
+<!--</a>-->
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
+<!-- Vendor js -->
+<script src="./src/bootstrap-input-spinner.js"></script>
+<script src="../../static/assets\js\vendor.min.js"></script>
+<!--Morris Chart-->
+<script src="../../static/assets\libs\morris-js\morris.min.js"></script>
+<script src="../../static/assets\libs\raphael\raphael.min.js"></script>
+
+<!-- Dashboard init js-->
+<script src="../../static/assets\js\pages\dashboard.init.js"></script>
+<!-- App js -->
+<script src="../../static/assets\js\app.min.js"></script>
+<script src="../../static/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</body>
+</html>
