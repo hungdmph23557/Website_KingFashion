@@ -29,6 +29,10 @@ import java.util.UUID;
 @Builder
 public class KhachHang {
 
+    @ManyToOne
+    @JoinColumn(name = "id_vt", referencedColumnName = "id")
+    private VaiTro vaiTro;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
