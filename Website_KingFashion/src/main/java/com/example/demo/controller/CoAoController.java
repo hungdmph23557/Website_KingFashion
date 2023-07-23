@@ -41,7 +41,6 @@ public class CoAoController {
             return "coao/co-ao";
         }
         coAo.setNgayTao(new Date());
-        coAo.setNgaySua(new Date());
         model.addAttribute("att", coAo);
         coAoService.add(coAo);
         return "redirect:/co-ao/hien-thi";

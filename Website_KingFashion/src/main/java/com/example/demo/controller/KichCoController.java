@@ -45,7 +45,6 @@ public class KichCoController {
             return "kichco/kich-co";
         }
         kichCo.setNgayTao(new Date());
-        kichCo.setNgaySua(new Date());
         model.addAttribute("att", kichCo);
         kichCoService.add(kichCo);
         return "redirect:/kich-co/hien-thi";

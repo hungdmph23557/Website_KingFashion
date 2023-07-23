@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +17,11 @@ public class MauSacServiceImpl implements MauSacService {
     @Autowired
     private MauSacRepository mauSacRepository;
 
+
+    @Override
+    public List<MauSac> getAll() {
+        return mauSacRepository.findAll();
+    }
 
     @Override
     public void add(MauSac mauSac) {

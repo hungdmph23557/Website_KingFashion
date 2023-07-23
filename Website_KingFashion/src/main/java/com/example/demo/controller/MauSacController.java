@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.ParseException;
@@ -26,6 +27,8 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/mau-sac/")
 public class MauSacController {
+
+    private static int currentNumber = 1;
 
     @Autowired
     private MauSacService mauSacService;
@@ -45,15 +48,16 @@ public class MauSacController {
     }
 
     @PostMapping("add")
-    public String addMauSac(@Valid @ModelAttribute("ms1") MauSac mauSac, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
+    public String addMauSac(@Valid @ModelAttribute("ms1") MauSac mauSac, BindingResult result, @RequestParam MultipartFile img, Model model) {
 
         if (result.hasErrors()) {
             return "mausac/mausac";
         }
+        String maMauSac = "MS" + currentNumber;
+        currentNumber++;
+        mauSac.setMaMauSac(maMauSac);
         mauSac.setNgayTao(new Date());
-        mauSac.setNgaySua(new Date());
         model.addAttribute("ms1", mauSac);
-        redirectAttributes.addFlashAttribute("message","Save Success");
         mauSacService.add(mauSac);
         return "redirect:/mau-sac/hien-thi";
     }
