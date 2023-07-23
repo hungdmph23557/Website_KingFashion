@@ -41,7 +41,6 @@ public class LoaiSanPhamController {
             return "loaisanpham/loai-san-pham";
         }
         loaiSanPham.setNgayTao(new Date());
-        loaiSanPham.setNgaySua(new Date());
         model.addAttribute("lsp1", loaiSanPham);
         loaiSanPhamService.add(loaiSanPham);
         return "redirect:/loai-san-pham/hien-thi";

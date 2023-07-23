@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +19,11 @@ public class KichCoServiceImpl implements KichCoService {
 
     @Autowired
     private KichCoRepository kichCoRepository;
+
+    @Override
+    public List<KichCo> getAll() {
+        return kichCoRepository.findAll();
+    }
 
     @Override
     public Page<KichCo> phanTrang(Integer pageNum, Integer pageNo) {

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +17,11 @@ public class NhaSanXuatServiceImpl implements NhaSanXuatService {
 
     @Autowired
     private NhaSanXuatRepository nhaSanXuatRepository;
+
+    @Override
+    public List<NhaSanXuat> getAll() {
+        return nhaSanXuatRepository.findAll();
+    }
 
     @Override
     public void add(NhaSanXuat nhaSanXuat) {

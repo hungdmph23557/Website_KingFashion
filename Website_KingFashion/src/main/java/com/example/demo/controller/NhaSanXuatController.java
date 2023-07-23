@@ -41,7 +41,6 @@ public class NhaSanXuatController {
             return "nhasanxuat/nha-san-xuat";
         }
         nhaSanXuat.setNgayTao(new Date());
-        nhaSanXuat.setNgaySua(new Date());
         model.addAttribute("nsx1", nhaSanXuat);
 
         nhaSanXuatService.add(nhaSanXuat);

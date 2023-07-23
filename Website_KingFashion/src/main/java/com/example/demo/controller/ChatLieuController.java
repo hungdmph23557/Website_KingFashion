@@ -41,7 +41,6 @@ public class ChatLieuController {
             return "chatlieu/chat-lieu";
         }
         chatLieu.setNgayTao(new Date());
-        chatLieu.setNgaySua(new Date());
         model.addAttribute("cl1", chatLieu);
         chatLieuService.add(chatLieu);
         return "redirect:/chat-lieu/hien-thi";

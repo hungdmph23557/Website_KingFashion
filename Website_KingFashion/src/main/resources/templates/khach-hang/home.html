@@ -40,11 +40,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Mã: </label>
                         <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <input type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -52,11 +48,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Tên: </label>
                         <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <input type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -64,11 +56,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-5 col-form-label">SĐT: </label>
                         <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <input type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -76,11 +64,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-5 col-form-label">Email: </label>
                         <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <input type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -88,11 +72,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-5 col-form-label">Địa chỉ: </label>
                         <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <input type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -123,7 +103,7 @@
                     <th>Email</th>
                     <th>Địa chỉ</th>
                     <th>Ngày sinh</th>
-                    <th>Mật khẩu</th>
+                    <th>Vai trò</th>
                     <th>Trạng thái</th>
                     <th>Action</th>
                 </tr>
@@ -137,7 +117,7 @@
                     <td th:text="${l.email}"></td>
                     <td th:text="${l.diaChi}"></td>
                     <td th:text="${l.ngaySinh}"></td>
-                    <td th:text="${l.matKhau}"></td>
+                    <td th:text="${l.vaiTro.id}"></td>
                     <td th:text="${l.trangThai == 1 ? 'Hoạt động' : 'Không hoạt động'}"></td>
                     <td>
                         <a th:href="@{view-update/{id}(id=${l.id})}">Update</a>
@@ -152,17 +132,17 @@
                     <!--                        <a class="page-link" th:href="@{/vouchers(page=0, size=${list.size})}">First</a>-->
                     <!--                    </li>-->
                     <li class="page-item" th:classappend="${list.number == 0} ? disabled">
-                        <a class="page-link" th:href="@{/voucher/hien-thi(page=${list.number - 1})}">
+                        <a class="page-link" th:href="@{/khach-hang/hien-thi(page=${list.number - 1})}">
                             Previous
                         </a>
                     </li>
                     <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
-                        <a class="page-link" th:href="@{/voucher/hien-thi(page=${pageNumber})}"
+                        <a class="page-link" th:href="@{/khach-hang/hien-thi(page=${pageNumber})}"
                            th:text="${pageNumber + 1}" th:classappend="${pageNumber == list.number} ? active">
                         </a>
                     </li>
                     <li class="page-item" th:classappend="${list.number == list.totalPages - 1} ? disabled">
-                        <a class="page-link" th:href="@{/voucher/hien-thi(page=${list.number + 1})}">
+                        <a class="page-link" th:href="@{/khach-hang/hien-thi(page=${list.number + 1})}">
                             Next
                         </a>
                     </li>

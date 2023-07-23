@@ -41,7 +41,6 @@ public class SanPhamController {
             return "sanpham/san-pham";
         }
         sanPham.setNgayTao(new Date());
-        sanPham.setNgaySua(new Date());
         model.addAttribute("att", sanPham);
         sanPhamService.add(sanPham);
         return "redirect:/san-pham/hien-thi";
