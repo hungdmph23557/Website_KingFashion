@@ -30,13 +30,13 @@
                 <form class="row g-3" method="post" th:action="@{/khach-hang/add}" th:object="${khachhang}">
                     <div class="col-md-6">
                         <label class="form-label">Mã</label>
-                        <input type="text" class="form-control" th:field="*{ma}">
-                        <span th:errors="*{ma}"></span>
+                        <input type="text" class="form-control" th:field="*{maTaiKhoan}">
+                        <span th:errors="*{maTaiKhoan}"></span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Tên</label>
-                        <input type="text" class="form-control" th:field="*{ten}">
-                        <span th:errors="*{ten}"></span>
+                        <input type="text" class="form-control" th:field="*{tenTaiKhoan}">
+                        <span th:errors="*{tenTaiKhoan}"></span>
                     </div>
                     <div class="col-6">
                         <label class="form-label">SĐT</label>

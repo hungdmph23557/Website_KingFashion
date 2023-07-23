@@ -17,11 +17,9 @@ import java.util.UUID;
 public class VaiTro {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private UUID id;
-
-
 
     @Column(name = "ma")
     private String maVaiTro;
@@ -30,6 +28,6 @@ public class VaiTro {
     private String tenVaiTro;
 
     @Column(name = "trang_thai")
-    private Boolean trangThai;
+    private Integer trangThai;
 
 }
