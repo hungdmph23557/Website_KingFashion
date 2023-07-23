@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.HoaDon;
 import com.example.demo.entity.LichSuHoaDon;
 import com.example.demo.entity.TaiKhoan;
+import com.example.demo.service.HoaDonChiTietService;
 import com.example.demo.service.HoaDonService;
 import com.example.demo.service.LichSuHoaDonService;
 import com.example.demo.service.TaiKhoanService;
@@ -37,8 +38,9 @@ public class HoaDonController {
     @Autowired
     private TaiKhoanService taiKhoanService;
 
-
-
+    @Autowired
+    private HoaDonChiTietService hoaDonChiTietService;
+    
     @GetMapping("hien-thi")
     public String hienThiHoaDon(Model model, @RequestParam(name ="page", defaultValue = "0") Integer pageNum){
         Page<HoaDon> hoaDonPage = hoaDonService.phanTrangHoaDon(pageNum, 5);
