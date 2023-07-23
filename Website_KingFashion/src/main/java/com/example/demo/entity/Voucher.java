@@ -47,7 +47,7 @@ public class Voucher {
     @Column(name = "muc_giam")
     @NotBlank(message = "Không được để trống")
     @Min(value = 0, message = "Không được nhỏ hơn 0")
-    private String mucGiam;
+    private Integer mucGiam;
 
     @Column(name = "so_tien_toi_thieu_giam_gia")
     @NotNull(message = "Không được để trống")

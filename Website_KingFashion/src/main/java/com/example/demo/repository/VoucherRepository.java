@@ -15,13 +15,14 @@ import java.util.UUID;
 @Repository
 public interface VoucherRepository extends JpaRepository<Voucher, UUID> {
     @Query("SELECT v FROM Voucher v " +
-            "WHERE (:ma is null OR v.ma = :ma)\n" +
-            "  AND (:ten is null OR v.ten LIKE CONCAT('%', :ten, '%'))\n" +
+            "WHERE (:ma is null OR v.ma LIKE lower(CONCAT('%', :ma, '%')))\n" +
+            "  AND (:ten is null OR v.ten LIKE lower(CONCAT('%', :ten, '%')))\n" +
+            "  AND (:mucGiam is null OR v.mucGiam <= :mucGiam)\n" +
             "  AND (:tien is null OR v.tien <= :tien)\n" +
             "  AND (:thoiGianBatDau IS NULL OR v.thoiGianBatDau <= :thoiGianBatDau)\n" +
             "  AND (:thoiGianKetThuc IS NULL OR v.thoiGianKetThuc >= :thoiGianKetThuc)\n" +
             "  AND (:trangThai is null OR v.trangThai = :trangThai)")
-    Page<Voucher> search(@Param("ma") String ma, @Param("ten") String ten, @Param("tien") Double tien,
+    Page<Voucher> search(@Param("ma") String ma, @Param("ten") String ten,@Param("mucGiam") Integer mucGiam, @Param("tien") Double tien,
                          @Param("thoiGianBatDau") Date thoiGianBatDau, @Param("thoiGianKetThuc") Date thoiGianKetThuc, @Param("trangThai") Integer trangThai,
                          Pageable pageable);
 
