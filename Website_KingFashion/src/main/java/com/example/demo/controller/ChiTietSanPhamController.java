@@ -196,8 +196,8 @@ public class ChiTietSanPhamController {
         if (result.hasErrors()) {
             return "chitietsanpham/update-chi-tiet-san-pham";
         }
-        String tenkichCo = chiTietSanPham.getKichCo().getTen();
-        Integer soLuongkichCo = chiTietSanPham.getKichCo().getSoLuong();
+//        String tenkichCo = chiTietSanPham.getKichCo().getTen();
+//        Integer soLuongkichCo = chiTietSanPham.getKichCo().getSoLuong();
 
         chiTietSanPham.setNgaySua(new Date());
         model.addAttribute("att", chiTietSanPham);
