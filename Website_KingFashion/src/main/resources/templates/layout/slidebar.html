@@ -11,36 +11,85 @@
     <th:block id="home-static-resources">
         <link rel="stylesheet" type="text/css" media="all" th:href="@{../static/css/style.css}"/>
     </th:block>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
-<div id="sidebar" th:fragment="header">
-    <div class="menu">
-        <img class="img logo" src="../../static/image/zyro-image.png" alt="">
-        <br>
-        <div class="item">
-            <a class="sub-btn"><i class="fas fa-table"></i>Quản lý Sản Phẩm<i
-                    class="fas fa-angle-right dropdown"></i></a>
-            <div class="sub-menu">
-                <a href="/san-pham/hien-thi" class="sub-item">Sản phẩm</a>
-                <a href="/mau-sac/hien-thi" class="sub-item">Màu sắc</a>
-                <a href="/nha-san-xuat/hien-thi" class="sub-item">Nhà Sản Xuất</a>
-                <a href="/chat-lieu/hien-thi" class="sub-item">Chất liệu</a>
-                <a href="/loai-san-pham/hien-thi" class="sub-item">Loại sản phẩm</a>
-                <a href="/co-ao/hien-thi" class="sub-item">Cổ áo</a>
-                <a href="/kich-co/hien-thi" class="sub-item">Kích cỡ</a>
-            </div>
-        </div>
-        <div class="item"><a href="/voucher/hien-thi"><i class="fas fa-th"></i>Voucher</a></div>
-        <div class="item"><a href="/hoa-don/hien-thi"><i class="fas fa-th"></i>Hóa đơn</a></div>
-        <div class="item"><a href="/voucher/hien-thi"><i class="fas fa-th"></i>Nhân viên</a></div>
-        <div class="item"><a href="/khach-hang/hien-thi"><i class="fas fa-th"></i>Khách hàng</a></div>
-        <div class="item"><a href="/voucher/hien-thi"><i class="fas fa-th"></i>Hình thức thanh toán</a></div>
-    </div>
-</div>
 
+<body>
+<div class="slimscroll-menu" th:fragment="header">
+
+    <!--- Sidemenu -->
+    <div id="sidebar-menu">
+
+        <ul class="metismenu" id="side-menu">
+
+            <li class="menu-title">Navigation</li>
+
+            <li>
+                <a href="/hoa-don/hien-thi">
+                    <i class="mdi mdi-view-dashboard"></i>
+                    <span> Quản Lý Hóa Đơn </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="calendar.html">
+                    <i class="mdi mdi-calendar-month"></i>
+                    <span> Voucher </span>
+                </a>
+            </li>
+
+            <!--            <li>-->
+            <!--                <a href="javascript: void(0);">-->
+            <!--                    <i class="mdi mdi-flip-horizontal"></i>-->
+            <!--                    <span> Layouts </span>-->
+            <!--                    <span class="badge badge-danger badge-pill float-right">New</span>-->
+            <!--                </a>-->
+            <!--                <ul class="nav-second-level" aria-expanded="false">-->
+            <!--                    <li><a href="layouts-dark-sidebar.html">Dark Sidebar</a></li>-->
+            <!--                    <li><a href="layouts-small-sidebar.html">Small Sidebar</a></li>-->
+            <!--                    <li><a href="layouts-sidebar-collapsed.html">Sidebar Collapsed</a></li>-->
+            <!--                    <li><a href="layouts-unsticky.html">Unsticky Layout</a></li>-->
+            <!--                    <li><a href="layouts-boxed.html">Boxed Layout</a></li>-->
+            <!--                </ul>-->
+            <!--            </li>-->
+
+            <li>
+                <a href="javascript: void(0);">
+                    <i class="mdi mdi-google-pages"></i>
+                    <span> Quản Lý Sản Phẩm </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li><a href="pages-starter.html">Màu sắc</a></li>
+                    <li><a href="pages-login.html">Nhà sản xuất</a></li>
+                    <li><a href="pages-register.html">Chất liệu</a></li>
+                    <li><a href="pages-recoverpw.html">Loại sản phẩm</a></li>
+                    <li><a href="pages-lock-screen.html">Cổ Áo</a></li>
+                    <li><a href="pages-404.html">Kích cỡ</a></li>
+                    <li><a href="pages-500.html">Ảnh</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);">
+                    <i class="mdi mdi-content-copy"></i>
+                    <span> Quản Lý Tài Khoản </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li><a href="pages-timeline.html">Nhân viên</a></li>
+                    <li><a href="pages-invoice.html">Khách Hàng</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="clearfix"></div>
+
+</div>
+<!-- Sidebar -left -->
 
 <script src="../../static/js/jquery.min.js"></script>
 <script src="../../static/js/popper.js"></script>

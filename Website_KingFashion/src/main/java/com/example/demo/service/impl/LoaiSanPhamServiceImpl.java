@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +17,11 @@ public class LoaiSanPhamServiceImpl implements LoaiSanPhamService {
 
     @Autowired
     private LoaiSanPhamRepository loaiSanPhamRepository;
+
+    @Override
+    public List<LoaiSanPham> getAll() {
+        return loaiSanPhamRepository.findAll();
+    }
 
     @Override
     public Page<LoaiSanPham> phanTrang(Integer pageNum, Integer pageNo) {

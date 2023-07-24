@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +17,11 @@ public class ChatLieuServiceImpl implements ChatLieuService {
 
     @Autowired
     private ChatLieuRepository chatLieuRepository;
+
+    @Override
+    public List<ChatLieu> getAll() {
+        return chatLieuRepository.findAll();
+    }
 
     @Override
     public Page<ChatLieu> phanTrangChatLieu(Integer pageNum, Integer pageNo) {

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard | Uplon - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../../static/assets\images\favicon.ico">
+
+    <!-- App css -->
+    <link href="../../static/assets\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
+    <link href="../../static/assets\css\icons.min.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets\css\app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+    <!-- Topbar Start -->
+    <div class="navbar-custom" th:insert="layout/nav.html :: header">
+
+    </div>
+    <!-- end Topbar -->
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu" th:insert="layout/slidebar.html :: header">
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-center">
+                                <h1 class="page-title" style="text-align: center; font-size: 200%">Sản Phẩm</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box" style="display: flex;justify-content:center ">
+
+
+                                    <div class="col-xl-12">
+                                        <div class="dataTables_filter">
+                                            <label>Search:
+                                                <input
+                                                        type="search" class="form-control form-control-sm"
+                                                        placeholder="" aria-controls="datatable-buttons"
+                                                        style="width: 300px">
+                                            </label>
+                                            <button type="button" class="btn btn-success waves-effect waves-light">
+                                                        <span class="btn-label"><i class="mdi mdi-search-web"></i>
+                                                        </span>Tìm Kiếm
+                                            </button>
+                                            <button type="button" class="btn btn-success waves-effect waves-light">
+                                                        <span class="btn-label"><i class="mdi mdi-reload"></i>
+                                                        </span>Làm mới
+                                            </button>
+                                            <form action="/chi-tiet-san-pham/view-add" method="get" style="float: right; margin-top: 20px">
+                                                <button type="submit"  class="btn btn-success waves-effect waves-light"
+                                                        style="float: right;">
+                                                        <span class="btn-label"><i class="mdi mdi-plus"></i>
+                                                        </span>Tạo Sản Phẩm
+                                                </button>
+                                            </form>
+
+                                        </div>
+                                        <form class="form-inline mt-3" style="display: flex;justify-content:center ">
+                                            <label class="mr-3 mb-3">Màu sắc</label>
+                                            <select class="custom-select mb-3 mr-3">
+                                                <option selected="">Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <label class="mr-3 mb-3">Kích cỡ</label>
+                                            <select class="custom-select mb-3 mr-3">
+                                                <option selected="">Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <label class="mr-3 mb-3">Chất liệu</label>
+                                            <select class="custom-select mb-3 mr-3">
+                                                <option selected="">Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <label class="mr-3 mb-3">Hãng</label>
+                                            <select class="custom-select mb-3 mr-3">
+                                                <option selected="">Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </form>
+                                        <form class="form-inline mt-3" style="display: flex;justify-content:center ">
+                                            <label class="mr-3 mb-3">Trạng Thái</label>
+                                            <select class="custom-select mb-3 mr-3">
+                                                <option selected="">Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <label class="mr-3 mb-3">Sắp Xếp</label>
+                                            <select class="custom-select mb-3 mr-3">
+                                                <option selected="">Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dt-buttons btn-group">
+                                                <button class="btn btn-secondary buttons-copy buttons-html5"
+                                                        tabindex="0" aria-controls="datatable-buttons"
+                                                        type="button"><span>Copy</span></button>
+                                                <button class="btn btn-secondary buttons-excel buttons-html5"
+                                                        tabindex="0" aria-controls="datatable-buttons"
+                                                        type="button"><span>Excel</span></button>
+                                                <button class="btn btn-secondary buttons-pdf buttons-html5"
+                                                        tabindex="0" aria-controls="datatable-buttons"
+                                                        type="button"><span>PDF</span></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="datatable-buttons"
+                                                   class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                                                   style="border-collapse: collapse; border-spacing: 0px; width: 100%;"
+                                                   role="grid" aria-describedby="datatable-buttons_info">
+                                                <thead class="text-center">
+                                                <tr>
+                                                    <th scope="row">STT</th>
+                                                    <th>Ảnh</th>
+                                                    <th>Tên Sản Phẩm</th>
+                                                    <th>Giá</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="l, row : ${list.content}" class="text-center">
+                                                    <th scope="row" class="align-middle"
+                                                        th:text="${row.index + 1}"></th>
+                                                    <td class="align-middle"><img th:if="${l.anh != null}"
+                                                                                  th:src="@{'../static/image/'+${l.anh.ten}}"
+                                                                                  style="width: 200px; height: 150px">
+                                                    </td>
+                                                    <td class="align-middle" th:text="${l.sanPham.ten}"></td>
+                                                    <td class="align-middle" th:text="${l.giaBan}"></td>
+                                                    <td class="align-middle" th:text="${l.soLuong}"></td>
+                                                    <td class="align-middle" th:if="${l.trangThai == 1}">Hoạt động</td>
+                                                    <td class="align-middle" th:if="${l.trangThai == 0}">Không hoạt
+                                                        động
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <a class="edit" th:href="@{view-update/{id}(id=${l.id})}">
+                                                            <i class="material-icons" data-toggle="tooltip"
+                                                               title="Edit">&#xE254;</i>
+                                                        </a>
+                                                        <a th:href="@{delete/{id}(id=${l.id})}" class="delete">
+                                                            <i class="material-icons" data-toggle="tooltip"
+                                                               title="Delete">&#xE872;</i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12" style="display: flex; justify-content: center">
+                                            <div class="dataTables_paginate paging_simple_numbers"
+                                                 id="datatable-buttons_paginate">
+                                                <ul class="pagination">
+                                                    <li class="page-item"
+                                                        th:classappend="${list.number == 0} ? disabled">
+                                                        <a class="page-link"
+                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number - 1})}">
+                                                            Previous
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item"
+                                                        th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
+                                                        <a class="page-link"
+                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${pageNumber})}"
+                                                           th:text="${pageNumber + 1}"
+                                                           th:classappend="${pageNumber == list.number} ? active">
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item"
+                                                        th:classappend="${list.number == list.totalPages - 1} ? disabled">
+                                                        <a class="page-link"
+                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number + 1})}">
+                                                            Next
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+
+                    </div><!-- end col -->
+                </div>
+                <!-- end row -->
+
+
+            </div>
+            <!-- end row -->
+
+        </div> <!-- end container-fluid -->
+
+    </div> <!-- end content -->
+
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+</div>
+<!-- END wrapper -->
+
+<!--&lt;!&ndash; Right Sidebar &ndash;&gt;-->
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+
+<!--<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">-->
+<!--    <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos-->
+<!--</a>-->
+
+<!-- Vendor js -->
+<script src="../../static/assets\js\vendor.min.js"></script>
+
+<!--Morris Chart-->
+<script src="../../static/assets\libs\morris-js\morris.min.js"></script>
+<script src="../../static/assets\libs\raphael\raphael.min.js"></script>
+
+<!-- Dashboard init js-->
+<script src="../../static/assets\js\pages\dashboard.init.js"></script>
+
+<!-- App js -->
+<script src="../../static/assets\js\app.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</body>
+</html>
