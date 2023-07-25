@@ -27,6 +27,14 @@ public class TaiKhoanController {
     public String hienThi (Model model, @RequestParam(name = "page",defaultValue = "0") Integer p){
         Page<TaiKhoan> page = taiKhoanService.page(p,5);
         model.addAttribute("list", page);
+        model.addAttribute("search", new TaiKhoan());
+        return "khach-hang/home";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("search") TaiKhoan taiKhoan, @RequestParam(name = "page", defaultValue = "0") Integer p, @RequestParam("maTaiKhoan") String maTaiKhoan){
+        Page<TaiKhoan> list = taiKhoanService.search(taiKhoan.getMaTaiKhoan(),taiKhoan.getTenTaiKhoan(),taiKhoan.getSdt(),taiKhoan.getEmail(),taiKhoan.getDiaChi(),taiKhoan.getNgaySinh(),5,p);
+        model.addAttribute("list",list);
         return "khach-hang/home";
     }
 

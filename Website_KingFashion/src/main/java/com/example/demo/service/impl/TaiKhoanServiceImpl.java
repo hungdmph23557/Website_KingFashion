@@ -12,11 +12,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class TaiKhoanServiceImpl  implements TaiKhoanService {
+public class TaiKhoanServiceImpl implements TaiKhoanService {
 
     @Autowired
     private VaiTroRepository vaiTroRepository;
@@ -33,6 +34,12 @@ public class TaiKhoanServiceImpl  implements TaiKhoanService {
     public Page<TaiKhoan> page(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return taiKhoanRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<TaiKhoan> search(String ma, String ten, String sdt, String email, String diaChi, Date ngaySinh, Integer size, Integer page) {
+        Pageable pageable = PageRequest.of(page, size);
+        return taiKhoanRepository.search(ma, ten, sdt, diaChi, email, ngaySinh, pageable);
     }
 
     @Override

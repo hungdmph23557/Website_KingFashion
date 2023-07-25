@@ -47,86 +47,84 @@
                     <div class="col-12">
                         <div class="page-title-box">
                             <div class="page-title-center">
-                                <h1 class="page-title" style="text-align: center; font-size: 200%">Sản Phẩm</h1>
+                                <h1 class="page-title" style="text-align: center; font-size: 200%">Khách Hàng</h1>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- end page title -->
 
+                <form th:object="${search}" th:action="@{/khach-hang/search}"
+                      class="row form-row justify-content-between">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Mã: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{maTaiKhoan}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Tên: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{tenTaiKhoan}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-5 col-form-label">SĐT: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{sdt}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-5 col-form-label">Email: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{email}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-5 col-form-label">Địa chỉ: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{diaChi}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row mb-6">
+                                        <label class="col-sm-5 col-form-label">Ngày sinh: </label>
+                                        <div class="col-sm-6">
+                                            <input type="date" name="" class="form-control" th:field="*{ngaySinh}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-primary">Lọc</button>
+                                </div>
+                                <div class="col-3">
+                                    <a type="button" class="btn btn-primary add" href="/khach-hang/view-add">Add</a>
+                                </div>
 
-                <div class="row">
-                    <div class="col-12">
-
-                        <div class="row">
-                            <div class="col-12">
-                                <h1 style="padding-left: 40px">Khách Hàng</h1>
-                                <br>
-                            </div>
-                            <div class="col-2">
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Mã: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Tên: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="row mb-3">
-                                    <label class="col-sm-5 col-form-label">SĐT: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="row mb-3">
-                                    <label class="col-sm-5 col-form-label">Email: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="row mb-3">
-                                    <label class="col-sm-5 col-form-label">Địa chỉ: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="row mb-6">
-                                    <label class="col-sm-5 col-form-label">Ngày sinh: </label>
-                                    <div class="col-sm-6">
-                                        <input type="date" name="" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <button type="button" class="btn btn-primary">Lọc</button>
-                            </div>
-                            <div class="col-3">
-                                <a type="button" class="btn btn-primary add" href="/khach-hang/view-add">Add</a>
                             </div>
 
-                        </div>
 
-
-                    </div><!-- end col -->
-                </div>
+                        </div><!-- end col -->
+                    </div>
+                </form>
                 <!-- end row -->
 
 
             </div>
+
             <!-- end row -->
             <table class="table table-striped">
                 <thead>
