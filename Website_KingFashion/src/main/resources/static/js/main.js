@@ -119,3 +119,4 @@ function decreaseQuantity(button) {
 		input.value = parseInt(input.value) - 1;
 	}
 }
+

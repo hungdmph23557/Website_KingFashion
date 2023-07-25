@@ -16,4 +16,6 @@ public interface KichCoService {
     KichCo detail(UUID id);
 
     void delete(UUID id);
+
+    List<KichCo> getKichCoByChiTietSanPhamId(UUID chiTietSanPhamId);
 }

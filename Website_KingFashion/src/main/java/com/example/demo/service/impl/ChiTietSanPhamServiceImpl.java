@@ -34,7 +34,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Override
     public Page<ChiTietSanPham> PhanTrang(Integer PageNum, Integer PageNo) {
         Pageable pageable = PageRequest.of(PageNum, PageNo);
-        return chiTietSanPhamRepository.findAll(pageable);
+        return chiTietSanPhamRepository.phanTrang(pageable);
     }
 
     @Override
@@ -42,19 +42,17 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
         if(chiTietSanPham.getSanPham().getId() == null) {
             sanPhamRepository.save(chiTietSanPham.getSanPham());
         }
-        if(chiTietSanPham.getAnh() != null && chiTietSanPham.getAnh().getId() == null) {
-            anhRepository.save(chiTietSanPham.getAnh());
-        }
+
         chiTietSanPhamRepository.save(chiTietSanPham);
     }
 
     @Override
     public ChiTietSanPham detail(UUID id) {
-        return chiTietSanPhamRepository.getChiTietSanPhamById(id);
+        return chiTietSanPhamRepository.findById(id).orElse(null);
     }
 
     @Override
     public void delete(UUID id) {
-        chiTietSanPhamRepository.deleteById(id);
+        chiTietSanPhamRepository.delete(id);
     }
 }

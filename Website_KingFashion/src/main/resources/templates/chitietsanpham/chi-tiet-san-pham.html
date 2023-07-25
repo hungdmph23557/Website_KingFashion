@@ -84,8 +84,9 @@
                                                         <span class="btn-label"><i class="mdi mdi-reload"></i>
                                                         </span>Làm mới
                                             </button>
-                                            <form action="/chi-tiet-san-pham/view-add" method="get" style="float: right; margin-top: 20px">
-                                                <button type="submit"  class="btn btn-success waves-effect waves-light"
+                                            <form action="/chi-tiet-san-pham/view-add" method="get"
+                                                  style="float: right; margin-top: 20px">
+                                                <button type="submit" class="btn btn-success waves-effect waves-light"
                                                         style="float: right;">
                                                         <span class="btn-label"><i class="mdi mdi-plus"></i>
                                                         </span>Tạo Sản Phẩm
@@ -185,12 +186,17 @@
                                                 <tr th:each="l, row : ${list.content}" class="text-center">
                                                     <th scope="row" class="align-middle"
                                                         th:text="${row.index + 1}"></th>
-                                                    <td class="align-middle"><img th:if="${l.anh != null}"
-                                                                                  th:src="@{'../static/image/'+${l.anh.ten}}"
-                                                                                  style="width: 200px; height: 150px">
-                                                    </td>
+                                                    <!--                                                    <td class="align-middle"><img th:if="${Anh.chiTietSanPham.id != null}"-->
+                                                    <!--                                                                                  th:src="@{'../static/image/'+${Anh.chiTietSanPham.ten}}"-->
+                                                    <!--                                                                                  style="width: 200px; height: 150px">-->
+                                                    <!--                                                    </td>-->
+                                                    <td class="align-middle"><img height="250px"
+                                                                                  th:src="@{${'/chi-tiet-san-pham/display?id=' + l.id}}"
+                                                                                  alt=""></td>
+
                                                     <td class="align-middle" th:text="${l.sanPham.ten}"></td>
                                                     <td class="align-middle" th:text="${l.giaBan}"></td>
+                                                    <!--                                                    <td class="align-middle" th:text="${l.soLuong}"></td>-->
                                                     <td class="align-middle" th:text="${l.soLuong}"></td>
                                                     <td class="align-middle" th:if="${l.trangThai == 1}">Hoạt động</td>
                                                     <td class="align-middle" th:if="${l.trangThai == 0}">Không hoạt
@@ -293,7 +299,6 @@
 
 <!-- Vendor js -->
 <script src="../../static/assets\js\vendor.min.js"></script>
-
 <!--Morris Chart-->
 <script src="../../static/assets\libs\morris-js\morris.min.js"></script>
 <script src="../../static/assets\libs\raphael\raphael.min.js"></script>
