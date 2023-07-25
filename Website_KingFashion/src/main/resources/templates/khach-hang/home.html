@@ -153,8 +153,8 @@
                     <td th:text="${l.vaiTro.tenVaiTro}"></td>
                     <td th:text="${l.trangThai == 1 ? 'Hoạt động' : 'Không hoạt động'}"></td>
                     <td>
-                        <a th:href="@{view-update/{id}(id=${l.id})}">Update</a>
-                        <a th:href="@{delete/{id}(id=${l.id})}">Delete</a>
+                        <button type="button" class="btn btn-primary add"><a th:href="@{view-update/{id}(id=${l.id})}">Update</a></button>
+                        <button type="button" class="btn btn-primary add"><a th:href="@{delete/{id}(id=${l.id})}">Delete</a></button>
                     </td>
                 </tr>
                 </tbody>
