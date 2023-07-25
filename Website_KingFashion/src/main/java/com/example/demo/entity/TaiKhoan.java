@@ -23,7 +23,7 @@ public class TaiKhoan {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_vt", referencedColumnName = "id")
     private VaiTro vaiTro;
 
@@ -69,7 +69,7 @@ public class TaiKhoan {
 
 
     @Column(name = "trang_thai")
-    private Boolean trangThai;
+    private Integer trangThai;
 
 
 }

@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface AnhRepository extends JpaRepository<Anh, UUID> {
+
     Anh getAnhById(UUID id);
 
     @Query(value = "SELECT a FROM Anh a JOIN a.chiTietSanPham c WHERE c.id = ?1")

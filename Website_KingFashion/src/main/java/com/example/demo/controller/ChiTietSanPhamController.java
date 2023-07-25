@@ -207,7 +207,6 @@ public class ChiTietSanPhamController {
         if (result.hasErrors()) {
             return "chitietsanpham/update-chi-tiet-san-pham";
         }
-
         chiTietSanPham.setNgaySua(new Date());
         model.addAttribute("att", chiTietSanPham);
         chiTietSanPhamService.add(chiTietSanPham);

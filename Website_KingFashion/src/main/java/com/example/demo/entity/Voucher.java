@@ -6,14 +6,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -34,7 +37,7 @@ public class Voucher {
     private UUID id;
 
     @Column(name = "ma")
-    @NotBlank(message = "Không được để trống")
+//    @NotBlank(message = "Không được để trống")
     private String ma;
 
     @Column(name = "ten")
@@ -42,21 +45,26 @@ public class Voucher {
     private String ten;
 
     @Column(name = "muc_giam")
-    @NotBlank(message = "Không được để trống")
-    private String mucGiam;
+    @NotNull(message = "Không được để trống")
+    @Min(value = 0, message = "Không được nhỏ hơn 0")
+    private Integer mucGiam;
 
     @Column(name = "so_tien_toi_thieu_giam_gia")
     @NotNull(message = "Không được để trống")
+    @Min(value = 0)
     private Double tien;
 
     @Column(name = "thoi_gian_bat_dau")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @NotNull(message = "Không được để trống")
+    @Past(message = "Không được đi đến tương lai")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date thoiGianBatDau;
 
     @Column(name = "thoi_gian_ket_thuc")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @NotNull(message = "Không được để trống")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date thoiGianKetThuc;
 
     @Column(name = "mo_ta")
@@ -68,10 +76,13 @@ public class Voucher {
     private Integer trangThai;
 
     @Column(name = "ngay_tao")
-    private String ngayTao;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+    private Date ngayTao;
 
     @Column(name = "ngay_sua")
-    private String ngaySua;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+    private Date ngaySua;
 
     @Column(name = "nguoi_tao")
     private String nguoiTao;

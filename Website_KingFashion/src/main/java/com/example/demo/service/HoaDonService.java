@@ -11,4 +11,6 @@ public interface HoaDonService {
     List<HoaDon> getAll();
 
     Page<HoaDon> phanTrangHoaDon(Integer pageNum, Integer pageNo);
+
+    List<HoaDon> getExcel();
 }

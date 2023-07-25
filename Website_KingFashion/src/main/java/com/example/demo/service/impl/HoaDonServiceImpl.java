@@ -27,4 +27,9 @@ public class HoaDonServiceImpl implements HoaDonService {
         Pageable pageable = PageRequest.of(pageNum, pageNo);
         return hoaDonRepository.findAll(pageable);
     }
+
+    @Override
+    public List<HoaDon> getExcel() {
+        return hoaDonRepository.findAll();
+    }
 }

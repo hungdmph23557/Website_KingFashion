@@ -51,11 +51,9 @@ public class ChiTietSanPham {
     @JoinColumn(name = "id_nsx", referencedColumnName = "id")
     private NhaSanXuat nhaSanXuat;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_coao", referencedColumnName = "id")
     private CoAo coAo;
-
 
     @Column(name = "so_luong")
     private Integer soLuong;

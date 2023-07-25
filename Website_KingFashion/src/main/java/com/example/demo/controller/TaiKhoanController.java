@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.KhachHang;
-import com.example.demo.entity.Voucher;
-import com.example.demo.service.KhachHangService;
+import com.example.demo.entity.TaiKhoan;
+import com.example.demo.service.TaiKhoanService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,51 +19,59 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/khach-hang")
-public class KhachHangController {
+public class TaiKhoanController {
     @Autowired
-    private KhachHangService khachHangService;
+    private TaiKhoanService taiKhoanService;
 
     @GetMapping("/hien-thi")
     public String hienThi (Model model, @RequestParam(name = "page",defaultValue = "0") Integer p){
-        Page<KhachHang> page = khachHangService.page(p,5);
+        Page<TaiKhoan> page = taiKhoanService.page(p,5);
         model.addAttribute("list", page);
+        model.addAttribute("search", new TaiKhoan());
+        return "khach-hang/home";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("search") TaiKhoan taiKhoan, @RequestParam(name = "page", defaultValue = "0") Integer p, @RequestParam("maTaiKhoan") String maTaiKhoan){
+        Page<TaiKhoan> list = taiKhoanService.search(taiKhoan.getMaTaiKhoan(),taiKhoan.getTenTaiKhoan(),taiKhoan.getSdt(),taiKhoan.getEmail(),taiKhoan.getDiaChi(),taiKhoan.getNgaySinh(),5,p);
+        model.addAttribute("list",list);
         return "khach-hang/home";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model) {
-        model.addAttribute("khachhang", new KhachHang());
+        model.addAttribute("khachhang", new TaiKhoan());
         return "khach-hang/add";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable UUID id, Model model) {
-        khachHangService.delete(id);
+        taiKhoanService.delete(id);
         return "redirect:/khach-hang/hien-thi";
     }
 
     @GetMapping("/view-update/{id}")
     public String viewUpdate(@PathVariable UUID id, Model model) {
-        KhachHang khachHang = khachHangService.detail(id);
-        model.addAttribute("khachhang", khachHang);
+        TaiKhoan taiKhoan = taiKhoanService.detail(id);
+        model.addAttribute("khachhang", taiKhoan);
         return "khach-hang/update";
     }
 
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute("khachhang") KhachHang khachHang, BindingResult result, Model model) {
+    public String add(@Valid @ModelAttribute("khachhang") TaiKhoan taiKhoan, BindingResult result, Model model) {
         if(result.hasErrors()){
             return "khach-hang/add";
         }
-        khachHangService.add(khachHang);
+        taiKhoanService.add(taiKhoan);
         return "redirect:/khach-hang/hien-thi";
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("khachhang") KhachHang khachHang, BindingResult result, Model model) {
+    public String update(@Valid @ModelAttribute("khachhang") TaiKhoan taiKhoan, BindingResult result, Model model) {
         if(result.hasErrors()){
             return "khach-hang/update";
         }
-        khachHangService.add(khachHang);
+        taiKhoanService.add(taiKhoan);
         return "redirect:/khach-hang/hien-thi";
     }
 }

@@ -21,8 +21,6 @@ public class VaiTro {
     @Column(name = "id")
     private UUID id;
 
-
-
     @Column(name = "ma")
     private String maVaiTro;
 
@@ -30,6 +28,6 @@ public class VaiTro {
     private String tenVaiTro;
 
     @Column(name = "trang_thai")
-    private Boolean trangThai;
+    private Integer trangThai;
 
 }

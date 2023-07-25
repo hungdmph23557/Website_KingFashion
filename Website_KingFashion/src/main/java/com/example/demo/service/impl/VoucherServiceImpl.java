@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,6 +23,12 @@ public class VoucherServiceImpl implements VoucherService {
     public Page<Voucher> page(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return repository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Voucher> search(String ma, String ten, Integer mucGiam, Double tien, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, Integer size, Integer page) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.search(ma, ten, mucGiam, tien, ngayBatDau, ngayKetThuc, trangThai, pageable);
     }
 
     @Override
@@ -37,4 +45,5 @@ public class VoucherServiceImpl implements VoucherService {
     public void delete(UUID id) {
         repository.deleteById(id);
     }
+
 }
