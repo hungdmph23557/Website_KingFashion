@@ -53,12 +53,7 @@ public class HoaDonController {
         return "hoadon/hoadon";
     }
 
-    @GetMapping("/search")
-    public String search(Model model, @ModelAttribute("search") HoaDon hoaDon, @RequestParam(name ="page", defaultValue = "0") Integer pageNum, @RequestParam("maHoaDon") String maHoaDon){
-        Page<HoaDon> listHD = hoaDonService.search(hoaDon.getMaHoaDon(),  hoaDon.getNgayThanhToan(), hoaDon.getTongTienSauKhiGiam(), Boolean.valueOf(hoaDon.getTrangThai()), hoaDon.getTenNguoiNhan(), hoaDon.getNgayDuKienNhan(), hoaDon.getNgayShip(), 5 ,  pageNum);
-        model.addAttribute("listHD", listHD);
-        return "hoadon/hoadon";
-    }
+
 
     @PostMapping("/export")
     public void exportToExcel(HttpServletResponse response) throws IOException {

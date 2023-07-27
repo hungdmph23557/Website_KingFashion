@@ -29,11 +29,7 @@ public class HoaDonServiceImpl implements HoaDonService {
         return hoaDonRepository.findAll(pageable);
     }
 
-    @Override
-    public Page<HoaDon> search(String maHoaDon, Date ngayThanhToan, Double tongTienSauKhiGiam, Boolean trangThai, String tenNguoiNhan, Date ngayNhanDuKien, Date ngayShip, Integer size, Integer page) {
-        Pageable pageable = PageRequest.of(page, size);
-        return hoaDonRepository.search(maHoaDon, ngayThanhToan, tongTienSauKhiGiam, trangThai, tenNguoiNhan, ngayNhanDuKien, ngayShip, pageable);
-    }
+
 
     @Override
     public List<HoaDon> getExcel() {

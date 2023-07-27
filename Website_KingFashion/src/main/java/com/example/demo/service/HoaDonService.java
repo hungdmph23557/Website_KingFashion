@@ -13,7 +13,6 @@ public interface HoaDonService {
 
     Page<HoaDon> phanTrangHoaDon(Integer pageNum, Integer pageNo);
 
-    Page<HoaDon> search(String maHoaDon, Date ngayThanhToan, Double tongTienSauKhiGiam, Boolean trangThai, String tenNguoiNhan, Date ngayNhanDuKien, Date ngayShip, Integer size, Integer page);
 
     List<HoaDon> getExcel();
 }
