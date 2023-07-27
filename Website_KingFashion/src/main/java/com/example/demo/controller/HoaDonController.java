@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,13 @@ public class HoaDonController {
         model.addAttribute("listLSHD", lichSuHoaDons);
         List<TaiKhoan> taiKhoans = taiKhoanService.getAll();
         model.addAttribute("listTK", taiKhoans);
+        return "hoadon/hoadon";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("search") HoaDon hoaDon, @RequestParam(name ="page", defaultValue = "0") Integer pageNum, @RequestParam("maHoaDon") String maHoaDon){
+        Page<HoaDon> listHD = hoaDonService.search(hoaDon.getMaHoaDon(),  hoaDon.getNgayThanhToan(), hoaDon.getTongTienSauKhiGiam(), Boolean.valueOf(hoaDon.getTrangThai()), hoaDon.getTenNguoiNhan(), hoaDon.getNgayDuKienNhan(), hoaDon.getNgayShip(), 5 ,  pageNum);
+        model.addAttribute("listHD", listHD);
         return "hoadon/hoadon";
     }
 
