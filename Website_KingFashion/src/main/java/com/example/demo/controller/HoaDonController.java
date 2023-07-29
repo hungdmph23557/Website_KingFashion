@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
-@RequestMapping("/hoa-don")
+@RequestMapping("/hoa-don/")
 public class HoaDonController {
 
 
@@ -41,9 +43,9 @@ public class HoaDonController {
 
     @Autowired
     private HoaDonChiTietService hoaDonChiTietService;
-    
+
     @GetMapping("hien-thi")
-    public String hienThiHoaDon(Model model, @RequestParam(name ="page", defaultValue = "0") Integer pageNum){
+    public String hienThiHoaDon(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNum) {
         Page<HoaDon> hoaDonPage = hoaDonService.phanTrangHoaDon(pageNum, 5);
         model.addAttribute("listHD", hoaDonPage);
         List<LichSuHoaDon> lichSuHoaDons = lichSuHoaDonService.getAll();
@@ -54,6 +56,14 @@ public class HoaDonController {
     }
 
 
+    @GetMapping("view-hoa-don/{id}")
+    public String viewHoaDon(@PathVariable UUID id, Model model) {
+        HoaDon hoaDon = hoaDonService.detail(id);
+        model.addAttribute("hd1", hoaDon);
+        List<LichSuHoaDon> lichSuHoaDon = lichSuHoaDonService.detail(hoaDon.getLichSuHoaDon().getId());
+        model.addAttribute("lshd1", lichSuHoaDon);
+        return "/hoadon/hoa-don-chi-tiet";
+    }
 
     @PostMapping("/export")
     public void exportToExcel(HttpServletResponse response) throws IOException {
