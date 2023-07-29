@@ -84,4 +84,10 @@ public class NhanVienController {
         model.addAttribute("nhanvien", new NhanVien());
         return "redirect:/nhan-vien/hien-thi";
     }
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("nhanvien") NhanVien nhanVien, @RequestParam(name = "page", defaultValue = "0") Integer p){
+        Page<NhanVien> list = service.search(nhanVien.getTenNhanVien(),nhanVien.getSdt(),nhanVien.getEmail(),nhanVien.getDiaChi(),nhanVien.getNgaySinh(),5,p);
+        model.addAttribute("list",list);
+        return "nhanvien/nhan-vien";
+    }
 }
