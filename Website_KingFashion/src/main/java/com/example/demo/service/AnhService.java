@@ -26,4 +26,6 @@ public interface AnhService {
     void delete(UUID id);
 
     List<Anh> getAllByChiTietSanPhamId(UUID chiTietSanPhamId);
+
+    Anh getAnhById(UUID id);
 }

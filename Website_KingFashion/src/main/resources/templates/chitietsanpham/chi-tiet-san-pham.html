@@ -43,11 +43,7 @@
 
     <div class="content-page">
         <div class="content">
-
-            <!-- Start Content-->
             <div class="container-fluid">
-
-                <!-- start page title -->
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box">
@@ -57,246 +53,226 @@
                         </div>
                     </div>
                 </div>
-                <!-- end page title -->
-
-
                 <div class="row">
                     <div class="col-12">
+                        <div class="card-box" style="display: flex;justify-content:center ">
+                            <div class="col-xl-8">
+                                <form th:object="${att}" th:action="@{/chi-tiet-san-pham/search}">
+                                    <div class="form-inline mt-3" style="display: flex">
+                                        <input type="text" th:name="ten" placeholder="Nhập tên sản phẩm"
+                                               class="form-control form-control-sm" style="width: 150px; height: 40px; margin-right: 10px;"/>
+                                        <label>Min Price:</label>
+                                        <input type="number" class="form-control form-control-sm" th:name="minTien"
+                                               placeholder="Min price" style="width: 150px; height: 40px;  margin-right: 10px;">
+                                        <label>Max Price:</label>
+                                        <input type="number" class="form-control form-control-sm" th:name="maxTien"
+                                               placeholder="Max price" style="width: 150px; height: 40px;  margin-right: 10px;">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light">
+                                            <span class="btn-label"><i class="mdi mdi-search-web"></i></span>
+                                            Tìm Kiếm
+                                        </button>
+                                    </div>
+                                    <!--                                    <div class="form-inline mt-3" style="display: flex;justify-content:right ">-->
+                                    <!--                                        <label class="mr-3 mb-3">Màu sắc</label>-->
+                                    <!--                                        <select class="custom-select mb-3 mr-3" style="width: 104px"-->
+                                    <!--                                                th:field="*{mauSac}">-->
+                                    <!--                                            <option th:each="l: ${listMauSac}"-->
+                                    <!--                                                    th:value="${l.id}"-->
+                                    <!--                                                    th:text="${l.tenMauSac}">Three-->
+                                    <!--                                            </option>-->
+                                    <!--                                        </select>-->
+                                    <!--                                        <label class="mr-3 mb-3">Nhà Sản Xuất</label>-->
+                                    <!--                                        <select class="custom-select mb-3 mr-3" style="width: 104px">-->
+                                    <!--                                            <option th:each="l: ${listNhaSanXuat}"-->
+                                    <!--                                                    th:value="${l.id}"-->
+                                    <!--                                                    th:text="${l.tenNhaSanXuat}">Three-->
+                                    <!--                                            </option>-->
+                                    <!--                                        </select>-->
+                                    <!--                                        <label class="mr-3 mb-3" style="margin-left: -3px">Chất liệu</label>-->
+                                    <!--                                        <select class="custom-select mb-3 mr-3" style="width: 104px">-->
+                                    <!--                                            <option th:each="l: ${listChatLieu}"-->
+                                    <!--                                                    th:value="${l.id}"-->
+                                    <!--                                                    th:text="${l.ten}">Three-->
+                                    <!--                                            </option>-->
+                                    <!--                                        </select>-->
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card-box" style="display: flex;justify-content:center ">
-
-
-                                    <div class="col-xl-12">
-                                        <div class="dataTables_filter">
-                                            <label>Search:
-                                                <input
-                                                        type="search" class="form-control form-control-sm"
-                                                        placeholder="" aria-controls="datatable-buttons"
-                                                        style="width: 300px">
-                                            </label>
-                                            <button type="button" class="btn btn-success waves-effect waves-light">
-                                                        <span class="btn-label"><i class="mdi mdi-search-web"></i>
-                                                        </span>Tìm Kiếm
-                                            </button>
-                                            <button type="button" class="btn btn-success waves-effect waves-light">
-                                                        <span class="btn-label"><i class="mdi mdi-reload"></i>
-                                                        </span>Làm mới
-                                            </button>
-                                            <form action="/chi-tiet-san-pham/view-add" method="get"
-                                                  style="float: right; margin-top: 20px">
-                                                <button type="submit" class="btn btn-success waves-effect waves-light"
-                                                        style="float: right;">
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="form-inline mt-3" style="display: flex;justify-content:right ">-->
+                                    <!--                                        <label class="mr-3 mb-3">Loại Sản Phẩm</label>-->
+                                    <!--                                        <select class="custom-select mb-3 mr-3" style="width: 104px">-->
+                                    <!--                                            <option th:each="l: ${listLoaiSanPham}"-->
+                                    <!--                                                    th:value="${l.id}"-->
+                                    <!--                                                    th:text="${l.ten}">Three-->
+                                    <!--                                            </option>-->
+                                    <!--                                        </select>-->
+                                    <!--                                        <label class="mr-3 mb-3">Trạng Thái</label>-->
+                                    <!--                                        <select class="custom-select mb-3 mr-3" style="width: 104px">-->
+                                    <!--                                            <option value="3" selected="">Tất cả</option>-->
+                                    <!--                                            <option value="0">Hoạt Động</option>-->
+                                    <!--                                            <option value="1">Dừng Hoạt Động</option>-->
+                                    <!--                                        </select>-->
+                                    <!--                                        <label class="mr-3 mb-3">Sắp Xếp</label>-->
+                                    <!--                                        <select class="custom-select mb-3 mr-3" style="width: 104px">-->
+                                    <!--                                            <option selected="">Choose...</option>-->
+                                    <!--                                            <option value="1">One</option>-->
+                                    <!--                                            <option value="2">Two</option>-->
+                                    <!--                                            <option value="3">Three</option>-->
+                                    <!--                                        </select>-->
+                                    <!--                                    </div>-->
+                                </form>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="dataTables_filter" style="padding-top: 17px">
+                                    <form action="/chi-tiet-san-pham/view-add" method="get">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light"
+                                                style="float: right; margin-left: 10px">
                                                         <span class="btn-label"><i class="mdi mdi-plus"></i>
                                                         </span>Tạo Sản Phẩm
-                                                </button>
-                                            </form>
+                                        </button>
+                                    </form>
+                                    <form action="/chi-tiet-san-pham/hien-thi" method="get">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light"
+                                                style="float: right">
+                                                        <span class="btn-label"><i class="mdi mdi-reload"></i>
+                                                        </span>Làm mới
+                                        </button>
+                                    </form>
 
-                                        </div>
-                                        <form class="form-inline mt-3" style="display: flex;justify-content:center ">
-                                            <label class="mr-3 mb-3">Màu sắc</label>
-                                            <select class="custom-select mb-3 mr-3">
-                                                <option selected="">Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                            <label class="mr-3 mb-3">Kích cỡ</label>
-                                            <select class="custom-select mb-3 mr-3">
-                                                <option selected="">Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                            <label class="mr-3 mb-3">Chất liệu</label>
-                                            <select class="custom-select mb-3 mr-3">
-                                                <option selected="">Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                            <label class="mr-3 mb-3">Hãng</label>
-                                            <select class="custom-select mb-3 mr-3">
-                                                <option selected="">Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </form>
-                                        <form class="form-inline mt-3" style="display: flex;justify-content:center ">
-                                            <label class="mr-3 mb-3">Trạng Thái</label>
-                                            <select class="custom-select mb-3 mr-3">
-                                                <option selected="">Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                            <label class="mr-3 mb-3">Sắp Xếp</label>
-                                            <select class="custom-select mb-3 mr-3">
-                                                <option selected="">Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dt-buttons btn-group">
-                                                <button class="btn btn-secondary buttons-copy buttons-html5"
-                                                        tabindex="0" aria-controls="datatable-buttons"
-                                                        type="button"><span>Copy</span></button>
-                                                <button class="btn btn-secondary buttons-excel buttons-html5"
-                                                        tabindex="0" aria-controls="datatable-buttons"
-                                                        type="button"><span>Excel</span></button>
-                                                <button class="btn btn-secondary buttons-pdf buttons-html5"
-                                                        tabindex="0" aria-controls="datatable-buttons"
-                                                        type="button"><span>PDF</span></button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="datatable-buttons"
-                                                   class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
-                                                   style="border-collapse: collapse; border-spacing: 0px; width: 100%;"
-                                                   role="grid" aria-describedby="datatable-buttons_info">
-                                                <thead class="text-center">
-                                                <tr>
-                                                    <th scope="row">STT</th>
-                                                    <th>Ảnh</th>
-                                                    <th>Tên Sản Phẩm</th>
-                                                    <th>Giá</th>
-                                                    <th>Số lượng</th>
-                                                    <th>Trạng thái</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="l, row : ${list.content}" class="text-center">
-                                                    <th scope="row" class="align-middle"
-                                                        th:text="${row.index + 1}"></th>
-                                                    <!--                                                    <td class="align-middle"><img th:if="${Anh.chiTietSanPham.id != null}"-->
-                                                    <!--                                                                                  th:src="@{'../static/image/'+${Anh.chiTietSanPham.ten}}"-->
-                                                    <!--                                                                                  style="width: 200px; height: 150px">-->
-                                                    <!--                                                    </td>-->
-                                                    <td class="align-middle"><img height="250px"
-                                                                                  th:src="@{${'/chi-tiet-san-pham/display?id=' + l.id}}"
-                                                                                  alt=""></td>
-
-                                                    <td class="align-middle" th:text="${l.sanPham.ten}"></td>
-                                                    <td class="align-middle" th:text="${l.giaBan}"></td>
-                                                    <!--                                                    <td class="align-middle" th:text="${l.soLuong}"></td>-->
-                                                    <td class="align-middle" th:text="${l.soLuong}"></td>
-                                                    <td class="align-middle" th:if="${l.trangThai == 1}">Hoạt động</td>
-                                                    <td class="align-middle" th:if="${l.trangThai == 0}">Không hoạt
-                                                        động
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <a class="edit" th:href="@{view-update/{id}(id=${l.id})}">
-                                                            <i class="material-icons" data-toggle="tooltip"
-                                                               title="Edit">&#xE254;</i>
-                                                        </a>
-                                                        <a th:href="@{delete/{id}(id=${l.id})}" class="delete">
-                                                            <i class="material-icons" data-toggle="tooltip"
-                                                               title="Delete">&#xE872;</i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12" style="display: flex; justify-content: center">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="datatable-buttons_paginate">
-                                                <ul class="pagination">
-                                                    <li class="page-item"
-                                                        th:classappend="${list.number == 0} ? disabled">
-                                                        <a class="page-link"
-                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number - 1})}">
-                                                            Previous
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item"
-                                                        th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
-                                                        <a class="page-link"
-                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${pageNumber})}"
-                                                           th:text="${pageNumber + 1}"
-                                                           th:classappend="${pageNumber == list.number} ? active">
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item"
-                                                        th:classappend="${list.number == list.totalPages - 1} ? disabled">
-                                                        <a class="page-link"
-                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number + 1})}">
-                                                            Next
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-
-                    </div><!-- end col -->
+                    </div>
                 </div>
-                <!-- end row -->
+            </div>
 
 
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dt-buttons btn-group">
+                                    <button class="btn btn-secondary buttons-copy buttons-html5"
+                                            tabindex="0" aria-controls="datatable-buttons"
+                                            type="button"><span>Copy</span></button>
+                                    <button class="btn btn-secondary buttons-excel buttons-html5"
+                                            tabindex="0" aria-controls="datatable-buttons"
+                                            type="button"><span>Excel</span></button>
+                                    <button class="btn btn-secondary buttons-pdf buttons-html5"
+                                            tabindex="0" aria-controls="datatable-buttons"
+                                            type="button"><span>PDF</span></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="datatable-buttons"
+                                       class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                                       style="border-collapse: collapse; border-spacing: 0px; width: 100%;"
+                                       role="grid" aria-describedby="datatable-buttons_info">
+                                    <thead class="text-center">
+                                    <tr>
+                                        <th scope="row">STT</th>
+                                        <th>Ảnh</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Trạng thái</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="l, row : ${list.content}" class="text-center">
+                                        <th scope="row" class="align-middle"
+                                            th:text="${row.index + 1}"></th>
+                                        <td class="align-middle"><img style="height: 250px; width: 250px"
+                                                                      th:src="@{${'/chi-tiet-san-pham/display?id=' + l.id}}"
+                                                                      alt=""></td>
+                                        <td class="align-middle" th:text="${l.sanPham.ten}"></td>
+                                        <td class="align-middle" th:text="${l.giaBan}"></td>
+
+                                        <td class="align-middle" th:text="${l.soLuong}"></td>
+                                        <td class="align-middle" th:if="${l.trangThai == 1}">Hoạt động</td>
+                                        <td class="align-middle" th:if="${l.trangThai == 0}">Không hoạt động
+                                        </td>
+                                        <td class="align-middle">
+                                            <a class="edit" th:href="@{view-update/{id}(id=${l.id})}">
+                                                <i class="material-icons" data-toggle="tooltip"
+                                                   title="Edit">&#xE254;</i>
+                                            </a>
+                                            <a th:href="@{delete/{id}(id=${l.id})}" class="delete">
+                                                <i class="material-icons" data-toggle="tooltip"
+                                                   title="Delete">&#xE872;</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12" style="display: flex; justify-content: center">
+                                <div class="dataTables_paginate paging_simple_numbers"
+                                     id="datatable-buttons_paginate">
+                                    <ul class="pagination">
+                                        <li class="page-item"
+                                            th:classappend="${list.number == 0} ? disabled">
+                                            <a class="page-link"
+                                               th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number - 1})}">
+                                                Previous
+                                            </a>
+                                        </li>
+                                        <li class="page-item"
+                                            th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
+                                            <a class="page-link"
+                                               th:href="@{/chi-tiet-san-pham/hien-thi(page=${pageNumber})}"
+                                               th:text="${pageNumber + 1}"
+                                               th:classappend="${pageNumber == list.number} ? active">
+                                            </a>
+                                        </li>
+                                        <li class="page-item"
+                                            th:classappend="${list.number == list.totalPages - 1} ? disabled">
+                                            <a class="page-link"
+                                               th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number + 1})}">
+                                                Next
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- end row -->
 
-        </div> <!-- end container-fluid -->
 
-    </div> <!-- end content -->
+        </div><!-- end col -->
+    </div>
 
 
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
-                </div>
+</div>
+
+
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
             </div>
         </div>
-    </footer>
-    <!-- end Footer -->
+    </div>
+</footer>
+<!-- end Footer -->
 
-</div>
 
-<!-- ============================================================== -->
-<!-- End Page content -->
-<!-- ============================================================== -->
-
-</div>
-<!-- END wrapper -->
-
-<!--&lt;!&ndash; Right Sidebar &ndash;&gt;-->
-<!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
 
-<!--<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">-->
-<!--    <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos-->
-<!--</a>-->
-
+<script src="/path/to/jquery.min.js"></script> <!-- Nếu sử dụng jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Vendor js -->
 <script src="../../static/assets\js\vendor.min.js"></script>
 <!--Morris Chart-->

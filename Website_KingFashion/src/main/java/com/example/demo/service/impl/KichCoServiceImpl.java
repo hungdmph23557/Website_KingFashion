@@ -34,6 +34,7 @@ public class KichCoServiceImpl implements KichCoService {
     @Override
     public void add(KichCo kichCo) {
         kichCoRepository.save(kichCo);
+
     }
 
     @Override
@@ -49,6 +50,11 @@ public class KichCoServiceImpl implements KichCoService {
     @Override
     public List<KichCo> getKichCoByChiTietSanPhamId(UUID chiTietSanPhamId) {
         return kichCoRepository.findAllByChiTietSanPhamId(chiTietSanPhamId);
+    }
+
+    @Override
+    public KichCo getKichCoById(UUID id) {
+        return kichCoRepository.findById(id).orElse(null);
     }
 
 }

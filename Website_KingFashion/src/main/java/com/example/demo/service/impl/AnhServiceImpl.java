@@ -75,4 +75,9 @@ public class AnhServiceImpl implements AnhService {
     public List<Anh> getAllByChiTietSanPhamId(UUID chiTietSanPhamId) {
         return anhRepository.findAllByChiTietSanPhamId(chiTietSanPhamId);
     }
+
+    @Override
+    public Anh getAnhById(UUID id) {
+        return anhRepository.findById(id).orElse(null);
+    }
 }

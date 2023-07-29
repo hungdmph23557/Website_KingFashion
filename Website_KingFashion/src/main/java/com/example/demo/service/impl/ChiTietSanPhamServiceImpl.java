@@ -33,10 +33,15 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
     @Override
     public Page<ChiTietSanPham> PhanTrang(Integer PageNum, Integer PageNo) {
-        Pageable pageable = PageRequest.of(PageNum, PageNo);
+        Pageable pageable = PageRequest.of(PageNum,PageNo);
         return chiTietSanPhamRepository.phanTrang(pageable);
     }
 
+    @Override
+    public Page<ChiTietSanPham> search(String ten, Integer minTien, Integer maxTien, Integer PageNum, Integer PageNo) {
+        Pageable pageable = PageRequest.of(PageNum, PageNo);
+        return chiTietSanPhamRepository.search(ten, minTien, maxTien, pageable);
+    }
     @Override
     public void add(ChiTietSanPham chiTietSanPham) {
         if(chiTietSanPham.getSanPham().getId() == null) {

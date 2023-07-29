@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entity.ChiTietSanPham;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +12,8 @@ public interface ChiTietSanPhamService {
     List<ChiTietSanPham> getAll();
 
     Page<ChiTietSanPham> PhanTrang(Integer PageNum, Integer PageNo);
+
+    Page<ChiTietSanPham> search(String ten, Integer minTien, Integer maxTien, Integer PageNum, Integer PageNo);
 
     void add(ChiTietSanPham chiTietSanPham);
 

@@ -9,6 +9,7 @@ import com.example.demo.entity.LoaiSanPham;
 import com.example.demo.entity.MauSac;
 import com.example.demo.entity.NhaSanXuat;
 import com.example.demo.entity.SanPham;
+import com.example.demo.entity.Voucher;
 import com.example.demo.repository.AnhRepository;
 import com.example.demo.service.AnhService;
 import com.example.demo.service.ChatLieuService;
@@ -23,6 +24,8 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -38,7 +41,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -91,14 +96,42 @@ public class ChiTietSanPhamController {
             model.addAttribute("successMessage", successMessage);
             session.removeAttribute("successMessage");
         }
+        List<SanPham> listSanPham = sanPhamService.getAll();
         Page<ChiTietSanPham> page = chiTietSanPhamService.PhanTrang(pageNum, 5);
+        model.addAttribute("listSanPham", listSanPham);
         model.addAttribute("list", page);
         model.addAttribute("listCoAo", coAoService.getAll());
         model.addAttribute("listLoaiSanPham", loaiSanPhamService.getAll());
         model.addAttribute("listMauSac", mauSacService.getAll());
+        model.addAttribute("listHang", mauSacService.getAll());
         model.addAttribute("listNhaSanXuat", nhaSanXuatService.getAll());
         model.addAttribute("listChatLieu", chatLieuService.getAll());
         model.addAttribute("att", new ChiTietSanPham());
+        return "chitietsanpham/chi-tiet-san-pham";
+    }
+
+
+
+    @GetMapping("search")
+    public String search(@RequestParam(value = "ten", required = false) String ten,
+                         @RequestParam(value = "minTien", required = false) Integer minTien,
+                         @RequestParam(value = "maxTien", required = false) Integer maxTien,
+                         @RequestParam(defaultValue = "0", name = "page") Integer pageNum,
+                         Model model, HttpSession session) {
+
+        if (session.getAttribute("successMessage") != null) {
+            String successMessage = (String) session.getAttribute("successMessage");
+            model.addAttribute("successMessage", successMessage);
+            session.removeAttribute("successMessage");
+        }
+
+        Page<ChiTietSanPham> ketQuaTimKiem = chiTietSanPhamService.search(ten, minTien, maxTien, pageNum, 5);
+
+        model.addAttribute("list", ketQuaTimKiem);
+        model.addAttribute("att", new ChiTietSanPham()); // Add this line to set the "att" attribute in the model
+
+        // Add other model attributes if required
+
         return "chitietsanpham/chi-tiet-san-pham";
     }
 
@@ -179,6 +212,7 @@ public class ChiTietSanPhamController {
         ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
 
         listKichCo = kichCoService.getKichCoByChiTietSanPhamId(id);
+
         model.addAttribute("att", chiTietSanPham);
         model.addAttribute("listKc", listKichCo);
         model.addAttribute("listCoAo", coAoService.getAll());
@@ -195,7 +229,16 @@ public class ChiTietSanPhamController {
         model.addAttribute("cl1", new ChatLieu());
 
         List<Anh> listAnh = anhService.getAllByChiTietSanPhamId(id);
-        model.addAttribute("listAnh", listAnh);
+        List<Anh> filteredAnhList = new ArrayList<>();
+        // Thay ... bằng giá trị UUID thực tế từ URL
+
+        for (Anh anh : listAnh) {
+            if (anh.getChiTietSanPham().getId().equals(id)) {
+                filteredAnhList.add(anh);
+            }
+        }
+        model.addAttribute("listAnh", filteredAnhList);
+
         return "chitietsanpham/add-kich-co-anh-chi-tiet-san-pham";
     }
 
@@ -209,6 +252,13 @@ public class ChiTietSanPhamController {
         }
         chiTietSanPham.setNgaySua(new Date());
         model.addAttribute("att", chiTietSanPham);
+        List<KichCo> kichCoList = kichCoService.getKichCoByChiTietSanPhamId(chiTietSanPham.getId());
+
+        // Tính tổng số lượng kích cỡ
+        int totalKichCoQuantity = kichCoList.stream().mapToInt(KichCo::getSoLuong).sum();
+
+        // Set tổng số lượng kích cỡ cho sản phẩm chi tiết
+        chiTietSanPham.setSoLuong(totalKichCoQuantity);
         chiTietSanPhamService.add(chiTietSanPham);
         redirectAttributes.addAttribute("id", chiTietSanPham.getId());
         return "redirect:/chi-tiet-san-pham/view-update/{id}";
@@ -291,31 +341,123 @@ public class ChiTietSanPhamController {
                         Model model) {
 
         ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
-        kichCo.setChiTietSanPham(chiTietSanPham);
-        kichCo.setNgayTao(new Date());
-        kichCo.setMa("KC01");
-        kichCo.setTrangThai(1);
-        model.addAttribute("kc1", kichCo);
-        redirectAttributes.addAttribute("id", kichCo.getId());
-        model.addAttribute("id", id);
-        kichCoService.add(kichCo);
+
+        // Lấy danh sách kích cỡ của sản phẩm chi tiết
         List<KichCo> kichCoList = kichCoService.getKichCoByChiTietSanPhamId(chiTietSanPham.getId());
+
+        // Kiểm tra xem kích cỡ đã tồn tại trong danh sách hay chưa
+        boolean kichCoExists = false;
+        for (KichCo existingKichCo : kichCoList) {
+            if (existingKichCo.getTen().equalsIgnoreCase(kichCo.getTen())) {
+                // Kích cỡ đã tồn tại, cập nhật số lượng bằng cách cộng dồn số lượng mới
+                existingKichCo.setSoLuong(existingKichCo.getSoLuong() + kichCo.getSoLuong());
+                kichCoService.add(existingKichCo);
+                kichCoExists = true;
+                break;
+            }
+        }
+
+        if (!kichCoExists) {
+            // Kích cỡ chưa tồn tại trong danh sách, thêm mới kích cỡ
+            kichCo.setChiTietSanPham(chiTietSanPham);
+            kichCo.setNgayTao(new Date());
+            kichCo.setMa("KC01");
+            kichCo.setTrangThai(1);
+            kichCoService.add(kichCo);
+            kichCoList.add(kichCo); // Thêm kích cỡ mới vào danh sách kích cỡ
+        }
+
         // Tính tổng số lượng kích cỡ
         int totalKichCoQuantity = kichCoList.stream().mapToInt(KichCo::getSoLuong).sum();
+
         // Set tổng số lượng kích cỡ cho sản phẩm chi tiết
         chiTietSanPham.setSoLuong(totalKichCoQuantity);
         chiTietSanPhamService.add(chiTietSanPham);
+
+        redirectAttributes.addAttribute("id", chiTietSanPham.getId());
         return "redirect:/chi-tiet-san-pham/view-update/{id}";
     }
 
+    @PostMapping("updateKc")
+    public String updatekc(@Valid @ModelAttribute("kc1") KichCo kichCo, BindingResult result,
+                           @RequestParam("id") UUID id,
+                           RedirectAttributes redirectAttributes,
+                           Model model) {
+        // Check for any validation errors
+        if (result.hasErrors()) {
+            // Handle validation errors if needed
+            return "chitietsanpham/update-chi-tiet-san-pham";
+        }
+
+        // Get the ChiTietSanPham object
+        ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
+
+        // Get the list of KichCo objects related to the ChiTietSanPham
+        List<KichCo> kichCoList = kichCoService.getKichCoByChiTietSanPhamId(chiTietSanPham.getId());
+
+        // Find the KichCo object that needs to be updated
+        KichCo updatedKichCo = null;
+        for (KichCo existingKichCo : kichCoList) {
+            if (existingKichCo.getId().equals(kichCo.getId())) {
+                updatedKichCo = existingKichCo;
+                break;
+            }
+        }
+
+        if (updatedKichCo == null) {
+            // If the KichCo object is not found, add an error message and redirect back
+            redirectAttributes.addFlashAttribute("error", "Không tìm thấy KichCo hoặc không thể cập nhật.");
+            return "redirect:/chi-tiet-san-pham/view-update/{id}";
+        }
+
+        // Update the soLuong value of the existing KichCo object
+        updatedKichCo.setSoLuong(kichCo.getSoLuong());
+
+        // Save the updated KichCo object (assuming you have a 'kichCoService.update' method)
+        kichCoService.add(updatedKichCo);
+
+        // Recalculate the totalKichCoQuantity after updating
+        int totalKichCoQuantity = kichCoList.stream().mapToInt(KichCo::getSoLuong).sum();
+
+        // Set the new totalKichCoQuantity for the ChiTietSanPham
+        chiTietSanPham.setSoLuong(totalKichCoQuantity);
+
+        // Save the updated ChiTietSanPham object
+        chiTietSanPhamService.add(chiTietSanPham);
+
+        // Redirect back to the view-update page with the updated ChiTietSanPham's id
+        redirectAttributes.addAttribute("id", chiTietSanPham.getId());
+        return "redirect:/chi-tiet-san-pham/view-update/{id}";
+    }
+
+
     @GetMapping("delete1/{id}")
-    public String deleteKc(@ModelAttribute("att") ChiTietSanPham chiTietSanPham,@PathVariable UUID id, Model model,
+    public String deleteKc(@ModelAttribute("att") ChiTietSanPham chiTietSanPham, @PathVariable UUID id, Model model,
                            RedirectAttributes redirectAttributes,
                            HttpSession session) {
+        KichCo kichCo = kichCoService.getKichCoById(id);
         session.setAttribute("successMessage", "Xóa thành công!");
         kichCoService.delete(id);
-        redirectAttributes.addAttribute("ids", chiTietSanPham.getId());
-        return "redirect:/chi-tiet-san-pham/view-update/{ids}";
+        UUID chiTietSanPhamId = kichCo.getChiTietSanPham().getId();
+        return "redirect:/chi-tiet-san-pham/view-update/" + chiTietSanPhamId;
+    }
+
+    @GetMapping("delete2/{id}")
+    public String deleteAnh(@PathVariable UUID id, RedirectAttributes redirectAttributes, HttpSession session) {
+        // Get the image by id
+        Anh anh = anhService.getAnhById(id);
+
+        // Delete the image
+        anhService.delete(id);
+
+        // Get the id of the related ChiTietSanPham
+        UUID chiTietSanPhamId = anh.getChiTietSanPham().getId();
+
+        // Add a success message to the session
+        session.setAttribute("successMessage", "Xóa thành công!");
+
+        // Redirect back to the "view-update" page
+        return "redirect:/chi-tiet-san-pham/view-update/" + chiTietSanPhamId;
     }
 
 
@@ -346,16 +488,43 @@ public class ChiTietSanPhamController {
         byte[] imageBytes = image.getTen().getBytes(1, (int) image.getTen().length());
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
     }
+
     @GetMapping("display1")
-    public ResponseEntity<List<byte[]>> displayImages(@RequestParam("id") UUID id) throws IOException, SQLException {
-        List<Anh> images = (List<Anh>) anhService.viewAllById(id);
-        List<byte[]> imageBytesList = new ArrayList<>();
+    public ResponseEntity<byte[]> displayImage1(@RequestParam("id") UUID id) throws IOException, SQLException {
+        Anh anh = anhService.getAnhById(id);
 
-        for (Anh image : images) {
-            byte[] imageBytes = image.getTen().getBytes(1, (int) image.getTen().length());
-            imageBytesList.add(imageBytes);
+        // Kiểm tra nếu trường image của đối tượng Anh là null thì xử lý hoặc thông báo lỗi tùy ý
+        if (anh.getTen() != null) {
+            // Convert Blob to byte[]
+            byte[] imageData = convertBlobToBytes(anh.getTen());
+
+            // Thiết lập các header cho response
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG); // Hoặc MediaType.IMAGE_PNG tùy loại ảnh
+
+            // Trả về response chứa dữ liệu của ảnh
+            return ResponseEntity.ok().headers(headers).body(imageData);
+        } else {
+            // Xử lý trường hợp image là null, ví dụ:
+            String errorResponse = "Ảnh không khả dụng"; // Hoặc bạn có thể đưa ra thông báo lỗi khác tùy ý
+
+            // Trả về response chứa thông báo lỗi
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.TEXT_PLAIN);
+            return ResponseEntity.badRequest().headers(headers).body(errorResponse.getBytes());
         }
-
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytesList);
     }
+
+    private byte[] convertBlobToBytes(Blob blob) throws IOException, SQLException {
+        try (InputStream inputStream = blob.getBinaryStream()) {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            return outputStream.toByteArray();
+        }
+    }
+
 }
