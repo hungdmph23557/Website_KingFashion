@@ -42,11 +42,6 @@ public class ChiTietSanPham {
     @JoinColumn(name = "id_ms", referencedColumnName = "id")
     private MauSac mauSac;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_img", referencedColumnName = "id")
-    private Anh anh;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_loaisp", referencedColumnName = "id")
     private LoaiSanPham loaiSanPham;

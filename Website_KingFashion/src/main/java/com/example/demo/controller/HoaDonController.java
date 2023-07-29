@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,8 @@ public class HoaDonController {
         model.addAttribute("listTK", taiKhoans);
         return "hoadon/hoadon";
     }
+
+
 
     @PostMapping("/export")
     public void exportToExcel(HttpServletResponse response) throws IOException {
