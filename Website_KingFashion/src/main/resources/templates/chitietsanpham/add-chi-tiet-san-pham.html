@@ -66,6 +66,57 @@
 
                         <div class="row">
                             <div class="col-12">
+                                <dialog id="myDialog1">
+                                    <form action="/chi-tiet-san-pham/addLoaiSanPham" method="post" th:object="${lsp1}">
+                                        <!-- Các trường nhập liệu của form ở đây -->
+                                        <label class="form-label" style="color: black">Tên</label>
+                                        <input type="text" class="form-control" th:field="*{ten}"/>
+                                        <!-- Nút đóng form -->
+                                        <button type="submit">Thêm</button>
+                                        <button type="button" id="closeDialogButton1">Đóng</button>
+                                    </form>
+                                </dialog>
+                                <dialog id="myDialog2">
+                                    <form action="/chi-tiet-san-pham/addMauSac" method="post" th:object="${ms1}">
+                                        <!-- Các trường nhập liệu của form ở đây -->
+                                        <label class="form-label" style="color: black">Tên</label>
+                                        <input type="text" class="form-control" th:field="*{tenMauSac}"/>
+                                        <!-- Nút đóng form -->
+                                        <button type="submit">Thêm</button>
+                                        <button type="button" id="closeDialogButton2">Đóng</button>
+                                    </form>
+                                </dialog>
+                                <dialog id="myDialog3">
+                                    <form action="/chi-tiet-san-pham/addNhaSanXuat" method="post" th:object="${nsx1}">
+                                        <!-- Các trường nhập liệu của form ở đây -->
+                                        <label class="form-label" style="color: black">Tên</label>
+                                        <input type="text" class="form-control" th:field="*{tenNhaSanXuat}"/>
+                                        <!-- Nút đóng form -->
+                                        <button type="submit">Thêm</button>
+                                        <button type="button" id="closeDialogButton3">Đóng</button>
+                                    </form>
+                                </dialog>
+                                <dialog id="myDialog4">
+                                    <form action="/chi-tiet-san-pham/addCoAo" method="post" th:object="${ca1}">
+                                        <!-- Các trường nhập liệu của form ở đây -->
+                                        <label class="form-label" style="color: black">Tên</label>
+                                        <input type="text" class="form-control" th:field="*{ten}"/>
+                                        <!-- Nút đóng form -->
+                                        <button type="submit">Thêm</button>
+                                        <button type="button" id="closeDialogButton4">Đóng</button>
+                                    </form>
+                                </dialog>
+                                <dialog id="myDialog5">
+                                    <form action="/chi-tiet-san-pham/addChatLieu" method="post" th:object="${cl1}">
+                                        <!-- Các trường nhập liệu của form ở đây -->
+                                        <label class="form-label" style="color: black">Tên</label>
+                                        <input type="text" class="form-control" th:field="*{ten}"/>
+                                        <!-- Nút đóng form -->
+                                        <button type="submit">Thêm</button>
+                                        <button type="button" id="closeDialogButton5">Đóng</button>
+                                    </form>
+                                </dialog>
+
                                 <form th:action="@{/chi-tiet-san-pham/add}"
                                       th:object="${att}" method="post">
                                     <div class="card-box" style="display: flex;justify-content:center ">
@@ -111,79 +162,127 @@
 
                                             <div class="form-inline mt-3" style="display: flex;justify-content:center ">
                                                 <div class="d-flex" style="margin-right: 30px;">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                            style="height: 58px; width: 200px" th:field="*{chatLieu}">
-                                                        <option th:each="chatLieu : ${listChatLieu}"
-                                                                th:value="${chatLieu.id}"
-                                                                th:text="${chatLieu.ten}"></option>
-                                                    </select>
-                                                    <button type="button"
-                                                            class="btn btn-success waves-effect waves-light"
-                                                            style="float: right;">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="" style="float: left">Chất liệu</label>
+                                                        </div>
+                                                        <div class="noi-dung">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example"
+                                                                    style="height: 58px; width: 200px"
+                                                                    th:field="*{chatLieu}">
+                                                                <option th:each="chatLieu : ${listChatLieu}"
+                                                                        th:value="${chatLieu.id}"
+                                                                        th:text="${chatLieu.ten}"></option>
+                                                            </select>
+                                                            <a
+                                                                    id="openDialogButton5"
+                                                                    class="btn btn-success waves-effect waves-light text-center"
+                                                                    style="float: right; color: white">
+                                                                <i class="mdi mdi-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="d-flex" style="margin-right: 30px;">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                            style="height: 58px; width: 200px"
-                                                            th:field="*{loaiSanPham}">>
-                                                        <option th:each="loaiSanPham : ${listLoaiSanPham}"
-                                                                th:value="${loaiSanPham.id}"
-                                                                th:text="${loaiSanPham.ten}"></option>
-                                                    </select>
-                                                    <button type="button"
-                                                            class="btn btn-success waves-effect waves-light"
-                                                            style="float: right;">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="" style="float: left">Loại sản phẩm</label>
+                                                        </div>
+                                                        <div class="noi-dung">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example"
+                                                                    style="height: 58px; width: 200px"
+                                                                    th:field="*{loaiSanPham}">>
+                                                                <option th:each="loaiSanPham : ${listLoaiSanPham}"
+                                                                        th:value="${loaiSanPham.id}"
+                                                                        th:text="${loaiSanPham.ten}"></option>
+                                                            </select>
+                                                            <a
+                                                                    id="openDialogButton1"
+                                                                    class="btn btn-success waves-effect waves-light text-center"
+                                                                    style="float: right; color: white">
+                                                                <i class="mdi mdi-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="d-flex" style="margin-right: 30px;">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                            style="height: 58px; width: 200px" th:field="*{mauSac}">
-                                                        <option th:each="mauSac : ${listMauSac}" th:value="${mauSac.id}"
-                                                                th:text="${mauSac.tenMauSac}"></option>
-                                                    </select>
-
-                                                    <button type="button"
-                                                            class="btn btn-success waves-effect waves-light"
-                                                            style="float: right;">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="" style="float: left">MauSac</label>
+                                                        </div>
+                                                        <div class="noi-dung">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example"
+                                                                    style="height: 58px; width: 200px"
+                                                                    th:field="*{mauSac}">
+                                                                <option th:each="mauSac : ${listMauSac}"
+                                                                        th:value="${mauSac.id}"
+                                                                        th:text="${mauSac.tenMauSac}"></option>
+                                                            </select>
+                                                            <a
+                                                                    id="openDialogButton2"
+                                                                    class="btn btn-success waves-effect waves-light text-center"
+                                                                    style="float: right; color: white">
+                                                                <i class="mdi mdi-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-inline mt-3" style="display: flex;justify-content:center ">
                                                 <div class="d-flex" style="margin-right: 30px;">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                            style="height: 58px; width: 200px" th:field="*{nhaSanXuat}">>
-                                                        <option th:each="nhaSanXuat : ${listNhaSanXuat}"
-                                                                th:value="${nhaSanXuat.id}"
-                                                                th:text="${nhaSanXuat.tenNhaSanXuat}"></option>
-                                                    </select>
-                                                    <button type="button"
-                                                            class="btn btn-success waves-effect waves-light"
-                                                            style="float: right;">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="" style="float: left">Nhà sản xuất</label>
+                                                        </div>
+                                                        <div class="noi-dung">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example"
+                                                                    style="height: 58px; width: 200px"
+                                                                    th:field="*{nhaSanXuat}">>
+                                                                <option th:each="nhaSanXuat : ${listNhaSanXuat}"
+                                                                        th:value="${nhaSanXuat.id}"
+                                                                        th:text="${nhaSanXuat.tenNhaSanXuat}"></option>
+                                                            </select>
+                                                            <a
+                                                                    id="openDialogButton3"
+                                                                    class="btn btn-success waves-effect waves-light text-center"
+                                                                    style="float: right; color: white">
+                                                                <i class="mdi mdi-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="d-flex" style="margin-right: 30px;">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                            style="height: 58px; width: 200px" th:field="*{coAo}">
-                                                        <option th:each="coAo : ${listCoAo}" th:value="${coAo.id}"
-                                                                th:text="${coAo.ten}"></option>
-                                                    </select>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="" style="float: left">Cổ áo</label>
+                                                        </div>
+                                                        <div class="noi-dung">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example"
+                                                                    style="height: 58px; width: 200px"
+                                                                    th:field="*{coAo}">
+                                                                <option th:each="coAo : ${listCoAo}"
+                                                                        th:value="${coAo.id}"
+                                                                        th:text="${coAo.ten}"></option>
+                                                            </select>
 
-                                                    <button type="button"
-                                                            class="btn btn-success waves-effect waves-light"
-                                                            style="float: right;">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
+                                                            <a
+                                                                    id="openDialogButton4"
+                                                                    class="btn btn-success waves-effect waves-light text-center"
+                                                                    style="float: right; color: white">
+                                                                <i class="mdi mdi-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-
-
                                             </div>
                                             <div class="form-inline mt-3" style="display: flex;justify-content:right ">
                                                 <button type="submit" class="btn btn-info">Xác nhận</button>
@@ -237,6 +336,66 @@
 <!--<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">-->
 <!--    <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos-->
 <!--</a>-->
+<script>
+    const openDialogButton1 = document.getElementById('openDialogButton1');
+    const openDialogButton2 = document.getElementById('openDialogButton2');
+    const openDialogButton3 = document.getElementById('openDialogButton3');
+    const openDialogButton4 = document.getElementById('openDialogButton4');
+    const openDialogButton5 = document.getElementById('openDialogButton5');
+
+    const myDialog1 = document.getElementById('myDialog1');
+    const myDialog2 = document.getElementById('myDialog2');
+    const myDialog3 = document.getElementById('myDialog3');
+    const myDialog4 = document.getElementById('myDialog4');
+    const myDialog5 = document.getElementById('myDialog5');
+
+    const closeDialogButton1 = document.getElementById('closeDialogButton1');
+    const closeDialogButton2 = document.getElementById('closeDialogButton2');
+    const closeDialogButton3 = document.getElementById('closeDialogButton3');
+    const closeDialogButton4 = document.getElementById('closeDialogButton4');
+    const closeDialogButton5 = document.getElementById('closeDialogButton5');
+
+    openDialogButton1.addEventListener('click', () => {
+        myDialog1.showModal();
+    });
+
+    openDialogButton2.addEventListener('click', () => {
+        myDialog2.showModal();
+    });
+
+    openDialogButton3.addEventListener('click', () => {
+        myDialog3.showModal();
+    });
+
+    openDialogButton4.addEventListener('click', () => {
+        myDialog4.showModal();
+    });
+
+    openDialogButton5.addEventListener('click', () => {
+        myDialog5.showModal();
+    });
+
+    closeDialogButton1.addEventListener('click', () => {
+        myDialog1.close();
+    });
+
+    closeDialogButton2.addEventListener('click', () => {
+        myDialog2.close();
+    });
+
+    closeDialogButton3.addEventListener('click', () => {
+        myDialog3.close();
+    });
+
+    closeDialogButton4.addEventListener('click', () => {
+        myDialog4.close();
+    });
+
+    closeDialogButton5.addEventListener('click', () => {
+        myDialog5.close();
+    });
+</script>
+</script>
 
 <!-- Vendor js -->
 <script src="../../static/assets\js\vendor.min.js"></script>

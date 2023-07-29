@@ -5,94 +5,130 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <th:block id="home-static-resources">
-        <link rel="stylesheet" type="text/css" media="all" th:href="@{../../static/css/style.css}"/>
-    </th:block>
-    <style media="screen">
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-    </style>
-
+    <link rel="shortcut icon" href="../../static/assets\images\favicon.ico">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{../../static/css/style.css}"/>
+    <!-- App css -->
+    <link href="../../static/assets\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
+    <link href="../../static/assets\css\icons.min.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets\css\app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-<div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar" th:insert="layout/slidebar.html :: header">
-    </nav>
-    <!-- Page Content  -->
-    <div id="content" class="p-4 p-md-5">
+<div id="wrapper">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" th:insert="layout/nav.html :: header">
-        </nav>
-        <section class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="row">
-                <div class="col-12">
-                    <h1 style="padding-left: 40px">Khách Hàng</h1>
-                    <br>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Mã: </label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
+
+    <!-- Topbar Start -->
+    <div class="navbar-custom" th:insert="layout/nav.html :: header">
+
+    </div>
+    <!-- end Topbar -->
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu" th:insert="layout/slidebar.html :: header">
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-center">
+                                <h1 class="page-title" style="text-align: center; font-size: 200%">Khách Hàng</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Tên: </label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
-                        </div>
+                <!-- end page title -->
+
+                <form th:object="${search}" th:action="@{/khach-hang/search}"
+                      class="row form-row justify-content-between">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Mã: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{maTaiKhoan}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Tên: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{tenTaiKhoan}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-5 col-form-label">SĐT: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{sdt}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-5 col-form-label">Email: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{email}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-5 col-form-label">Địa chỉ: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:field="*{diaChi}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row mb-6">
+                                        <label class="col-sm-5 col-form-label">Ngày sinh: </label>
+                                        <div class="col-sm-6">
+                                            <input type="date" name="" class="form-control" th:field="*{ngaySinh}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-primary">Lọc</button>
+                                </div>
+                                <div class="col-3">
+                                    <a type="button" class="btn btn-primary add" href="/khach-hang/view-add"><i
+                                            class="material-icons"
+                                            data-toggle="tooltip"
+                                            title="ADD">&#xE254;</i></a>
+                                </div>
+
+                            </div>
+
+
+                        </div><!-- end col -->
                     </div>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">SĐT: </label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Email: </label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Địa chỉ: </label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="row mb-6">
-                        <label class="col-sm-5 col-form-label">Ngày sinh: </label>
-                        <div class="col-sm-6">
-                            <input type="date" name="" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <button type="button" class="btn btn-primary">Lọc</button>
-                </div>
-                <div class="col-3">
-                    <a type="button" class="btn btn-primary add" href="/khach-hang/view-add">Add</a>
-                </div>
+                </form>
+                <!-- end row -->
+
+
             </div>
-        </section>
-        <section class="navbar-expand-lg navbar-light bg-light">
+
+            <!-- end row -->
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -111,17 +147,23 @@
                 <tbody>
                 <tr th:each="l,index : ${list.content}">
                     <td th:text="${index.count}"></td>
-                    <td th:text="${l.ma}"></td>
-                    <td th:text="${l.ten}"></td>
+                    <td th:text="${l.maTaiKhoan}"></td>
+                    <td th:text="${l.tenTaiKhoan}"></td>
                     <td th:text="${l.sdt}"></td>
                     <td th:text="${l.email}"></td>
                     <td th:text="${l.diaChi}"></td>
                     <td th:text="${l.ngaySinh}"></td>
-                    <td th:text="${l.vaiTro.id}"></td>
+                    <td th:text="${l.vaiTro.tenVaiTro}"></td>
                     <td th:text="${l.trangThai == 1 ? 'Hoạt động' : 'Không hoạt động'}"></td>
                     <td>
-                        <a th:href="@{view-update/{id}(id=${l.id})}">Update</a>
-                        <a th:href="@{delete/{id}(id=${l.id})}">Delete</a>
+                        <a th:href="@{view-update/{id}(id=${l.id})}"><i
+                                class="material-icons"
+                                data-toggle="tooltip"
+                                title="UPDATE">&#xE254;</i></a>
+                        <a th:href="@{delete/{id}(id=${l.id})}"><i
+                            class="material-icons"
+                            data-toggle="tooltip"
+                            title="UPDATE">&#xE872;</i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -148,16 +190,37 @@
                     </li>
                 </ul>
             </nav>
-        </section>
-    </div>
+
+        </div> <!-- end container-fluid -->
+
+    </div> <!-- end content -->
+
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end Footer -->
+
 </div>
 
 <!--<img src="../../static/images/logo.jpg" alt="">-->
 
-<script src="../../static/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../../static/js/popper.js"></script>
-<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/assets\js\vendor.min.js"></script>
+<!--Morris Chart-->
+<script src="../../static/assets\libs\morris-js\morris.min.js"></script>
+<script src="../../static/assets\libs\raphael\raphael.min.js"></script>
+
+<!-- Dashboard init js-->
+<script src="../../static/assets\js\pages\dashboard.init.js"></script>
+<!-- App js -->
+<script src="../../static/assets\js\app.min.js"></script>
 <script src="../../static/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 </body>

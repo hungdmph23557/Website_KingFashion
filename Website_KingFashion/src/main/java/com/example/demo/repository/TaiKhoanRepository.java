@@ -1,11 +1,27 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.TaiKhoan;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
-@Service
-public interface TaiKhoanRepository  extends JpaRepository<TaiKhoan , UUID>{
+@Repository
+
+public interface TaiKhoanRepository extends JpaRepository<TaiKhoan, UUID> {
+    @Query("SELECT v FROM TaiKhoan v " +
+            "WHERE (:maTaiKhoan is null or v.maTaiKhoan LIKE lower(CONCAT('%', :maTaiKhoan, '%')))\n" +
+            "AND (:tenTaiKhoan is null or v.tenTaiKhoan LIKE lower(CONCAT('%', :tenTaiKhoan, '%')))\n"+
+            "AND (:sdt is null or v.sdt LIKE lower(CONCAT('%', :sdt, '%')))\n"+
+            "AND (:email is null or v.email LIKE lower(CONCAT('%', :email, '%')))"+
+            "AND (:diaChi is null or v.diaChi LIKE lower(CONCAT('%', :diaChi, '%')))"+
+            "AND (:ngaySinh IS NULL OR v.ngaySinh = :ngaySinh)")
+    Page<TaiKhoan> search(@Param("maTaiKhoan") String maTaiKhoan, @Param("tenTaiKhoan") String tenTaiKhoan, @Param("sdt") String sdt, @Param("email") String email,
+                          @Param("diaChi") String diaChi, @Param("ngaySinh") Date ngaySinh, Pageable pageable);
 }

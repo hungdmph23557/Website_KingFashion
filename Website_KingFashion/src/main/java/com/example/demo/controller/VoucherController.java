@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Voucher;
 import com.example.demo.service.impl.VoucherServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -20,9 +24,23 @@ public class VoucherController {
     private VoucherServiceImpl voucherService;
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model, @RequestParam(name = "page", defaultValue = "0") Integer p) {
+    public String hienThi(Model model, @RequestParam(name = "page", defaultValue = "0") Integer p, HttpSession session) {
+        if (session.getAttribute("successMessage") != null) {
+            String successMessage = (String) session.getAttribute("successMessage");
+            model.addAttribute("successMessage", successMessage);
+            session.removeAttribute("successMessage");
+        }
         Page<Voucher> page = voucherService.page(p, 5);
         model.addAttribute("list", page);
+        model.addAttribute("search", new Voucher());
+        return "voucher/home";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("search") Voucher voucher, @RequestParam(name = "page", defaultValue = "0") Integer p, @RequestParam("ma") String ma) {
+        Page<Voucher> list = voucherService.search(voucher.getMa(), voucher.getTen(), Integer.valueOf(voucher.getMucGiam()), voucher.getTien(),
+                voucher.getThoiGianBatDau(), voucher.getThoiGianKetThuc(), voucher.getTrangThai(), 5, p);
+        model.addAttribute("list", list);
         return "voucher/home";
     }
 
@@ -33,8 +51,9 @@ public class VoucherController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable UUID id, Model model) {
+    public String delete(@PathVariable UUID id, Model model, HttpSession session) {
         voucherService.delete(id);
+        session.setAttribute("successMessage", "Xoá thành công");
         return "redirect:/voucher/hien-thi";
     }
 
@@ -42,24 +61,32 @@ public class VoucherController {
     public String viewUpdate(@PathVariable UUID id, Model model) {
         Voucher voucher = voucherService.detail(id);
         model.addAttribute("voucher", voucher);
+
         return "voucher/update";
     }
 
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
-        if(result.hasErrors()){
+    public String add(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model, HttpSession session) {
+        if (result.hasErrors() || voucher.getThoiGianBatDau().after(voucher.getThoiGianKetThuc())) {
+            result.rejectValue("thoiGianKetThuc", null, "Ngày bắt đầu không được lớn hơn ngày kết thúc");
             return "voucher/add";
         }
+        String ma = "VOC" + new Random().nextInt(100000);
+        voucher.setMa(ma);
+        voucher.setNgayTao(new Date());
         voucherService.add(voucher);
+        session.setAttribute("successMessage", "Thêm thành công");
         return "redirect:/voucher/hien-thi";
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model) {
-        if(result.hasErrors()){
+    public String update(@Valid @ModelAttribute("voucher") Voucher voucher, BindingResult result, Model model, HttpSession session) {
+        if (result.hasErrors()) {
             return "voucher/update";
         }
+        voucher.setNgaySua(new Date());
         voucherService.add(voucher);
+        session.setAttribute("successMessage", "Update thành công");
         return "redirect:/voucher/hien-thi";
     }
 }

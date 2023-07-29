@@ -48,7 +48,7 @@ public class MauSacController {
     }
 
     @PostMapping("add")
-    public String addMauSac(@Valid @ModelAttribute("ms1") MauSac mauSac, BindingResult result, @RequestParam MultipartFile img, Model model) {
+    public String addMauSac(@Valid @ModelAttribute("ms1") MauSac mauSac, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             return "mausac/mausac";

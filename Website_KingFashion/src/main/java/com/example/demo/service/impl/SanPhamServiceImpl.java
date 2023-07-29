@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 @Service
 public class SanPhamServiceImpl implements SanPhamService {
@@ -36,5 +37,10 @@ public class SanPhamServiceImpl implements SanPhamService {
     @Override
     public void delete(UUID id) {
         sanPhamRepository.deleteById(id);
+    }
+
+    @Override
+    public List<SanPham> getAll() {
+        return sanPhamRepository.findAll();
     }
 }
