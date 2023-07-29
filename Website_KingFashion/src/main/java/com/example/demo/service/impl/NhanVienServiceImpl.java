@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,4 +48,11 @@ public class NhanVienServiceImpl implements NhanVienService {
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Page<NhanVien> search(String ten, String sdt, String email, String diaChi, Date ngaySinh, Integer size, Integer page) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.search(ten, sdt, diaChi, email, ngaySinh, pageable);
+    }
+
 }
