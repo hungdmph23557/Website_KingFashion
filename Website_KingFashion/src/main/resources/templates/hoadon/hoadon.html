@@ -90,13 +90,14 @@
                                             </button>
 
                                             Từ ngày<input type="date">
-                                            Đến  ngày<input type="date">
+                                            Đến ngày<input type="date">
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="row mb-1">
                                                         <label class="col-sm-2 col-form-label">Trạng Thái </label>
                                                         <div class="col-sm-7">
-                                                            <select class="form-select" aria-label="Default select example">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example">
                                                                 <option value="1">Tất Cả</option>
                                                                 <option value="2">Đang Chờ Xác Nhận</option>
                                                                 <option value="3">Đã Hủy</option>
@@ -110,7 +111,8 @@
                                                     <div class="row mb-1">
                                                         <label class="col-sm-2 col-form-label">Loại Đơn </label>
                                                         <div class="col-sm-7">
-                                                            <select class="form-select" aria-label="Default select example">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example">
                                                                 <option value="1">Tất Cả</option>
                                                                 <option value="2">Đặt Tại Quầy</option>
                                                                 <option value="3">Đặt Online</option>
@@ -124,7 +126,8 @@
                                                     <div class="row mb-1">
                                                         <label class="col-sm-2 col-form-label">Sắp Xếp </label>
                                                         <div class="col-sm-7">
-                                                            <select class="form-select" aria-label="Default select example">
+                                                            <select class="form-select"
+                                                                    aria-label="Default select example">
                                                                 <option value="1">Mặc Định</option>
                                                                 <option value="2">Mới Nhất</option>
                                                                 <option value="3">Cũ nhất</option>
@@ -132,163 +135,151 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                        </div>
+                                            </div>
 
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            
-                                        </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card-box">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-6">
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <section class="navbar-expand-lg navbar-light bg-light">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                    <tr>
-                                                        <td>#</td>
-                                                        <td>Mã</td>
-                                                        <td>Ngày Thanh Toán</td>
-                                                        <td>Tổng tiền sau giảm</td>
-                                                        <td>Trạng Thái</td>
-                                                        <td>Người nhận</td>
-                                                        <td>Ngày Nhận DK</td>
-                                                        <td>Ngày ship</td>
-                                                        <td>Hành Động</td>
+                                                            </div>
 
-
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr th:each="hd,index : ${listHD.content}">
-                                                        <td th:text="${index.count}"></td>
-                                                        <td th:text="${hd.maHoaDon}"></td>
-                                                        <td th:text="${hd.ngayThanhToan}"></td>
-                                                        <td th:text="${hd.tongTienSauKhiGiam}"></td>
-                                                        <td th:text="${hd.trangThai == 1 ? 'Đang chờ xác nhận'  : ( hd.trangThai==2 ? 'Đã hủy' : 'Đã hoàn thành')}">
-
-                                                        </td>
-                                                        <td th:text="${hd.tenNguoiNhan}"></td>
-                                                        <td th:text="${hd.ngayDuKienNhan}"></td>
-                                                        <td th:text="${hd.ngayShip}"></td>
-                                                        <td>
-                                                            <a href="" class="btn btn-primary">Chi tiết </a>
-                                                        </td>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <section class="navbar-expand-lg navbar-light bg-light">
+                                                                    <table class="table table-striped">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <td>#</td>
+                                                                            <td>Mã</td>
+                                                                            <td>Ngày Thanh Toán</td>
+                                                                            <td>Tổng tiền sau giảm</td>
+                                                                            <td>Trạng Thái</td>
+                                                                            <td>Người nhận</td>
+                                                                            <td>Ngày Nhận DK</td>
+                                                                            <td>Ngày ship</td>
+                                                                            <td>Hành Động</td>
 
 
-                                                    </tr>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <tr th:each="hd,index : ${listHD.content}">
+                                                                            <td th:text="${index.count}"></td>
+                                                                            <td th:text="${hd.maHoaDon}"></td>
+                                                                            <td th:text="${hd.ngayThanhToan}"></td>
+                                                                            <td th:text="${hd.tongTienSauKhiGiam}"></td>
+                                                                            <td th:text="${hd.trangThai == 1 ? 'Đang chờ xác nhận'  : ( hd.trangThai==2 ? 'Đã hủy' : 'Đã hoàn thành')}" class="btn btn-warning">
+
+                                                                            </td>
+                                                                            <td th:text="${hd.tenNguoiNhan}"></td>
+                                                                            <td th:text="${hd.ngayDuKienNhan}"></td>
+                                                                            <td th:text="${hd.ngayShip}"></td>
+                                                                            <td>
+                                                                                <a class="view-hoa-don"
+                                                                                   th:href="@{view-hoa-don/{id}(id=${hd.id})}">
+                                                                                    <i class="material-icons"
+                                                                                       data-toggle="tooltip"
+                                                                                       title="Chi tiet">&#xE254;</i>
+                                                                                </a>
+                                                                            </td>
 
 
-                                                    </tbody>
-                                                </table>
+                                                                        </tr>
 
 
-                                                <nav aria-label="Page navigation example" class="flex">
-                                                    <ul class="pagination">
-                                                        <li class="page-item" th:classappend="${listHD.number == 0} ? disabled">
-                                                            <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${listHD.number - 1})}">
-                                                                Previous
-                                                            </a>
-                                                        </li>
-                                                        <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, listHD.totalPages - 1)}">
-                                                            <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${pageNumber})}"
-                                                               th:text="${pageNumber + 1}" th:classappend="${pageNumber == listHD.number} ? active">
-                                                            </a>
-                                                        </li>
-                                                        <li class="page-item" th:classappend="${listHD.number == listHD.totalPages - 1} ? disabled">
-                                                            <a class="page-link" th:href="@{/hoa-don/hien-thi(page=${listHD.number + 1})}">
-                                                                Next
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            </section>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12" style="display: flex; justify-content: center">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="datatable-buttons_paginate">
-                                                <ul class="pagination">
-                                                    <li class="page-item"
-                                                        th:classappend="${list.number == 0} ? disabled">
-                                                        <a class="page-link"
-                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number - 1})}">
-                                                            Previous
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item"
-                                                        th:each="pageNumber : ${#numbers.sequence(0, list.totalPages - 1)}">
-                                                        <a class="page-link"
-                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${pageNumber})}"
-                                                           th:text="${pageNumber + 1}"
-                                                           th:classappend="${pageNumber == list.number} ? active">
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item"
-                                                        th:classappend="${list.number == list.totalPages - 1} ? disabled">
-                                                        <a class="page-link"
-                                                           th:href="@{/chi-tiet-san-pham/hien-thi(page=${list.number + 1})}">
-                                                            Next
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                    <nav aria-label="Page navigation example"
+                                                                         class="flex">
+                                                                        <ul class="pagination">
+                                                                            <li class="page-item"
+                                                                                th:classappend="${listHD.number == 0} ? disabled">
+                                                                                <a class="page-link"
+                                                                                   th:href="@{/hoa-don/hien-thi(page=${listHD.number - 1})}">
+                                                                                    Previous
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="page-item"
+                                                                                th:each="pageNumber : ${#numbers.sequence(0, listHD.totalPages - 1)}">
+                                                                                <a class="page-link"
+                                                                                   th:href="@{/hoa-don/hien-thi(page=${pageNumber})}"
+                                                                                   th:text="${pageNumber + 1}"
+                                                                                   th:classappend="${pageNumber == listHD.number} ? active">
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="page-item"
+                                                                                th:classappend="${listHD.number == listHD.totalPages - 1} ? disabled">
+                                                                                <a class="page-link"
+                                                                                   th:href="@{/hoa-don/hien-thi(page=${listHD.number + 1})}">
+                                                                                    Next
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </nav>
+                                                                </section>
+
+
+                                                                <!-- end row -->
+
+
+                                                                <!-- end row -->
+
+
+                                                                <!-- row -->
+
+                                                            </div> <!-- end container-fluid -->
+
+                                                        </div> <!-- end content -->
+
+
+                                                        <!-- Footer Start -->
+                                                        <footer class="footer">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </footer>
+                                                        <!-- end Footer -->
+
+                                                    </div>
+
+                                                    <!-- ============================================================== -->
+                                                    <!-- End Page content -->
+                                                    <!-- ============================================================== -->
+
+                                                </div>
+                                                <!-- END wrapper -->
+
+                                                <!--&lt;!&ndash; Right Sidebar &ndash;&gt;-->
+                                                <!-- Right bar overlay-->
+                                                <div class="rightbar-overlay"></div>
+
+                                                <!--<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">-->
+                                                <!--    <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos-->
+                                                <!--</a>-->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
-
-
-                    </div><!-- end col -->
-                </div>
-                <!-- end row -->
-
-
-            </div>
-            <!-- end row -->
-
-        </div> <!-- end container-fluid -->
-
-    </div> <!-- end content -->
-
-
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- end Footer -->
-
-</div>
-
-<!-- ============================================================== -->
-<!-- End Page content -->
-<!-- ============================================================== -->
-
-</div>
-<!-- END wrapper -->
-
-<!--&lt;!&ndash; Right Sidebar &ndash;&gt;-->
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
-
-<!--<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">-->
-<!--    <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos-->
-<!--</a>-->
         </div>
     </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <!-- Vendor js -->

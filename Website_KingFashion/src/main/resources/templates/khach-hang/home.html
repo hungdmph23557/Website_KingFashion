@@ -111,7 +111,10 @@
                                     <button type="submit" class="btn btn-primary">Lọc</button>
                                 </div>
                                 <div class="col-3">
-                                    <a type="button" class="btn btn-primary add" href="/khach-hang/view-add">Add</a>
+                                    <a type="button" class="btn btn-primary add" href="/khach-hang/view-add"><i
+                                            class="material-icons"
+                                            data-toggle="tooltip"
+                                            title="ADD">&#xE254;</i></a>
                                 </div>
 
                             </div>
@@ -153,8 +156,14 @@
                     <td th:text="${l.vaiTro.tenVaiTro}"></td>
                     <td th:text="${l.trangThai == 1 ? 'Hoạt động' : 'Không hoạt động'}"></td>
                     <td>
-                        <button type="button" class="btn btn-primary add"><a th:href="@{view-update/{id}(id=${l.id})}">Update</a></button>
-                        <button type="button" class="btn btn-primary add"><a th:href="@{delete/{id}(id=${l.id})}">Delete</a></button>
+                        <a th:href="@{view-update/{id}(id=${l.id})}"><i
+                                class="material-icons"
+                                data-toggle="tooltip"
+                                title="UPDATE">&#xE254;</i></a>
+                        <a th:href="@{delete/{id}(id=${l.id})}"><i
+                            class="material-icons"
+                            data-toggle="tooltip"
+                            title="UPDATE">&#xE872;</i></a>
                     </td>
                 </tr>
                 </tbody>
