@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -40,6 +41,9 @@ public class LoaiSanPhamController {
         if (result.hasErrors()) {
             return "loaisanpham/loai-san-pham";
         }
+        String ma = "LSP" + new Random().nextInt(100000);
+        loaiSanPham.setMa(ma);
+        loaiSanPham.setTrangThai(1);
         loaiSanPham.setNgayTao(new Date());
         model.addAttribute("lsp1", loaiSanPham);
         loaiSanPhamService.add(loaiSanPham);

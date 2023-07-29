@@ -1,145 +1,148 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Dashboard | Uplon - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../../static/assets\images\favicon.ico">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{../../static/css/style.css}"/>
+    <!-- App css -->
+    <link href="../../static/assets\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
+    <link href="../../static/assets\css\icons.min.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets\css\app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <th:block id="home-static-resources">
-        <link rel="stylesheet" type="text/css" media="all" th:href="@{../../static/css/style.css}"/>
-    </th:block>
-    <style media="screen">
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
-
 </head>
+
 <body>
-<div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar" th:insert="layout/slidebar.html :: header">
-    </nav>
-    <!-- Page Content  -->
-    <div id="content" class="p-4 p-md-5">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" th:insert="layout/nav.html :: header">
-        </nav>
-        <section class="navbar navbar-expand-lg navbar-light bg-light">
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+    <!-- Topbar Start -->
+    <div class="navbar-custom" th:insert="layout/nav.html :: header">
+
+    </div>
+    <!-- end Topbar -->
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu" th:insert="layout/slidebar.html :: header">
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-center">
+                                <h1 class="page-title" style="text-align: center; font-size: 200%">Nhà Sản Xuất</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <form th:action="@{/mau-sac/update(id=${ms1.id})}" th:object="${ms1}" method="post">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="ma" >Mã</label>
+                                        <input type="text" class="form-control" id="ma" th:field="*{maMauSac}" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Tên</label>
+                                        <input type="text" class="form-control" th:field="*{tenMauSac}" />
+                                    </div>
+                                    <input  type="hidden" th:field="*{ngayTao}" th:value="${ms1.ngayTao}" />
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{trangThai}" th:value="1" checked/>
+                                        <label class="form-check-label" >Hoạt động</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio"  th:field="*{trangThai}" th:value="0" />
+                                        <label class="form-check-label" >Không hoạt động</label>
+                                    </div>
+                                        <button class="btn btn-success waves-effect waves-light text-center"
+                                                style="color: white; background-color: #2b3d51" type="submit">
+                                            Xác Nhận
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div><!-- end col -->
+                </div>
+                <!-- end row -->
+
+
+            </div>
+            <!-- end row -->
+
+        </div> <!-- end container-fluid -->
+
+    </div> <!-- end content -->
+
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
-                    <h1 style="padding-left: 40px">Màu Sắc</h1>
-                    <br>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Mã: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Tên: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Trạng thái: </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Ngày bắt đầu: </label>
-                        <div class="col-sm-6">
-                            <input type="date" name="" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-3">
-                        <label class="col-sm-5 col-form-label">Ngày kết thúc: </label>
-                        <div class="col-sm-6">
-                            <input type="date" name="" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <button type="button" class="btn btn-primary">Lọc</button>
-                </div>
-                <div class="col-12">
-                    <form th:action="@{/mau-sac/update(id=${ms1.id})}" th:object="${ms1}" method="post">
-                        <div class="mb-3">
-                            <label class="form-label" for="ma" >Mã</label>
-                            <input type="text" class="form-control" id="ma" th:field="*{maMauSac}" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Tên</label>
-                            <input type="text" class="form-control" th:field="*{tenMauSac}" />
-                        </div>
-                        <input  type="hidden" th:field="*{ngayTao}" th:value="${ms1.ngayTao}" />
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" th:field="*{trangThai}" th:value="1" checked/>
-                            <label class="form-check-label" >Hoạt động</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio"  th:field="*{trangThai}" th:value="0" />
-                            <label class="form-check-label" >Không hoạt động</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
+                <div class="col-md-12">
+                    2016 - 2019 &copy; Uplon theme by <a href="">Coderthemes</a>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </footer>
+    <!-- end Footer -->
+
 </div>
 
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        //jquery for toggle sub menus
-        $('.sub-btn').click(function () {
-            $(this).next('.sub-menu').slideToggle();
-            $(this).find('.dropdown').toggleClass('rotate');
-        });
+</div>
+<!-- END wrapper -->
 
-        //jquery for expand and collapse the sidebar
-        $('.menu-btn').click(function () {
-            $('.side-bar').addClass('active');
-            $('.menu-btn').css("visibility", "hidden");
-        });
+<!--&lt;!&ndash; Right Sidebar &ndash;&gt;-->
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
 
-        $('.close-btn').click(function () {
-            $('.side-bar').removeClass('active');
-            $('.menu-btn').css("visibility", "visible");
-        });
-    });
-</script>
-<!--<img src="../../static/images/logo.jpg" alt="">-->
+<!--<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">-->
+<!--    <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos-->
+<!--</a>-->
 
-<script src="../../static/js/jquery.min.js"></script>
-<script src="../../static/js/popper.js"></script>
-<script src="../../static/js/bootstrap.min.js"></script>
+
+<!-- Vendor js -->
+<script src="../../static/assets\js\vendor.min.js"></script>
+<!--Morris Chart-->
+<script src="../../static/assets\libs\morris-js\morris.min.js"></script>
+<script src="../../static/assets\libs\raphael\raphael.min.js"></script>
+
+<!-- Dashboard init js-->
+<script src="../../static/assets\js\pages\dashboard.init.js"></script>
+<!-- App js -->
+<script src="../../static/assets\js\app.min.js"></script>
 <script src="../../static/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 </body>

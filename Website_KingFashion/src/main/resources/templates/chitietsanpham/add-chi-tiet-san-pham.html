@@ -126,6 +126,7 @@
                                                     <input type="text" class="form-control"
                                                            placeholder="Tên Sản Phẩm" name="" style="width: 600px"
                                                            th:field="*{sanPham.ten}">
+                                                    <span class="error" th:errors="*{sanPham.ten}"></span>
                                                     <label>Tên Sản Phẩm</label>
                                                 </div>
                                             </div>
@@ -144,6 +145,7 @@
                                                 <div class="form-floating mb-3 mt-3" style="margin-right: 30px;">
                                                     <input type="text" class="form-control" placeholder="Tên Sản Phẩm"
                                                            name="" style="width: 200px" th:field="*{giaBan}">
+                                                    <span class="error" th:errors="*{giaBan}"></span>
                                                     <label>Giá</label>
                                                 </div>
                                                 <div class="d-flex">

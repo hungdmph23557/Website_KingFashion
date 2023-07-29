@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class SanPham {
     private String ma;
 
     @Column(name = "ten")
+    @NotBlank(message = "Không được để trống Tên")
     private String ten;
 
     @Column(name = "trang_thai")

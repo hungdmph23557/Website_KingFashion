@@ -155,19 +155,22 @@ public class ChiTietSanPhamController {
     public String add(@Valid @ModelAttribute("att") ChiTietSanPham chiTietSanPham,
                       BindingResult result,
                       RedirectAttributes redirectAttributes,
-                      @RequestParam(defaultValue = "0", name = "page") Integer pageNum,
                       Model model, HttpSession session) {
 
         if (result.hasErrors()) {
-            Page<ChiTietSanPham> page = chiTietSanPhamService.PhanTrang(pageNum, 5);
-            model.addAttribute("list", page);
             model.addAttribute("listCoAo", coAoService.getAll());
             model.addAttribute("listLoaiSanPham", loaiSanPhamService.getAll());
             model.addAttribute("listMauSac", mauSacService.getAll());
             model.addAttribute("listNhaSanXuat", nhaSanXuatService.getAll());
             model.addAttribute("listChatLieu", chatLieuService.getAll());
-            return "chitietsanpham/chi-tiet-san-pham";
+            model.addAttribute("lsp1", new LoaiSanPham());
+            model.addAttribute("ms1", new MauSac());
+            model.addAttribute("nsx1", new NhaSanXuat());
+            model.addAttribute("ca1", new CoAo());
+            model.addAttribute("cl1", new ChatLieu());
+            return "chitietsanpham/add-chi-tiet-san-pham";
         }
+
         String tenSanPham = chiTietSanPham.getSanPham().getTen();
         String moTaSanPham = chiTietSanPham.getSanPham().getMoTa();
 
