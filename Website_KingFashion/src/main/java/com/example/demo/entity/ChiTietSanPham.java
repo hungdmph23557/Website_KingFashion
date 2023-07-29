@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,11 +44,6 @@ public class ChiTietSanPham {
     @JoinColumn(name = "id_ms", referencedColumnName = "id")
     private MauSac mauSac;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_img", referencedColumnName = "id")
-    private Anh anh;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_loaisp", referencedColumnName = "id")
     private LoaiSanPham loaiSanPham;
@@ -64,6 +61,7 @@ public class ChiTietSanPham {
     private Integer soLuong;
 
     @Column(name = "gia_ban")
+    @NotNull(message = "Không được để trống")
     private Integer giaBan;
 
     @Column(name = "ngay_sua")

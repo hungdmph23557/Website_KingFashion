@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/chat-lieu/")
-public class ChatLieuController {
+public class    ChatLieuController {
     @Autowired
     private ChatLieuService chatLieuService;
 
@@ -40,6 +41,9 @@ public class ChatLieuController {
         if (result.hasErrors()) {
             return "chatlieu/chat-lieu";
         }
+        String ma = "CL" + new Random().nextInt(100000);
+        chatLieu.setMa(ma);
+        chatLieu.setTrangThai(1);
         chatLieu.setNgayTao(new Date());
         model.addAttribute("cl1", chatLieu);
         chatLieuService.add(chatLieu);

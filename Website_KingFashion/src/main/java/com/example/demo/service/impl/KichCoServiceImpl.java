@@ -27,13 +27,14 @@ public class KichCoServiceImpl implements KichCoService {
 
     @Override
     public Page<KichCo> phanTrang(Integer pageNum, Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNum,pageNo);
+        Pageable pageable = PageRequest.of(pageNum, pageNo);
         return kichCoRepository.findAll(pageable);
     }
 
     @Override
     public void add(KichCo kichCo) {
-            kichCoRepository.save(kichCo);
+        kichCoRepository.save(kichCo);
+
     }
 
     @Override
@@ -45,4 +46,15 @@ public class KichCoServiceImpl implements KichCoService {
     public void delete(UUID id) {
         kichCoRepository.deleteById(id);
     }
+
+    @Override
+    public List<KichCo> getKichCoByChiTietSanPhamId(UUID chiTietSanPhamId) {
+        return kichCoRepository.findAllByChiTietSanPhamId(chiTietSanPhamId);
+    }
+
+    @Override
+    public KichCo getKichCoById(UUID id) {
+        return kichCoRepository.findById(id).orElse(null);
+    }
+
 }

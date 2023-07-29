@@ -9,7 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class HoaDonServiceImpl implements HoaDonService {
@@ -28,8 +30,20 @@ public class HoaDonServiceImpl implements HoaDonService {
         return hoaDonRepository.findAll(pageable);
     }
 
+
+
     @Override
     public List<HoaDon> getExcel() {
         return hoaDonRepository.findAll();
+    }
+
+    @Override
+    public HoaDon detail(UUID id) {
+        return hoaDonRepository.getHoaDonById(id);
+    }
+
+    @Override
+    public void add(HoaDon hoaDon) {
+       hoaDonRepository.save(hoaDon);
     }
 }
