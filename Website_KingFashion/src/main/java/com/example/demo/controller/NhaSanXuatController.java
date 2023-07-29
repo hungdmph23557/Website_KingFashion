@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -40,6 +41,9 @@ public class NhaSanXuatController {
         if (result.hasErrors()) {
             return "nhasanxuat/nha-san-xuat";
         }
+        String ma = "NSX" + new Random().nextInt(100000);
+        nhaSanXuat.setMaNhaSanXuat(ma);
+        nhaSanXuat.setTrangThai(1);
         nhaSanXuat.setNgayTao(new Date());
         model.addAttribute("nsx1", nhaSanXuat);
 
