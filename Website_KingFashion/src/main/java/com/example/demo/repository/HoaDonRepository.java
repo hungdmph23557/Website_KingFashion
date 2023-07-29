@@ -13,5 +13,6 @@ import java.util.UUID;
 
 @Repository
 public interface HoaDonRepository  extends JpaRepository<HoaDon, UUID> {
+    HoaDon getHoaDonById(UUID id);
 
 }
