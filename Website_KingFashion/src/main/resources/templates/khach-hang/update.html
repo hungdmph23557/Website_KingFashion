@@ -94,7 +94,10 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Vai trò</label>
-                                <input type="text" class="form-control" th:field="*{vaiTro.id}">
+                                <select class="form-select" aria-label="Default select example" th:field="*{vaiTro.tenVaiTro}">
+                                    <option th:value="'Khách Hàng'">Khách Hàng</option>
+                                </select>
+                                <span th:errors="*{vaiTro}"></span>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Mật khẩu</label>
