@@ -70,103 +70,40 @@
 
                                     <div class="col-xl-12">
                                         <div class="dataTables_filter">
-                                            <label>Search:
-                                                <input
-                                                        type="search" class="form-control form-control-sm"
-                                                        placeholder="" aria-controls="datatable-buttons"
-                                                        style="width: 300px">
-                                            </label>
-                                            <button type="button" class="btn btn-success waves-effect waves-light">
-                                                        <span class="btn-label"><i class="mdi mdi-search-web"></i>
-                                                        </span>Tìm Kiếm
-                                            </button>
-                                            <button type="button" class="btn btn-success waves-effect waves-light">
-                                                        <span class="btn-label"><i class="mdi mdi-reload"></i>
-                                                        </span>Làm mới
-                                            </button>
-                                            <div class="row">
+                                            <form th:object="${nhanvien}" th:action="@{/nhan-vien/search}"
+                                                  class="row form-row justify-content-between">
+                                                <label>Tên:
+                                                    <input
+                                                            type="search" class="form-control form-control-sm"
+                                                            placeholder="" aria-controls="datatable-buttons"
+                                                            style="width: 300px" th:field="*{tenNhanVien}">
+                                                </label>
+                                                <label>SĐT:
+                                                    <input
+                                                            type="search" class="form-control form-control-sm"
+                                                            placeholder="" aria-controls="datatable-buttons"
+                                                            style="width: 300px" th:field="*{sdt}">
+                                                </label>
+                                                <label>Email:
+                                                    <input
+                                                            type="search" class="form-control form-control-sm"
+                                                            placeholder="" aria-controls="datatable-buttons"
+                                                            style="width: 300px" th:field="*{email}">
+                                                </label>
+                                                <label>Địa chỉ:
+                                                    <input
+                                                            type="search" class="form-control form-control-sm"
+                                                            placeholder="" aria-controls="datatable-buttons"
+                                                            style="width: 300px" th:field="*{diaChi}">
+                                                </label>
                                                 <div class="col-3">
-                                                    <div class="row mb-1">
-                                                        <label class="col-sm-2 col-form-label">Trạng Thái </label>
-                                                        <div class="col-sm-7">
-                                                            <select class="form-select" aria-label="Default select example">
-                                                                <option value="1">Tất cả</option>
-                                                                <option value="2">Hoạt động</option>
-                                                                <option value="3">Ngừng hoạt động</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                    <button type="submit" class="btn btn-success waves-effect waves-light">Lọc</button>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
-                                                            class="material-icons">&#xE147;</i>
-                                                        <span>Thêm nhân viên</span></a>
+                                                <div class="col-3">
+                                                    <a type="button" class="btn btn-primary add" href="/nhan-vien/view-add">Thêm nhân viên</a>
                                                 </div>
-                                                <div id="addEmployeeModal" class="modal fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <form th:action="@{/nhan-vien/add}" th:object="${nhanvien}" method="post">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title">Thêm nhân viên</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                        &times;
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Mã</label>
-                                                                        <input type="text" class="form-control" th:field="*{maNhanVien}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Tên</label>
-                                                                        <input type="text" class="form-control" th:field="*{tenNhanVien}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">SĐT</label>
-                                                                        <input type="text" class="form-control" th:field="*{sdt}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Email</label>
-                                                                        <input type="text" class="form-control" th:field="*{email}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Địa chỉ</label>
-                                                                        <input type="text" class="form-control" th:field="*{diaChi}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Ngày sinh</label>
-                                                                        <input type="date" class="form-control" th:field="*{ngaySinh}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Người tạo</label>
-                                                                        <input type="text" class="form-control" th:field="*{nguoiTao}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Người sửa</label>
-                                                                        <input type="text" class="form-control" th:field="*{nguoiSua}"/>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" style="color: black">Mật khẩu</label>
-                                                                        <input type="text" class="form-control" th:field="*{matKhau}"/>
-                                                                    </div>
-                                                                    <div class="md-3">
-                                                                        <label for="validationCustom04" class="form-label" style="color: black">Trạng
-                                                                            Thái</label>
-                                                                        <select class="form-select" id="validationCustom04" th:field="*{trangThai}">
-                                                                            <option th:value="1">Hoạt động</option>
-                                                                            <option th:value="0">Ngừng hoạt động</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="button" class="btn btn-default" data-dismiss="modal"
-                                                                           value="Cancel">
-                                                                    <input type="submit" class="btn btn-success" value="Add">
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            </form>
+                                            <div class="row">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="card-box">
@@ -315,6 +252,7 @@
             </div>
         </div>
     </div>
+</div>
     <!-- Vendor js -->
     <script src="../../static/assets\js\vendor.min.js"></script>
 
@@ -328,5 +266,6 @@
     <!-- App js -->
     <script src="../../static/assets\js\app.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+
 </body>
 </html>
