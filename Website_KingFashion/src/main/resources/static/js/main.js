@@ -108,14 +108,36 @@ function toggleSelect(button) {
 		button.classList.add('selected');
 	}
 }
-function increaseQuantity(button) {
-	var input = button.previousElementSibling;
-	input.value = parseInt(input.value) + 1;
-}
+$(document).ready(function () {
+	// Xử lý sự kiện khi người dùng nhập vào ô input search
+	$("#searchInput").on("input", function () {
+		// Lấy giá trị từ ô input search
+		var searchValue = $(this).val().trim();
 
-function decreaseQuantity(button) {
-	var input = button.nextElementSibling;
-	if (parseInt(input.value) > 1) {
-		input.value = parseInt(input.value) - 1;
+		// Gọi hàm search với giá trị searchValue
+		searchTableData(searchValue);
+	});
+
+	function searchTableData(searchValue) {
+		// Gửi request Ajax để search dữ liệu từ server với giá trị searchValue
+		$.get('/chi-tiet-san-pham/search', { ma: searchValue }, function (data) {
+			// Xóa nội dung hiện tại của bảng
+			$("#datatable-buttons tbody").empty();
+
+			// Loop qua kết quả từ server và cập nhật dữ liệu mới vào bảng
+			data.forEach(function (item) {
+				var row = "<tr>" +
+					"<td>" + item.ten + "</td>" +
+					"<td>" + item.soLuong + "</td>" +
+					"<td>" + (item.trangThai === 1 ? "Hoạt động" : "Không hoạt động") + "</td>" +
+					"<td><a href='/chi-tiet-san-pham/delete1/" + item.id + "' class='delete'>" +
+					"<i class='material-icons' data-toggle='tooltip' title='Delete'>&#xE872;</i>" +
+					"</a></td>" +
+					"</tr>";
+
+				$("#datatable-buttons tbody").append(row);
+			});
+		});
 	}
-}
+});
+

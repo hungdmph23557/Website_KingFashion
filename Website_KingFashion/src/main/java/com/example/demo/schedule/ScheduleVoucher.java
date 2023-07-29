@@ -15,7 +15,7 @@ public class ScheduleVoucher {
     @Autowired
     private VoucherRepository voucherRepository;
 
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 600000)
     public void updateVoucherStatus() {
         List<Voucher> expiredVouchers = voucherRepository.findByThoiGianKetThucBeforeAndTrangThaiNot(new Date(),0);
         for (Voucher voucher : expiredVouchers) {
