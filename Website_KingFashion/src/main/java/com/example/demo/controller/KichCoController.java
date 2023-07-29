@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -44,6 +45,9 @@ public class KichCoController {
         if (result.hasErrors()) {
             return "kichco/kich-co";
         }
+        String ma = "KC" + new Random().nextInt(100000);
+        kichCo.setMa(ma);
+        kichCo.setTrangThai(1);
         kichCo.setNgayTao(new Date());
         model.addAttribute("att", kichCo);
         kichCoService.add(kichCo);

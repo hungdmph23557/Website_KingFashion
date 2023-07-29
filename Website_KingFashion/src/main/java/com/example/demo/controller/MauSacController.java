@@ -22,13 +22,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/mau-sac/")
 public class MauSacController {
-
-    private static int currentNumber = 1;
 
     @Autowired
     private MauSacService mauSacService;
@@ -53,10 +52,10 @@ public class MauSacController {
         if (result.hasErrors()) {
             return "mausac/mausac";
         }
-        String maMauSac = "MS" + currentNumber;
-        currentNumber++;
-        mauSac.setMaMauSac(maMauSac);
+        String ma = "MS" + new Random().nextInt(100000);
+        mauSac.setMaMauSac(ma);
         mauSac.setNgayTao(new Date());
+        mauSac.setTrangThai(1);
         model.addAttribute("ms1", mauSac);
         mauSacService.add(mauSac);
         return "redirect:/mau-sac/hien-thi";

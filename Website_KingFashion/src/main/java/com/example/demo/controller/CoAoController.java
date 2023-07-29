@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -40,6 +41,9 @@ public class CoAoController {
         if (result.hasErrors()) {
             return "coao/co-ao";
         }
+        String ma = "CAO" + new Random().nextInt(100000);
+        coAo.setMa(ma);
+        coAo.setTrangThai(1);
         coAo.setNgayTao(new Date());
         model.addAttribute("att", coAo);
         coAoService.add(coAo);
