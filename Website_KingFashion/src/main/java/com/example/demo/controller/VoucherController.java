@@ -74,14 +74,14 @@ public class VoucherController {
         String ma = "VOC" + new Random().nextInt(100000);
         Date date = new Date();
         voucher.setMa(ma);
-        voucherService.add(voucher);
         voucher.setNgayTao(date);
         if (voucher.getThoiGianBatDau().before(date)) {
-            voucher.setTrangThai(1);
-        }
-        if (voucher.getThoiGianBatDau().after(date)) {
             voucher.setTrangThai(2);
         }
+        if (voucher.getThoiGianBatDau().after(date)) {
+            voucher.setTrangThai(1);
+        }
+        voucherService.add(voucher);
         session.setAttribute("successMessage", "Thêm thành công");
         return "redirect:/voucher/hien-thi";
     }
@@ -94,13 +94,13 @@ public class VoucherController {
         }
         Date date = new Date();
         voucher.setNgaySua(date);
-        voucherService.add(voucher);
         if (voucher.getThoiGianBatDau().before(date)) {
-            voucher.setTrangThai(1);
-        }
-        if (voucher.getThoiGianBatDau().after(date)) {
             voucher.setTrangThai(2);
         }
+        if (voucher.getThoiGianBatDau().after(date)) {
+            voucher.setTrangThai(1);
+        }
+        voucherService.add(voucher);
         session.setAttribute("successMessage", "Update thành công");
         return "redirect:/voucher/hien-thi";
     }
