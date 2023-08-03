@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.NhanVien;
+import com.example.demo.entity.TaiKhoan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,7 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
             "AND (:ngaySinh IS NULL OR v.ngaySinh = :ngaySinh)")
     Page<NhanVien> search(@Param("tenNhanVien") String tenNhanVien, @Param("sdt") String sdt, @Param("email") String email,
                           @Param("diaChi") String diaChi, @Param("ngaySinh") Date ngaySinh, Pageable pageable);
+
+    @Query("SELECT t FROM TaiKhoan t JOIN t.vaiTro v WHERE v.tenVaiTro LIKE lower(CONCAT('%', 'Nhân viên', '%'))")
+    Page<TaiKhoan> getAllNhanVien(Pageable pageable);
 }

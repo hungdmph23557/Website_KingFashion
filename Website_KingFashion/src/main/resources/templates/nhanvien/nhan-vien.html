@@ -22,23 +22,18 @@
 <body>
 <!-- Begin page -->
 <div id="wrapper">
-
-
     <!-- Topbar Start -->
     <div class="navbar-custom" th:insert="layout/nav.html :: header">
-
     </div>
     <!-- end Topbar -->
     <!-- ========== Left Sidebar Start ========== -->
     <div class="left-side-menu" th:insert="layout/slidebar.html :: header">
-
     </div>
     <!-- Left Sidebar End -->
 
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
-
     <div class="content-page">
         <div class="content">
 
@@ -127,8 +122,8 @@
                                                 <tbody>
                                                 <tr th:each="nv, row : ${list.content}">
                                                     <th scope="row" th:text="${row.index + 1}"></th>
-                                                    <td th:text="${nv.maNhanVien}"></td>
-                                                    <td th:text="${nv.tenNhanVien}"></td>
+                                                    <td th:text="${nv.maTaiKhoan}"></td>
+                                                    <td th:text="${nv.tenTaiKhoan}"></td>
                                                     <td th:text="${nv.sdt}"></td>
                                                     <td th:text="${nv.email}"></td>
                                                     <td th:text="${nv.diaChi}"></td>

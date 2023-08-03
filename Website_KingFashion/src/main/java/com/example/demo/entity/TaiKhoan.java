@@ -37,7 +37,6 @@ public class TaiKhoan {
     @Column(name = "ten")
     private String tenTaiKhoan;
 
-
     @NotBlank(message = "Không được để trống")
     @Column(name = "sdt")
     private String sdt;

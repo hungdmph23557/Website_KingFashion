@@ -76,10 +76,10 @@ public class VoucherController {
         voucher.setMa(ma);
         voucher.setNgayTao(date);
         if (voucher.getThoiGianBatDau().before(date)) {
-            voucher.setTrangThai(2);
+            voucher.setTrangThai(1);
         }
         if (voucher.getThoiGianBatDau().after(date)) {
-            voucher.setTrangThai(1);
+            voucher.setTrangThai(2);
         }
         voucherService.add(voucher);
         session.setAttribute("successMessage", "Thêm thành công");
@@ -95,10 +95,10 @@ public class VoucherController {
         Date date = new Date();
         voucher.setNgaySua(date);
         if (voucher.getThoiGianBatDau().before(date)) {
-            voucher.setTrangThai(2);
+            voucher.setTrangThai(1);
         }
         if (voucher.getThoiGianBatDau().after(date)) {
-            voucher.setTrangThai(1);
+            voucher.setTrangThai(2);
         }
         voucherService.add(voucher);
         session.setAttribute("successMessage", "Update thành công");

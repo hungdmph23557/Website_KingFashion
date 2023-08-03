@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.NhanVien;
+import com.example.demo.entity.TaiKhoan;
 import org.springframework.data.domain.Page;
 
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface NhanVienService {
-    Page<NhanVien> page(Integer page, Integer size);
+    Page<TaiKhoan> page(Integer page, Integer size);
 
     NhanVien detail(UUID id);
 

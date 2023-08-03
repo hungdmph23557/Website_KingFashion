@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.NhanVien;
+import com.example.demo.entity.TaiKhoan;
 import com.example.demo.service.impl.NhanVienServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class NhanVienController {
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam(name = "page", defaultValue = "0") Integer p) {
-        Page<NhanVien> page = service.page(p, 5);
+        Page<TaiKhoan> page = service.page(p, 5);
         model.addAttribute("list", page);
         model.addAttribute("nhanvien", new NhanVien());
         return "nhanvien/nhan-vien";
