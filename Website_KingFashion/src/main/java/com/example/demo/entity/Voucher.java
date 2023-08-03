@@ -57,7 +57,7 @@ public class Voucher {
     @Column(name = "thoi_gian_bat_dau")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @NotNull(message = "Không được để trống")
-    @Past(message = "Không được đi đến tương lai")
+//    @Past(message = "Không được đi đến tương lai")
     @Temporal(TemporalType.TIMESTAMP)
     private Date thoiGianBatDau;
 
@@ -72,7 +72,6 @@ public class Voucher {
     private String moTa;
 
     @Column(name = "trang_thai")
-    @NotNull(message = "Không được để trống")
     private Integer trangThai;
 
     @Column(name = "ngay_tao")
