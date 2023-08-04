@@ -265,10 +265,11 @@ public class ChiTietSanPhamController {
         }
         chiTietSanPham.setNgaySua(new Date());
         model.addAttribute("att", chiTietSanPham);
-        List<ChiTietKichCo> ListCTKC = chiTietKichCoService.getCTKCByChiTietSanPhamId(chiTietSanPham.getId());
+
+        List<ChiTietKichCo> ListCTKCS = chiTietKichCoService.getCTKCByChiTietSanPhamId(chiTietSanPham.getId());
 
         // Tính tổng số lượng kích cỡ
-        int totalKichCoQuantity = listCTKC.stream().mapToInt(ChiTietKichCo::getSoLuong).sum();
+        int totalKichCoQuantity = ListCTKCS.stream().mapToInt(ChiTietKichCo::getSoLuong).sum();
 
         // Set tổng số lượng kích cỡ cho sản phẩm chi tiết
         chiTietSanPham.setSoLuong(totalKichCoQuantity);
@@ -378,7 +379,7 @@ public String addCTKC(@Valid @ModelAttribute("ctkc") ChiTietKichCo chiTietKichCo
                       Model model) {
 
     ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
-    int totalSoLuongCTKC = 0;
+
     for (String kichCoId : kichCoIds) {
         UUID kichCoUUID = UUID.fromString(kichCoId);
 
@@ -390,7 +391,7 @@ public String addCTKC(@Valid @ModelAttribute("ctkc") ChiTietKichCo chiTietKichCo
             existingChiTietKichCo.setSoLuong(existingChiTietKichCo.getSoLuong() + soLuong);
             chiTietKichCoService.add(existingChiTietKichCo);
 
-            totalSoLuongCTKC += existingChiTietKichCo.getSoLuong();
+//            totalSoLuongCTKC += existingChiTietKichCo.getSoLuong();
         } else {
             // Nếu ChiTietKichCo chưa tồn tại, thêm mới ChiTietKichCo
             KichCo kichCo = new KichCo();
@@ -403,18 +404,25 @@ public String addCTKC(@Valid @ModelAttribute("ctkc") ChiTietKichCo chiTietKichCo
             newChiTietKichCo.setNgayTao(new Date());
             newChiTietKichCo.setSoLuong(soLuong);
             chiTietKichCoService.add(newChiTietKichCo);
-
-            totalSoLuongCTKC += soLuong;
+//
+//            totalSoLuongCTKC += soLuong;
         }
     }
+    List<ChiTietKichCo> ListCTKCS = chiTietKichCoService.getCTKCByChiTietSanPhamId(chiTietSanPham.getId());
 
-    chiTietSanPham.setSoLuong(totalSoLuongCTKC);
+    // Tính tổng số lượng kích cỡ
+    int totalKichCoQuantity = ListCTKCS.stream().mapToInt(ChiTietKichCo::getSoLuong).sum();
+
+    // Set tổng số lượng kích cỡ cho sản phẩm chi tiết
+    chiTietSanPham.setSoLuong(totalKichCoQuantity);
     chiTietSanPhamService.add(chiTietSanPham);
 
     //... Tiếp tục các xử lý khác sau khi lưu thành công ...
     redirectAttributes.addAttribute("id", chiTietSanPham.getId());
     return "redirect:/chi-tiet-san-pham/view-update/{id}";
 }
+
+
 
 
     @GetMapping("delete1/{id}")
