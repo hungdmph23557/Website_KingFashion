@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.NhanVien;
+import com.example.demo.entity.TaiKhoan;
 import com.example.demo.repository.NhanVienRepository;
 import com.example.demo.service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class NhanVienServiceImpl implements NhanVienService {
     private NhanVienRepository repository;
 
     @Override
-    public Page<NhanVien> page(Integer page, Integer size) {
+    public Page<TaiKhoan> page(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        return repository.findAll(pageable);
+        return repository.getAllNhanVien(pageable);
     }
 
     @Override

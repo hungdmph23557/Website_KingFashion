@@ -24,4 +24,7 @@ public interface TaiKhoanRepository extends JpaRepository<TaiKhoan, UUID> {
             "AND (:ngaySinh IS NULL OR v.ngaySinh = :ngaySinh)")
     Page<TaiKhoan> search(@Param("maTaiKhoan") String maTaiKhoan, @Param("tenTaiKhoan") String tenTaiKhoan, @Param("sdt") String sdt, @Param("email") String email,
                           @Param("diaChi") String diaChi, @Param("ngaySinh") Date ngaySinh, Pageable pageable);
+
+    @Query("SELECT t FROM TaiKhoan t JOIN t.vaiTro v WHERE v.tenVaiTro LIKE lower(CONCAT('%', 'Khách hàng', '%'))")
+    Page<TaiKhoan> getAllNhanVien(Pageable pageable);
 }
