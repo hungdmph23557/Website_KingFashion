@@ -20,50 +20,37 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-        /* Style the radio buttons as circles */
-        .form-check-input[type="radio"] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            border: 2px solid #000;
-            border-radius: 50%;
-            margin-right: 5px;
-            cursor: pointer;
-            position: relative;
-            margin-bottom: 15px; /* Add margin between radio buttons */
+        .checkbox-container {
+            margin-right: 10px; /* Điều chỉnh khoảng cách giữa các ô checkbox */
+            width: 70px;
         }
 
-        /* Add the number inside the circle */
-        .form-check-input[type="radio"]::before {
-            content: attr(value);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Style the radio buttons as circles with larger numbers */
-        .form-check-label {
-            display: inline-flex;
+        .special-form > a >  #openDialogButton6 {
+            display: flex;
+            justify-content: center;
             align-items: center;
-            font-size: 16px;
+            position: relative; /* Thêm thuộc tính position */
+            height: 24px; /* Đặt chiều cao cho button */
+            font-size: 16px; /* Đặt kích thước font chữ cho button */
+            font-weight: bold; /* Đặt độ đậm cho font chữ */
+            color: white; /* Màu chữ trong button */
+            background-color: #2b3d51; /* Màu nền của button */
+            border: none; /* Xóa viền của button */
+            cursor: pointer; /* Biến con trỏ thành bàn tay khi di chuột vào button */
         }
 
-        /* Add padding to create separation between circle and number */
-        .form-check-label span {
-            padding-left: 8px;
+        .special-form a #openDialogButton6::before {
+            content: "+"; /* Nội dung dấu cộng */
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            left: 50%; /* Đưa nó ra giữa button theo chiều ngang */
+            top: 50%; /* Đưa nó ra giữa button theo chiều dọc */
+            transform: translate(-50%, -50%); /* Dịch nó đi 50% chiều ngang và 50% chiều dọc */
         }
 
-        /* Reduce spacing between radio buttons */
-        .kich-co .col-2 {
-            margin-right: -7px; /* Add margin between radio buttons */
-        }
-
-        /* Style the radio button when selected */
-        .form-check-input[type="radio"]:checked::before {
-            color: #fff; /* White text */
+        .special-form a #openDialogButton6:focus {
+            outline: none; /* Xóa viền khi button được focus (được chọn) */
         }
     </style>
 </head>
@@ -251,7 +238,7 @@
                                             </div>
                                             <button class="btn btn-info"
                                                     style="float: right; background-color: #2b3d51; color: white"
-                                                    onclick="submitForm()"
+                                                    type="submit"
                                             >Xác
                                                 nhận
                                             </button>
@@ -271,33 +258,12 @@
                                         <dialog id="myDialog6">
                                             <form th:action="@{/chi-tiet-san-pham/add-kich-co(id=${id})}" method="post"
                                                   th:object="${kc1}" onsubmit="submitForm(); return false;">
-                                                <!-- Các trường nhập liệu của form ở đây -->
-                                                <input type="hidden" th:field="*{chiTietSanPham.id}" th:value="${id}"/>
                                                 <div class="row" style="margin-bottom: 30px">
                                                     <div class="col-4">
                                                         <label class="form-label" style="color: black">Kích cỡ</label>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <label class="form-label" style="color: black">Số lượng</label>
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="row kich-co"
-                                                             style="display: flex;justify-content: center">
-                                                            <div th:each="value : ${#numbers.sequence(34, 49)}"
-                                                                 class="col-2">
-                                                                <label class="form-check-label">
-                                                                    <input type="radio" class="form-check-input"
-                                                                           th:value="${value}" th:field="*{ten}"
-                                                                           th:id="'radio_' + ${value}"
-                                                                           value="${value}"/>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <input type="number" class="form-control" th:field="*{soLuong}"
-                                                               style="width: 270px"/>
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Tên Sản Phẩm"
+                                                               th:field="*{ten}">
                                                     </div>
                                                 </div>
 
@@ -311,6 +277,56 @@
                                                 </button>
                                             </form>
                                         </dialog>
+                                        <form th:action="@{/chi-tiet-san-pham/addCTKC(id=${id})}" method="post"
+                                              th:object="${ctkc}" class="special-form">
+                                            <!-- ... Các phần tử form khác ... -->
+                                            <div class="row">
+                                                <div class="col-4" style="display: flex; justify-content: center;">
+                                                    <label for="">Chọn kích cỡ</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="row" style="width: 300px">
+                                                        <!-- Dùng foreach để duyệt qua danh sách kích cỡ -->
+                                                        <div class="col-3" th:each="kichCo : ${listkc}"
+                                                             style="width: 65px;">
+                                                            <div class="checkbox-container">
+                                                                <!-- Thêm lớp "checkbox-container" ở đây -->
+                                                                <div class="form-check form-check-inline"
+                                                                     style="display: flex; justify-content: left;">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                           th:value="${kichCo.id}" name="kichCoIds">
+                                                                    <label class="form-check-label"
+                                                                           th:text="${kichCo.ten}"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3"
+                                                             style="width: 65px; display: flex; justify-content: center; align-items: center">
+                                                            <a id="openDialogButton6"
+                                                               style="display: flex; justify-content: center; height: 24px"
+                                                               class="btn btn-success waves-effect waves-light custom-checkbox">
+                                                                <label for=""
+                                                                       style="height: 10px; display: flex; align-items: center; justify-content: center">+</label>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4" style="display: flex; justify-content: center;">
+                                                    <label for="">Nhập số lượng cho tất cả kích cỡ</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <!-- Sử dụng 1 input để nhập số lượng cho tất cả kích cỡ đã chọn -->
+                                                    <input type="number" class="form-control" name="soLuong"/>
+                                                </div>
+                                            </div>
+
+                                            <!-- Thêm button để submit form -->
+                                            <button type="submit" style="float: right">Add</button>
+                                        </form>
+
+
                                         <form th:action="@{/chi-tiet-san-pham/updateKc(id=${id})}" method="post"
                                               th:object="${kc1}">
                                             <table id="datatable-buttons"
@@ -326,8 +342,8 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr th:each="l, row : ${listKc}" class="text-center">
-                                                    <td class="align-middle" th:text="${l.ten}">
+                                                <tr th:each="l, row : ${listctkc}" class="text-center">
+                                                    <td class="align-middle" th:text="${l.kichCo.ten}">
                                                     </td>
                                                     <td><input type="number" id="row-3-age" name="row-3-age"
                                                                th:value="${l.soLuong}"></td>
@@ -355,14 +371,8 @@
                                                 </button>
                                             </div>
                                         </form>
-                                        <div class="form-inline mt-3" style="display: flex;justify-content:center ">
-                                            <button
-                                                    id="openDialogButton6"
-                                                    class="btn btn-success waves-effect waves-light text-center"
-                                                    style="color: white; background-color: #2b3d51">
-                                                Thêm kích cỡ
-                                            </button>
-                                        </div>
+
+
                                     </div>
                                 </div>
 
@@ -456,51 +466,6 @@
     <div class="rightbar-overlay"></div>
 
     <script th:inline="javascript">
-        function submitForm() {
-            // Lấy dữ liệu của form
-            const form = document.getElementById('myFormId'); // Thay 'myFormId' bằng ID thực tế của form
-            const formData = new FormData(form);
-
-            // Gửi yêu cầu POST để thêm mới kích cỡ
-            fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // Cập nhật bảng với dữ liệu mới
-                    updateTable();
-                })
-                .catch(error => {
-                    console.error('Lỗi khi gửi yêu cầu:', error);
-                });
-        }
-
-        // Định nghĩa hàm cập nhật bảng
-        function updateTable() {
-            // Gửi yêu cầu lấy dữ liệu mới từ máy chủ sử dụng fetch hoặc bất kỳ phương thức nào bạn thích
-            fetch('/get-updated-data')
-                .then(response => response.json())
-                .then(data => {
-                    // Giả sử máy chủ trả về dữ liệu JSON với một mảng các đối tượng phù hợp với cấu trúc 'listKc'
-                    listKc = data; // Cập nhật biến 'listKc' với dữ liệu mới
-                    // Tiến hành cập nhật bảng với dữ liệu mới từ 'listKc'
-                    // Ví dụ, nếu bảng của bạn có ID là 'tableId':
-                    const tableBody = document.getElementById('tableBodyId'); // Thay 'tableBodyId' bằng ID thực tế của phần tử 'tbody' của bảng
-                    tableBody.innerHTML = ''; // Xóa nội dung hiện tại của bảng
-                    listKc.forEach(item => {
-                        // Thêm một dòng mới cho mỗi phần tử trong 'listKc'
-                        const row = document.createElement('tr');
-                        row.innerHTML = `<td>${item.ten}</td><td>${item.soLuong}</td><td>${item.trangThai}</td>`;
-                        tableBody.appendChild(row);
-                    });
-                    myDialog6.close(); // Đóng hộp thoại sau khi cập nhật bảng
-                })
-                .catch(error => {
-                    console.error('Lỗi khi lấy dữ liệu:', error);
-                    myDialog6.close(); // Đóng hộp thoại nếu có lỗi xảy ra
-                });
-        }
 
         // Đoạn mã xử lý mở và đóng dialog đã giữ nguyên như trước
         const openDialogButton6 = document.getElementById('openDialogButton6');
@@ -544,8 +509,6 @@
             }
         });
     </script>
-
-
     <!-- Vendor js -->
     <script src="../../static/assets\js\vendor.min.js"></script>
     <!--Morris Chart-->

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Anh;
 import com.example.demo.entity.ChatLieu;
+import com.example.demo.entity.ChiTietKichCo;
 import com.example.demo.entity.ChiTietSanPham;
 import com.example.demo.entity.CoAo;
 import com.example.demo.entity.KichCo;
@@ -13,6 +14,7 @@ import com.example.demo.entity.Voucher;
 import com.example.demo.repository.AnhRepository;
 import com.example.demo.service.AnhService;
 import com.example.demo.service.ChatLieuService;
+import com.example.demo.service.ChiTietKichCoService;
 import com.example.demo.service.ChiTietSanPhamService;
 import com.example.demo.service.CoAoService;
 import com.example.demo.service.KichCoService;
@@ -49,6 +51,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -87,7 +90,11 @@ public class ChiTietSanPhamController {
     @Autowired
     private ChatLieuService chatLieuService;
 
-    private List<KichCo> listKichCo = new ArrayList<>();
+    @Autowired
+    private ChiTietKichCoService chiTietKichCoService;
+
+    private List<ChiTietKichCo> listCTKC = new ArrayList<>();
+    private List<KichCo> listkc = new ArrayList<>();
 
     @GetMapping("hien-thi")
     public String hienThi(@RequestParam(defaultValue = "0", name = "page") Integer pageNum, Model model, HttpSession session) {
@@ -109,7 +116,6 @@ public class ChiTietSanPhamController {
         model.addAttribute("att", new ChiTietSanPham());
         return "chitietsanpham/chi-tiet-san-pham";
     }
-
 
 
     @GetMapping("search")
@@ -214,10 +220,14 @@ public class ChiTietSanPhamController {
     public String updateCTSP(@PathVariable UUID id, Model model) {
         ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
 
-        listKichCo = kichCoService.getKichCoByChiTietSanPhamId(id);
+        listCTKC = chiTietKichCoService.getAllByIdCTSP(id);
+
+        listkc = kichCoService.getAll();
 
         model.addAttribute("att", chiTietSanPham);
-        model.addAttribute("listKc", listKichCo);
+        model.addAttribute("ctkc", new ChiTietKichCo());
+        model.addAttribute("listctkc", listCTKC);
+        model.addAttribute("listkc", listkc);
         model.addAttribute("listCoAo", coAoService.getAll());
         model.addAttribute("listLoaiSanPham", loaiSanPhamService.getAll());
         model.addAttribute("listMauSac", mauSacService.getAll());
@@ -255,10 +265,10 @@ public class ChiTietSanPhamController {
         }
         chiTietSanPham.setNgaySua(new Date());
         model.addAttribute("att", chiTietSanPham);
-        List<KichCo> kichCoList = kichCoService.getKichCoByChiTietSanPhamId(chiTietSanPham.getId());
+        List<ChiTietKichCo> ListCTKC = chiTietKichCoService.getCTKCByChiTietSanPhamId(chiTietSanPham.getId());
 
         // Tính tổng số lượng kích cỡ
-        int totalKichCoQuantity = kichCoList.stream().mapToInt(KichCo::getSoLuong).sum();
+        int totalKichCoQuantity = listCTKC.stream().mapToInt(ChiTietKichCo::getSoLuong).sum();
 
         // Set tổng số lượng kích cỡ cho sản phẩm chi tiết
         chiTietSanPham.setSoLuong(totalKichCoQuantity);
@@ -337,6 +347,11 @@ public class ChiTietSanPhamController {
         return viewAdd(model);
     }
 
+    @ModelAttribute("selectedChiTietKichCoList")
+    public List<ChiTietKichCo> selectedChiTietKichCoList() {
+        return new ArrayList<>();
+    }
+
     @PostMapping("add-kich-co")
     public String addkc(@Valid @ModelAttribute("kc1") KichCo kichCo, BindingResult result,
                         @RequestParam("id") UUID id,
@@ -345,103 +360,76 @@ public class ChiTietSanPhamController {
 
         ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
 
-        // Lấy danh sách kích cỡ của sản phẩm chi tiết
-        List<KichCo> kichCoList = kichCoService.getKichCoByChiTietSanPhamId(chiTietSanPham.getId());
-
-        // Kiểm tra xem kích cỡ đã tồn tại trong danh sách hay chưa
-        boolean kichCoExists = false;
-        for (KichCo existingKichCo : kichCoList) {
-            if (existingKichCo.getTen().equalsIgnoreCase(kichCo.getTen())) {
-                // Kích cỡ đã tồn tại, cập nhật số lượng bằng cách cộng dồn số lượng mới
-                existingKichCo.setSoLuong(existingKichCo.getSoLuong() + kichCo.getSoLuong());
-                kichCoService.add(existingKichCo);
-                kichCoExists = true;
-                break;
-            }
-        }
-
-        if (!kichCoExists) {
-            // Kích cỡ chưa tồn tại trong danh sách, thêm mới kích cỡ
-            kichCo.setChiTietSanPham(chiTietSanPham);
-            kichCo.setNgayTao(new Date());
-            kichCo.setMa("KC01");
-            kichCo.setTrangThai(1);
-            kichCoService.add(kichCo);
-            kichCoList.add(kichCo); // Thêm kích cỡ mới vào danh sách kích cỡ
-        }
-
-        // Tính tổng số lượng kích cỡ
-        int totalKichCoQuantity = kichCoList.stream().mapToInt(KichCo::getSoLuong).sum();
-
-        // Set tổng số lượng kích cỡ cho sản phẩm chi tiết
-        chiTietSanPham.setSoLuong(totalKichCoQuantity);
-        chiTietSanPhamService.add(chiTietSanPham);
+        kichCo.setNgayTao(new Date());
+        kichCo.setMa("KC01");
+        kichCo.setTrangThai(1);
+        kichCoService.add(kichCo);
 
         redirectAttributes.addAttribute("id", chiTietSanPham.getId());
         return "redirect:/chi-tiet-san-pham/view-update/{id}";
     }
 
-    @PostMapping("updateKc")
-    public String updatekc(@Valid @ModelAttribute("kc1") KichCo kichCo, BindingResult result,
-                           @RequestParam("id") UUID id,
-                           RedirectAttributes redirectAttributes,
-                           Model model) {
-        // Check for any validation errors
-        if (result.hasErrors()) {
-            // Handle validation errors if needed
-            return "chitietsanpham/update-chi-tiet-san-pham";
+@PostMapping("addCTKC")
+public String addCTKC(@Valid @ModelAttribute("ctkc") ChiTietKichCo chiTietKichCo, BindingResult result,
+                      @RequestParam("id") UUID id,
+                      @RequestParam("kichCoIds") String[] kichCoIds,
+                      @RequestParam("soLuong") int soLuong,
+                      RedirectAttributes redirectAttributes,
+                      Model model) {
+
+    ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
+    int totalSoLuongCTKC = 0;
+    for (String kichCoId : kichCoIds) {
+        UUID kichCoUUID = UUID.fromString(kichCoId);
+
+        // Kiểm tra xem ChiTietKichCo đã tồn tại trong cơ sở dữ liệu chưa
+        ChiTietKichCo existingChiTietKichCo = chiTietKichCoService.getByChiTietSanPhamIdAndKichCoId(id, kichCoUUID);
+
+        if (existingChiTietKichCo != null) {
+            // Nếu ChiTietKichCo đã tồn tại, cộng dồn số lượng
+            existingChiTietKichCo.setSoLuong(existingChiTietKichCo.getSoLuong() + soLuong);
+            chiTietKichCoService.add(existingChiTietKichCo);
+
+            totalSoLuongCTKC += existingChiTietKichCo.getSoLuong();
+        } else {
+            // Nếu ChiTietKichCo chưa tồn tại, thêm mới ChiTietKichCo
+            KichCo kichCo = new KichCo();
+            kichCo.setId(kichCoUUID);
+
+            ChiTietKichCo newChiTietKichCo = new ChiTietKichCo();
+            newChiTietKichCo.setChiTietSanPham(chiTietSanPham);
+            newChiTietKichCo.setKichCo(kichCo);
+            newChiTietKichCo.setTrangThai(1);
+            newChiTietKichCo.setNgayTao(new Date());
+            newChiTietKichCo.setSoLuong(soLuong);
+            chiTietKichCoService.add(newChiTietKichCo);
+
+            totalSoLuongCTKC += soLuong;
         }
-
-        // Get the ChiTietSanPham object
-        ChiTietSanPham chiTietSanPham = chiTietSanPhamService.detail(id);
-
-        // Get the list of KichCo objects related to the ChiTietSanPham
-        List<KichCo> kichCoList = kichCoService.getKichCoByChiTietSanPhamId(chiTietSanPham.getId());
-
-        // Find the KichCo object that needs to be updated
-        KichCo updatedKichCo = null;
-        for (KichCo existingKichCo : kichCoList) {
-            if (existingKichCo.getId().equals(kichCo.getId())) {
-                updatedKichCo = existingKichCo;
-                break;
-            }
-        }
-
-        if (updatedKichCo == null) {
-            // If the KichCo object is not found, add an error message and redirect back
-            redirectAttributes.addFlashAttribute("error", "Không tìm thấy KichCo hoặc không thể cập nhật.");
-            return "redirect:/chi-tiet-san-pham/view-update/{id}";
-        }
-
-        // Update the soLuong value of the existing KichCo object
-        updatedKichCo.setSoLuong(kichCo.getSoLuong());
-
-        // Save the updated KichCo object (assuming you have a 'kichCoService.update' method)
-        kichCoService.add(updatedKichCo);
-
-        // Recalculate the totalKichCoQuantity after updating
-        int totalKichCoQuantity = kichCoList.stream().mapToInt(KichCo::getSoLuong).sum();
-
-        // Set the new totalKichCoQuantity for the ChiTietSanPham
-        chiTietSanPham.setSoLuong(totalKichCoQuantity);
-
-        // Save the updated ChiTietSanPham object
-        chiTietSanPhamService.add(chiTietSanPham);
-
-        // Redirect back to the view-update page with the updated ChiTietSanPham's id
-        redirectAttributes.addAttribute("id", chiTietSanPham.getId());
-        return "redirect:/chi-tiet-san-pham/view-update/{id}";
     }
+
+    chiTietSanPham.setSoLuong(totalSoLuongCTKC);
+    chiTietSanPhamService.add(chiTietSanPham);
+
+    //... Tiếp tục các xử lý khác sau khi lưu thành công ...
+    redirectAttributes.addAttribute("id", chiTietSanPham.getId());
+    return "redirect:/chi-tiet-san-pham/view-update/{id}";
+}
 
 
     @GetMapping("delete1/{id}")
     public String deleteKc(@ModelAttribute("att") ChiTietSanPham chiTietSanPham, @PathVariable UUID id, Model model,
                            RedirectAttributes redirectAttributes,
                            HttpSession session) {
-        KichCo kichCo = kichCoService.getKichCoById(id);
+        ChiTietKichCo chiTietKichCo = chiTietKichCoService.getCTKCById(id);
         session.setAttribute("successMessage", "Xóa thành công!");
-        kichCoService.delete(id);
-        UUID chiTietSanPhamId = kichCo.getChiTietSanPham().getId();
+        if (chiTietKichCo.getTrangThai() == 1){
+            chiTietKichCo.setTrangThai(0);
+        }else {
+            chiTietKichCo.setTrangThai(1);
+        }
+        chiTietKichCoService.add(chiTietKichCo);
+        UUID chiTietSanPhamId = chiTietKichCo.getChiTietSanPham().getId();
         return "redirect:/chi-tiet-san-pham/view-update/" + chiTietSanPhamId;
     }
 
