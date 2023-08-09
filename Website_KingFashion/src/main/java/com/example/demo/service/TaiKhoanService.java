@@ -21,6 +21,7 @@ public interface TaiKhoanService {
     TaiKhoan detail(UUID id);
 
     TaiKhoan update(TaiKhoan taiKhoan);
+
     TaiKhoan add(TaiKhoan taiKhoan);
 
     void delete(UUID id);

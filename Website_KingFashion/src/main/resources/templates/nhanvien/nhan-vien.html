@@ -59,12 +59,12 @@
                                 <div class="card-box" style="display: flex;justify-content:center ">
                                     <div class="col-xl-12">
                                         <div class="dataTables_filter">
-                                            <form action="/khach-hang/view-add" method="get"
+                                            <form action="/nhan-vien/view-add" method="get"
                                                   style="float: right; margin-top: 20px">
                                                 <button type="submit" class="btn btn-success waves-effect waves-light"
                                                         style="float: right;">
                                                         <span class="btn-label"><i class="mdi mdi-plus"></i>
-                                                        </span>Tạo Khách hàng
+                                                        </span>Tạo Nhân Viên
                                                 </button>
                                             </form>
                                         </div>
@@ -148,10 +148,6 @@
                                                     <td>Email</td>
                                                     <td>Địa chỉ</td>
                                                     <td>Ngày sinh</td>
-                                                    <td>Ngày Tạo</td>
-                                                    <td>Ngày Sửa</td>
-                                                    <td>Người sửa</td>
-                                                    <td>Người tạo</td>
                                                     <td>Trạng thái</td>
                                                     <td>Action</td>
                                                 </tr>
@@ -165,20 +161,16 @@
                                                     <td th:text="${nv.email}"></td>
                                                     <td th:text="${nv.diaChi}"></td>
                                                     <td th:text="${nv.ngaySinh}"></td>
-                                                    <td th:text="${nv.ngayTao}"></td>
-                                                    <td th:text="${nv.ngaySua}"></td>
-                                                    <td th:text="${nv.nguoiTao}"></td>
-                                                    <td th:text="${nv.nguoiSua}"></td>
                                                     <td th:if="${nv.trangThai == 1}">Hoạt động</td>
                                                     <td th:if="${nv.trangThai == 0}">Không hoạt động</td>
                                                     <td>
                                                         <a class="edit"
-                                                           th:href="@{view-update/{id}(id=${nv.id})}"
+                                                           th:href="@{view1-update/{id}(id=${nv.id})}"
                                                         ><i
                                                                 class="material-icons"
                                                                 data-toggle="tooltip"
                                                                 title="Edit">&#xE254;</i></a>
-<!--                                                        <a th:href="@{delete/{id}(id=${nv.id})}" class="delete"><i-->
+                                                        <a th:href="@{deletenhanvien/{id}(id=${nv.id})}" class="delete"><i
                                                                 class="material-icons"
                                                                 data-toggle="tooltip"
                                                                 title="Delete">&#xE872;</i></a>
