@@ -32,6 +32,6 @@ public interface TaiKhoanRepository extends JpaRepository<TaiKhoan, UUID> {
     @Query(value = "select * from TaiKhoan tk where tk.ma like %:keyword% or tk.ten like %:keyword% or tk.sdt like %:keyword% or tk.dia_chi like %:keyword% or tk.email like %:keyword%", nativeQuery = true)
     List<TaiKhoan> findByKeyWord(@Param("keyword") String keyword);
 
-
+    List<TaiKhoan> findByTrangThai(Integer trangThai);
 
 }

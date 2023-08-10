@@ -70,5 +70,10 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
         return taiKhoanRepository.findByKeyWord(keyword);
     }
 
+    @Override
+    public List<TaiKhoan> getTrangThai(Integer trangthai) {
+        return taiKhoanRepository.findByTrangThai(trangthai);
+    }
+
 
 }

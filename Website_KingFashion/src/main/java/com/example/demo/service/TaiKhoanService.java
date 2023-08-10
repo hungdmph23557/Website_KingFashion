@@ -28,5 +28,6 @@ public interface TaiKhoanService {
 
     List<TaiKhoan> getByKeyWord(String keyword);
 
+    List<TaiKhoan> getTrangThai(Integer trangthai);
 
 }
