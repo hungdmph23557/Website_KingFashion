@@ -65,4 +65,10 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
         taiKhoanRepository.deleteById(id);
     }
 
+    @Override
+    public List<TaiKhoan> getByKeyWord(String keyword) {
+        return taiKhoanRepository.findByKeyWord(keyword);
+    }
+
+
 }

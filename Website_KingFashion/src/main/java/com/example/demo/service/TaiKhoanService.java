@@ -26,4 +26,7 @@ public interface TaiKhoanService {
 
     void delete(UUID id);
 
+    List<TaiKhoan> getByKeyWord(String keyword);
+
+
 }

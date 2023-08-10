@@ -42,7 +42,7 @@ public class TaiKhoanController {
         model.addAttribute("listVaiTro",vaiTroService.getAll());
         Page<TaiKhoan> page=taiKhoanService.page(number,5);
         model.addAttribute("listtaikhoan",page);
-        model.addAttribute("search",new TaiKhoan());
+        model.addAttribute("listsearch",new TaiKhoan());
         return "nhanvien/nhan-vien";
 
 
@@ -96,4 +96,16 @@ public class TaiKhoanController {
 
         return "redirect:/nhan-vien/hien-thi";
     }
+    @GetMapping("/serach")
+    public String Serach(TaiKhoan taiKhoan,Model model,String keyword){
+        if(keyword!=null){
+            List<TaiKhoan>listserach=taiKhoanService.getByKeyWord(keyword);
+            model.addAttribute("listtaikhoan",listserach);
+            return "nhanvien/nhan-vien";
+
+        }
+            return "redirect:/nhan-vien/hien-thi";
+        }
+
+
 }
